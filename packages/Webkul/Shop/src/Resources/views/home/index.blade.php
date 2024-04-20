@@ -16,6 +16,14 @@
     <x-slot:title>
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
+
+    
+    <div style="display: flex; width:100%">
+        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_2027.jpeg"/>
+        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1753.jpeg"/>
+        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1893.jpeg"/>
+        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1793.jpeg"/>
+    </div>
     
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
