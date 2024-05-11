@@ -10,7 +10,7 @@
 
         <div class="flex items-center gap-x-2.5">
             <!-- Export Modal -->
-            <x-admin::datagrid.export src="{{ route('admin.catalog.products.index') }}" />
+            <x-admin::datagrid.export :src="route('admin.catalog.products.index')" />
 
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
@@ -32,14 +32,28 @@
     {!! view_render_event('bagisto.admin.catalog.products.list.before') !!}
 
     <!-- Datagrid -->
-    <x-admin::datagrid src="{{ route('admin.catalog.products.index') }}" :isMultiRow="true">
+    <x-admin::datagrid
+        :src="route('admin.catalog.products.index')"
+        :isMultiRow="true"
+    >
         <!-- Datagrid Header -->
         @php
             $hasPermission = bouncer()->hasPermission('catalog.products.edit') || bouncer()->hasPermission('catalog.products.delete');
         @endphp
 
-        <template #header="{ columns, records, sortPage, selectAllRecords, applied, isLoading}">
-            <template v-if="! isLoading">
+        <template #header="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
                     <div
                         class="flex select-none items-center gap-2.5"
@@ -57,7 +71,7 @@
                                     id="mass_action_select_all_records"
                                     class="peer hidden"
                                     :checked="['all', 'partial'].includes(applied.massActions.meta.mode)"
-                                    @change="selectAllRecords"
+                                    @change="selectAll"
                                 >
 
                                 <span
@@ -79,13 +93,13 @@
                                         class="after:content-['/'] last:after:content-['']"
                                         :class="{
                                             'font-medium text-gray-800 dark:text-white': applied.sort.column == column,
-                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': columns.find(columnTemp => columnTemp.index === column)?.sortable,
+                                            'cursor-pointer hover:text-gray-800 dark:hover:text-white': available.columns.find(columnTemp => columnTemp.index === column)?.sortable,
                                         }"
                                         @click="
-                                            columns.find(columnTemp => columnTemp.index === column)?.sortable ? sortPage(columns.find(columnTemp => columnTemp.index === column)): {}
+                                            available.columns.find(columnTemp => columnTemp.index === column)?.sortable ? sort(available.columns.find(columnTemp => columnTemp.index === column)): {}
                                         "
                                     >
-                                        @{{ columns.find(columnTemp => columnTemp.index === column)?.label }}
+                                        @{{ available.columns.find(columnTemp => columnTemp.index === column)?.label }}
                                     </span>
                                 </template>
                             </span>
@@ -99,19 +113,24 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Head Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
-            </template>
         </template>
 
-        <!-- Datagrid Body -->
-        <template #body="{ columns, records, setCurrentSelectionMode, applied, isLoading }">
-            <template v-if="! isLoading">
+        <template #body="{
+            isLoading,
+            available,
+            applied,
+            selectAll,
+            sort,
+            performAction
+        }">
+            <template v-if="isLoading">
+                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+            </template>
+
+            <template v-else>
                 <div
                     class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
-                    v-for="record in records"
+                    v-for="record in available.records"
                 >
                     <!-- Name, SKU, Attribute Family Columns -->
                     <div class="flex gap-2.5">
@@ -123,7 +142,6 @@
                                 :value="record.product_id"
                                 class="peer hidden"
                                 v-model="applied.massActions.indices"
-                                @change="setCurrentSelectionMode"
                             >
 
                             <label
@@ -133,21 +151,15 @@
                         @endif
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="record.name"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ record.name }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.sku-value')".replace(':sku', record.sku) }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
                                 @{{ "@lang('admin::app.catalog.products.index.datagrid.attribute-family-value')".replace(':attribute_family', record.attribute_family) }}
                             </p>
                         </div>
@@ -162,10 +174,8 @@
                                     :src=`{{ Storage::url('') }}${record.base_image}`
                                 />
 
-                                <span
-                                    class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px"
-                                    v-text="record.images_count"
-                                >
+                                <span class="absolute bottom-px rounded-full bg-darkPink px-1.5 text-xs font-bold leading-normal text-white ltr:left-px rtl:right-px">
+                                    @{{ record.images_count }}
                                 </span>
                             </template>
 
@@ -181,16 +191,14 @@
                         </div>
 
                         <div class="flex flex-col gap-1.5">
-                            <p
-                                class="text-base font-semibold text-gray-800 dark:text-white"
-                                v-text="$admin.formatPrice(record.price)"
-                            >
+                            <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                @{{ $admin.formatPrice(record.price) }}
                             </p>
 
                             <!-- Parent Product Quantity -->
                             <div v-if="['configurable', 'bundle', 'grouped'].includes(record.type)">
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    <span class="text-red-600" v-text="'N/A'"></span>
+                                    <span class="text-red-600">N/A</span>
                                 </p>
                             </div>
 
@@ -227,16 +235,12 @@
                                 @{{ record.status ? "@lang('admin::app.catalog.products.index.datagrid.active')" : "@lang('admin::app.catalog.products.index.datagrid.disable')" }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.category_name ?? 'N/A'"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.category_name ?? 'N/A' }}
                             </p>
 
-                            <p
-                                class="text-gray-600 dark:text-gray-300"
-                                v-text="record.type"
-                            >
+                            <p class="text-gray-600 dark:text-gray-300">
+                                @{{ record.type }}
                             </p>
                         </div>
 
@@ -244,7 +248,7 @@
                             <a :href=`{{ route('admin.catalog.products.copy', '') }}/${record.product_id}`>
                                 <span class="icon-copy cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
-                            
+
                             <a :href=`{{ route('admin.catalog.products.edit', '') }}/${record.product_id}`>
                                 <span class="icon-sort-right cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                             </a>
@@ -252,18 +256,16 @@
                     </div>
                 </div>
             </template>
-
-            <!-- Datagrid Body Shimmer -->
-            <template v-else>
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
-            </template>
         </template>
     </x-admin::datagrid>
 
     {!! view_render_event('bagisto.admin.catalog.products.list.after') !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-create-product-form-template">
+        <script
+            type="text/x-template"
+            id="v-create-product-form-template"
+        >
             <div>
                 <!-- Product Create Button -->
                 @if (bouncer()->hasPermission('catalog.products.create'))
@@ -490,5 +492,4 @@
             })
         </script>
     @endPushOnce
-
 </x-admin::layouts>

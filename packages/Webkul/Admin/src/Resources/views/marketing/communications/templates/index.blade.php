@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.communications.templates.index.title')
     </x-slot>
@@ -22,7 +21,7 @@
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.marketing.communications.email_templates.index') }}" />
+    <x-admin::datagrid :src="route('admin.marketing.communications.email_templates.index')" />
 
     {!! view_render_event('bagisto.admin.marketing.communications.templates.list.after') !!}
 

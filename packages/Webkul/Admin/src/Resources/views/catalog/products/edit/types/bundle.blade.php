@@ -200,7 +200,10 @@
         </div>
     </script>
 
-    <script type="text/x-template" id="v-bundle-option-item-template">
+    <script
+        type="text/x-template"
+        id="v-bundle-option-item-template"
+    >
         <!-- Panel -->
         <div>
             <!-- Hidden Inputs -->
@@ -233,7 +236,7 @@
                 <div class="flex flex-col gap-2">
                     <p
                         class="text-base font-semibold text-gray-800 dark:text-white"
-                        :class="{'required': option.is_required}"
+                        :class="{'required': option.is_required == 1}"
                     >
                         @{{ (index + 1) + '. ' + option.label + ' - ' + types[option.type].title }}
                     </p>
@@ -341,7 +344,7 @@
                             </div>
 
                             <!-- Actions -->
-                            <div class="grid place-content-start gap-1 text-right">
+                            <div class="grid place-content-start gap-1 ltr:text-right rtl:text-left">
                                 <p class="font-semibold text-gray-800 dark:text-white">
                                     @{{ $admin.formatPrice(element.product.price) }}    
                                 </p>
@@ -360,7 +363,7 @@
                                 />
 
                                 <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required">
+                                    <x-admin::form.control-group.label class="required !block">
                                         @lang('admin::app.catalog.products.edit.types.bundle.option.default-qty')
                                     </x-admin::form.control-group.label>
 
@@ -368,12 +371,22 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="flex min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        class="min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
+                                        label="@lang('admin::app.catalog.products.edit.types.bundle.option.default-qty')"
                                     ></v-field>
-                                </x-admin::form.control-group>
 
+                                    <v-error-message
+                                        :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
+                                        v-slot="{ message }"
+                                    >
+                                        <p class="mt-1 text-xs italic text-red-600">
+                                            @{{ message }}
+                                        </p>
+                                    </v-error-message>
+                                </x-admin::form.control-group>
+                                
                                 <p
                                     class="cursor-pointer text-red-600 transition-all hover:underline"
                                     @click="removeProduct(element)"

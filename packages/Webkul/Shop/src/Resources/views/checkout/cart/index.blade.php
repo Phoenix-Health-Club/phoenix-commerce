@@ -203,10 +203,8 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.item_name.before') !!}
 
                                             <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
-                                                <p 
-                                                    class="text-base font-medium" 
-                                                    v-text="item.name"
-                                                >
+                                                <p class="text-base font-medium">
+                                                    @{{ item.name }}
                                                 </p>
                                             </a>
 
@@ -253,10 +251,8 @@
                                             {!! view_render_event('bagisto.shop.checkout.cart.formatted_total.before') !!}
 
                                             <div class="sm:hidden">
-                                                <p 
-                                                    class="text-lg font-semibold" 
-                                                    v-text="item.formatted_total"
-                                                >
+                                                <p class="text-lg font-semibold">
+                                                    @{{ item.formatted_total }}
                                                 </p>
                                                 
                                                 <span
@@ -285,14 +281,31 @@
                                     </div>
 
                                     <div class="text-right max-sm:hidden">
-
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.before') !!}
+                                        
+                                        <template v-if="displayTax.prices == 'including_tax'">
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+                                            </p>
+                                        </template>
 
-                                        <p 
-                                            class="text-lg font-semibold" 
-                                            v-text="item.formatted_total"
-                                        >
-                                        </p>
+                                        <template v-else-if="displayTax.prices == 'both'">
+                                            <p class="flex flex-col text-lg font-semibold">
+                                                @{{ item.formatted_total_incl_tax }}
+
+                                                <span class="text-xs font-normal">
+                                                    @lang('shop::app.checkout.cart.index.excl-tax')
+                                                    
+                                                    <span class="font-medium">@{{ item.formatted_total }}</span>
+                                                </span>
+                                            </p>
+                                        </template>
+
+                                        <template v-else>
+                                            <p class="text-lg font-semibold">
+                                                @{{ item.formatted_total }}
+                                            </p>
+                                        </template>
 
                                         {!! view_render_event('bagisto.shop.checkout.cart.total.after') !!}
 
@@ -348,7 +361,7 @@
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.before') !!}
 
-                        <!-- Cart Summary -->
+                        <!-- Cart Summary Blade File -->
                         @include('shop::checkout.cart.summary')
 
                         {!! view_render_event('bagisto.shop.checkout.cart.summary.after') !!}
@@ -387,6 +400,14 @@
 
                         applied: {
                             quantity: {},
+                        },
+
+                        displayTax: {
+                            prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                            subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                            
+                            shipping: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_shipping_amount') }}",
                         },
 
                         isLoading: true,

@@ -13,7 +13,10 @@
 
 
 @pushOnce('scripts')
-    <script type="text/x-template" id="v-previous-cart-items-template">
+    <script
+        type="text/x-template"
+        id="v-previous-cart-items-template"
+    >
         <template v-if="isLoading">
             <!-- Items Shimmer Effect -->
             <x-admin::shimmer.sales.orders.create.items />
@@ -67,8 +70,24 @@
                             </p>
 
                             <!-- Price -->
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                @{{ item.formatted_price }}
+                            <p class="flex flex-col gap-1 text-base font-semibold text-gray-800 dark:text-white">
+                                <template v-if="displayTax.prices == 'including_tax'">
+                                    @{{ item.formatted_price_incl_tax }}
+                                </template>
+
+                                <template v-else-if="displayTax.prices == 'both'">
+                                    @{{ item.formatted_price_incl_tax }}
+                                    
+                                    <span class="text-xs font-normal">
+                                        @lang('admin::app.sales.orders.create.cart-items.excl-tax')
+
+                                        <span class="font-medium">@{{ item.formatted_price }}</span>
+                                    </span>
+                                </template>
+
+                                <template v-else>
+                                    @{{ item.formatted_price }}
+                                </template>
                             </p>
 
                             <!-- Item Options -->
@@ -156,9 +175,15 @@
 
             data() {
                 return {
-                    isLoading: false,
+                    displayTax: {
+                        prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
+
+                        subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
+                    },
 
                     items: [],
+                    
+                    isLoading: false,
                 };
             },
 

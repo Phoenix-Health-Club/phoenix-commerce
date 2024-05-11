@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.settings.data-transfer.imports.import.title')
     </x-slot>
@@ -10,7 +9,7 @@
         </p>
 
         <div class="flex items-center gap-x-2.5">
-            <!-- Cancel Button -->
+            <!-- Back Button -->
             <a
                 href="{{ route('admin.settings.data_transfer.imports.index') }}"
                 class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
@@ -32,7 +31,10 @@
     <v-import />
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-import-template">
+        <script
+            type="text/x-template"
+            id="v-import-template"
+        >
             <!-- Body Content -->
             <div class="box-shadow mt-3.5 grid gap-2.5 p-5 max-xl:flex-wrap">
                 <!-- Validate CSV File -->
@@ -111,7 +113,7 @@
 
                             @lang('admin::app.settings.data-transfer.imports.import.validation-failed-info')
                         </p>
-                        
+
                         <p class="flex items-center gap-2">
                             <i
                                 class="icon-information rounded-full text-2xl"
@@ -362,7 +364,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-created')
                             </span>
@@ -372,7 +374,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-updated')
                             </span>
@@ -382,7 +384,7 @@
 
                         <p class="flex items-center gap-2">
                             <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600"></i>
-                            
+
                             <span class="font-medium text-gray-800">
                                 @lang('admin::app.settings.data-transfer.imports.import.total-deleted')
                             </span>

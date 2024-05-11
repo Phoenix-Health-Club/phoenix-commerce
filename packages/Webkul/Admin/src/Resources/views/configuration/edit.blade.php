@@ -7,7 +7,6 @@
 @endphp
 
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
             @foreach ($items as $key => $item)
@@ -19,8 +18,8 @@
     </x-slot>
 
     <!-- Configuration form fields -->
-    <x-admin::form 
-        action="" 
+    <x-admin::form
+        action=""
         enctype="multipart/form-data"
     >
         <!-- Save Inventory -->
@@ -39,7 +38,7 @@
                     @lang('admin::app.configuration.index.back-btn')
                 </a>
 
-                <button 
+                <button
                     type="submit"
                     class="primary-button"
                 >
@@ -59,10 +58,14 @@
                             class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
                         >
                             <span class="icon-store text-2xl"></span>
-                            
+
                             {{ $currentChannel->name }}
 
-                            <input type="hidden" name="channel" value="{{ $currentChannel->code }}"/>
+                            <input
+                                type="hidden"
+                                name="channel"
+                                value="{{ $currentChannel->code }}"
+                            />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -93,7 +96,11 @@
 
                             {{ $currentLocale->name }}
                             
-                            <input type="hidden" name="locale" value="{{ $currentLocale->code }}"/>
+                            <input
+                                type="hidden"
+                                name="locale"
+                                value="{{ $currentLocale->code }}"
+                            />
 
                             <span class="icon-sort-down text-2xl"></span>
                         </button>
@@ -129,17 +136,21 @@
 
                     <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                         @foreach ($item['fields'] as $field)
-                            @include ('admin::configuration.field-type')
-                        
+                            @if (
+                                $field['type'] == 'blade'
+                                && view()->exists($field['path'])
+                            )
+                                {!! view($field['path'], compact('field'))->render() !!}
+                            @else 
+                                @include ('admin::configuration.field-type')
+                            @endif
+
                             @php ($hint = $field['title'] . '-hint')
 
                             @if ($hint !== __($hint))
-                                <label 
-                                    for="@lang($hint)"
-                                    class="block text-xs font-medium leading-5 text-gray-600 dark:text-gray-300"
-                                >
+                                <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
                                     @lang($hint)
-                                </label>
+                                </p>
                             @endif
                         @endforeach
                     </div>

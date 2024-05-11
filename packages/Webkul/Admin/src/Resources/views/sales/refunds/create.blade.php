@@ -1,9 +1,9 @@
 <!-- Refund Vue Component -->
 <v-create-refund>
     <div class="transparent-button px-1 py-1.5 hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-        <span class="icon-cancel text-2xl"></span> 
+        <span class="icon-cancel text-2xl"></span>
 
-        @lang('admin::app.sales.orders.view.refund')     
+        @lang('admin::app.sales.orders.view.refund')
     </div>
 </v-create-refund>
 
@@ -22,15 +22,16 @@
                     role="presentation"
                     tabindex="0"
                 >
-                </span> 
+                </span>
 
-                @lang('admin::app.sales.orders.view.refund')     
+                @lang('admin::app.sales.orders.view.refund')
             </div>
 
             <!-- refund Create Drawer -->
-            <x-admin::form  
+            <x-admin::form
                 method="POST"
                 :action="route('admin.sales.refunds.store', $order->id)"
+                ref="refundForm"
             >
                 <x-admin::drawer ref="refund">
                     <!-- Drawer Header -->
@@ -43,13 +44,13 @@
 
                                 <div class="flex gap-x-2.5">
                                     <!-- Update Quantity Button -->
-                                 
+
                                     @if (bouncer()->hasPermission('sales.refunds.create'))
                                         <div 
-                                            class="transparent-button text-red-600 hover:bg-gray-200 dark:hover:bg-gray-800"
-                                            @click="updateQty"
+                                            class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800"
+                                            @click="updateTotals"
                                         >
-                                            @lang('admin::app.sales.refunds.create.update-quantity-btn')
+                                            @lang('admin::app.sales.refunds.create.update-totals-btn')
                                         </div>
 
                                         <!-- Refund Submit Button -->
@@ -138,7 +139,7 @@
                                             <!-- Information -->
                                             <div class="flex justify-between">
                                                 <!-- Quantity to Refund -->
-                                                <div class="">
+                                                <div>
                                                     <x-admin::form.control-group.label class="required">
                                                         @lang('admin::app.sales.refunds.create.qty-to-refund')
                                                     </x-admin::form.control-group.label>
@@ -197,13 +198,13 @@
                                                         </p>
 
                                                         @if ($order->base_discount_amount > 0)
-                                                            <p class="text-gray-600 dark:text-gray-300"> 
+                                                            <p class="text-gray-600 dark:text-gray-300">
                                                                 {{ core()->formatBasePrice($item->base_discount_amount) }}
                                                             </p>
-                                                        @endif 
+                                                        @endif
 
-                                                        <p class="font-semibold text-gray-600 dark:text-gray-300"> 
-                                                            {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }} 
+                                                        <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                                            {{ core()->formatBasePrice($item->base_total + $item->base_tax_amount - $item->base_discount_amount) }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -214,7 +215,7 @@
                             </div>
 
                             <div
-                                v-if="refund.summary"
+                                v-if="totals"
                                 class="mt-2.5 grid grid-cols-3 gap-x-5"
                             >
                                 <!-- Refund Shipping -->
@@ -227,8 +228,8 @@
                                         type="text"
                                         id="refund[shipping]"
                                         name="refund[shipping]" 
+                                        v-model="refund.shipping"
                                         :rules="'required|min_value:0|max_value:' . $order->base_shipping_invoiced - $order->base_shipping_refunded"
-                                        v-model="refund.summary.shipping.price"
                                         :label="trans('admin::app.sales.refunds.create.refund-shipping')"
                                     />
 
@@ -245,7 +246,7 @@
                                         type="text"
                                         id="refund[adjustment_refund]" 
                                         name="refund[adjustment_refund]"
-                                        value="0"
+                                        v-model="refund.adjustment_refund"
                                         rules="required|min_value:0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-refund')"
                                     />
@@ -263,8 +264,8 @@
                                         type="text"
                                         id="refund[adjustment_fee]" 
                                         name="refund[adjustment_fee]"
+                                        v-model="refund.adjustment_fee"
                                         rules="required|min_value:0"
-                                        value="0"
                                         :label="trans('admin::app.sales.refunds.create.adjustment-fee')"
                                     />
 
@@ -279,7 +280,7 @@
                                         @lang('admin::app.sales.refunds.create.subtotal')
                                     </p>
 
-                                    <p class="text-gray-600 dark:text-gray-300"> 
+                                    <p class="text-gray-600 dark:text-gray-300">
                                         @lang('admin::app.sales.refunds.create.discount-amount')
                                     </p>
 
@@ -293,28 +294,20 @@
                                 </div>
 
                                 <div class="flex flex-col gap-y-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.subtotal.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ totals.subtotal.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.discount.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ totals.discount.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.tax.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ totals.tax.formatted_price }}
                                     </p>
 
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-text="refund.summary.grand_total.formatted_price"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ totals.grand_total.formatted_price }}
                                     </p>
                                 </div>
                             </div>
@@ -334,8 +327,14 @@
                     refund: {
                         items: {},
 
-                        summary: null
-                    }
+                        shipping: "{{ $order->base_shipping_invoiced - $order->base_shipping_refunded - $order->base_shipping_discount_amount }}",
+
+                        adjustment_refund: 0,
+                        
+                        adjustment_fee: 0,
+                    },
+
+                    totals: null,
                 };
             },
 
@@ -344,21 +343,20 @@
                     this.refund.items[{{$item->id}}] = {{ $item->qty_to_refund }};
                 @endforeach
                 
-                this.updateQty();
+                this.updateTotals();
             },
 
             methods: {
-                updateQty() {
-                    this.$axios.post("{{ route('admin.sales.refunds.update_qty', $order->id) }}", this.refund.items)
+                updateTotals() {
+                    var self = this;
+                    
+                    this.$axios.post("{{ route('admin.sales.refunds.update_totals', $order->id) }}", this.refund)
                         .then((response) => {
-
-                            if (! response.data) {
-                                this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('admin::app.sales.refunds.invalid-qty')" });
-                            } else {
-                                this.refund.summary = response.data;
-                            }
+                            this.totals = response.data;
                         })
-                        .catch((error) => {})
+                        .catch((error) => {
+                            self.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                        })
                 }
             },
         });

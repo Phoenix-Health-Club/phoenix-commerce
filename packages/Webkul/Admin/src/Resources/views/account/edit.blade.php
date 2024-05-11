@@ -1,11 +1,10 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.account.edit.title')
     </x-slot>
 
     <!-- Input Form -->
-    <x-admin::form 
+    <x-admin::form
         :action="route('admin.account.update')"
         enctype="multipart/form-data"
         method="PUT"
@@ -16,7 +15,7 @@
             </p>
 
             <div class="flex items-center gap-x-2.5">
-                 <!-- Cancel Button -->
+                 <!-- Back Button -->
                 <a
                     href="{{ route('admin.dashboard.index') }}"
                     class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"

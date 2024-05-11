@@ -1,5 +1,4 @@
 <x-admin::layouts>
-    <!-- Title of the page -->
     <x-slot:title>
         @lang('admin::app.marketing.search-seo.url-rewrites.index.title')
     </x-slot>
@@ -51,14 +50,24 @@
             {!! view_render_event('bagisto.admin.marketing.search_seo.url_rewrites.list.before') !!}
 
             <x-admin::datagrid
-                src="{{ route('admin.marketing.search_seo.url_rewrites.index') }}"
+                :src="route('admin.marketing.search_seo.url_rewrites.index')"
                 ref="datagrid"
             >
-                <!-- DataGrid Body -->
-                <template #body="{ columns, records, setCurrentSelectionMode, performAction, available, applied, isLoading }">
-                    <template v-if="! isLoading">
+                <template #body="{
+                    isLoading,
+                    available,
+                    applied,
+                    selectAll,
+                    sort,
+                    performAction
+                }">
+                    <template v-if="isLoading">
+                        <x-admin::shimmer.datagrid.table.body />
+                    </template>
+
+                    <template v-else>
                         <div
-                            v-for="record in records"
+                            v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                                 :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
@@ -72,7 +81,6 @@
                                         :value="record[available.meta.primary_column]"
                                         :id="`mass_action_select_record_${record[available.meta.primary_column]}`"
                                         v-model="applied.massActions.indices"
-                                        @change="setCurrentSelectionMode"
                                     >
 
                                     <span class="icon-uncheckbox peer-checked:icon-checked cursor-pointer rounded-md text-2xl peer-checked:text-blue-600">
@@ -81,22 +89,22 @@
                             </p>
 
                             <!-- Id -->
-                            <p v-text="record.id"></p>
+                            <p>@{{ record.id }}</p>
 
                             <!-- For -->
-                            <p v-text="record.entity_type"></p>
+                            <p>@{{ record.entity_type }}</p>
 
                             <!-- Request Path -->
-                            <p v-text="record.request_path"></p>
+                            <p>@{{ record.request_path }}</p>
 
                             <!-- Target Path -->
-                            <p v-text="record.target_path"></p>
+                            <p>@{{ record.target_path }}</p>
 
                             <!-- Redirect Type -->
-                            <p v-text="record.redirect_type"></p>
+                            <p>@{{ record.redirect_type }}</p>
 
                             <!-- Locale -->
-                            <p v-text="record.locale"></p>
+                            <p>@{{ record.locale }}</p>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
@@ -121,11 +129,6 @@
                                 @endif
                             </div>
                         </div>
-                    </template>
-
-                    <!-- Datagrid Body Shimmer -->
-                    <template v-else>
-                        <x-admin::shimmer.datagrid.table.body />
                     </template>
                 </template>
             </x-admin::datagrid>
@@ -165,7 +168,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <!-- Id -->
+                            <!-- ID -->
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
@@ -273,7 +276,7 @@
                                 >
                                     @foreach (core()->getAllLocales() as $locale)
                                         <option value="{{ $locale->code }}">{{ $locale->name }}</option>
-                                    @endforeach 
+                                    @endforeach
                                 </x-admin::form.control-group.control>
 
                                 <x-admin::form.control-group.error control-name="locale" />

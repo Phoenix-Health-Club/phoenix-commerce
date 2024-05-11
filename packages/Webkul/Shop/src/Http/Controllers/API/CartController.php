@@ -64,7 +64,7 @@ class CartController extends APIController
             if (request()->get('is_buy_now')) {
                 Cart::deActivateCart();
 
-                $response['redirect'] = route('shop.product_or_category.index', $product->url_key);
+                $response['redirect'] = route('shop.checkout.onepage.index');
             }
 
             $cart = Cart::addProduct($product, request()->all());
@@ -185,10 +185,6 @@ class CartController extends APIController
         Cart::collectTotals();
 
         $cartResource = (new CartResource(Cart::getCart()))->jsonSerialize();
-
-        Cart::resetShippingMethod();
-
-        Cart::collectTotals();
 
         return new JsonResource([
             'data'     => [

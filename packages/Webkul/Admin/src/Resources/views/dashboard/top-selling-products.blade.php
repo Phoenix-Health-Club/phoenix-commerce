@@ -27,7 +27,7 @@
                     </p>
                 </div>
 
-                <!-- Top Selling Products Detailes -->
+                <!-- Top Selling Products Details -->
                 <div
                     class="flex flex-col"
                     v-if="report.statistics.length"
@@ -55,7 +55,7 @@
                             </p>
                         </div>
 
-                        <!-- Product Detailes -->
+                        <!-- Product Details -->
                         <div class="flex w-full flex-col gap-1.5">
                             <p
                                 class="text-gray-600 dark:text-gray-300"
@@ -64,16 +64,12 @@
                             </p>
 
                             <div class="flex justify-between">
-                                <p
-                                    class="font-semibold text-gray-600 dark:text-gray-300"
-                                    v-text="item.formatted_price"
-                                >
+                                <p class="font-semibold text-gray-600 dark:text-gray-300">
+                                    @{{ item.formatted_price }}
                                 </p>
 
-                                <p
-                                    class="text-base font-semibold text-gray-800 dark:text-white"
-                                    v-text="item.formatted_revenue"
-                                >
+                                <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                    @{{ item.formatted_revenue }}
                                 </p>
                             </div>
                         </div>

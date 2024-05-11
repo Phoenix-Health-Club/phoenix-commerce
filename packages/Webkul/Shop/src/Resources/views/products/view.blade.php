@@ -192,8 +192,8 @@
                                             <span class="icon-download text-2xl"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
-                                        <a 
-                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}" 
+                                        <a
+                                            href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img 
@@ -208,7 +208,7 @@
                                                 {{ $customAttributeValue['value'] ?? '-' }}
                                             </p>
                                         </div>
-                                    @endif 
+                                    @endif
                                 @endif
                             @endforeach
                         </div>
@@ -246,7 +246,10 @@
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 
     @pushOnce('scripts')
-        <script type="text/x-template" id="v-product-template">
+        <script
+            type="text/x-template"
+            id="v-product-template"
+        >
             <x-shop::form
                 v-slot="{ meta, errors, handleSubmit }"
                 as="div"
@@ -255,9 +258,9 @@
                     ref="formData"
                     @submit="handleSubmit($event, addToCart)"
                 >
-                    <input 
-                        type="hidden" 
-                        name="product_id" 
+                    <input
+                        type="hidden"
+                        name="product_id"
                         value="{{ $product->id }}"
                     >
 
@@ -266,10 +269,10 @@
                         name="is_buy_now"
                         v-model="is_buy_now"
                     >
-                    
-                    <input 
-                        type="hidden" 
-                        name="quantity" 
+
+                    <input
+                        type="hidden"
+                        name="quantity"
                         :value="qty"
                     >
 
@@ -323,14 +326,11 @@
                                 <!-- Pricing -->
                                 {!! view_render_event('bagisto.shop.products.price.before', ['product' => $product]) !!}
 
-                                <p class="mt-5 flex items-center gap-2.5 text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
+                                <p class="mt-5 grid items-center text-2xl !font-medium max-sm:mt-4 max-sm:text-lg">
                                     {!! $product->getTypeInstance()->getPriceHtml() !!}
 
-                                    <span class="text-lg text-[#6E6E6E]">
-                                        @if (
-                                            (bool) core()->getConfigData('taxes.catalogue.pricing.tax_inclusive') 
-                                            && $product->getTypeInstance()->getTaxCategory()
-                                        )
+                                    <span class="text-sm font-normal text-[#6E6E6E]">
+                                        @if (\Webkul\Tax\Facades\Tax::isInclusiveTaxProductPrices())
                                             @lang('shop::app.products.view.tax-inclusive')
                                         @endif
                                     </span>
