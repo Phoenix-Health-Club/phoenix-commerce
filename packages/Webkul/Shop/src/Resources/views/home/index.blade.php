@@ -17,14 +17,15 @@
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
 
-    
-    <!-- <div style="display: flex; width:100%">
-        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_2027.jpeg"/>
-        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1753.jpeg"/>
-        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1893.jpeg"/>
-        <img style="max-width: 25% !important" src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/DSC_1793.jpeg"/>
-    </div> -->
-    
+    <div class="scrolling-wrapper">
+        <div class="scrolling-content">
+            {{-- Necessary to add the duplicate image to the scrolling content --}}
+            <img src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/phoenix_home_banner.jpg" alt="Scrolling Image">
+            <img src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/phoenix_home_banner.jpg" alt="Scrolling Image">
+        </div>
+    </div>
+
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
