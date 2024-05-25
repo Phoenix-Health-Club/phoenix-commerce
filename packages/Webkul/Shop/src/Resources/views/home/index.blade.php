@@ -16,7 +16,16 @@
     <x-slot:title>
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
-    
+
+    <div class="scrolling-wrapper">
+        <div class="scrolling-content">
+            {{-- Necessary to add the duplicate image to the scrolling content --}}
+            <img src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/phoenix_home_banner.jpg" alt="Scrolling Image">
+            <img src="https://phoenixmerch.s3.eu-central-1.amazonaws.com/phoenix_home_banner.jpg" alt="Scrolling Image">
+        </div>
+    </div>
+
+
     <!-- Loop over the theme customization -->
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
@@ -25,7 +34,7 @@
         @switch ($customization->type)
             @case ($customization::IMAGE_CAROUSEL)
                 <!-- Image Carousel -->
-                <x-shop::carousel :options="$data" />
+                <x-shop::carousel :options="$data" aria-label="Image Carousel" />
 
                 @break
             @case ($customization::STATIC_CONTENT)
@@ -50,6 +59,7 @@
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.categories.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.home.index')"
+                    aria-label="Categories Carousel"
                 />
 
                 @break
@@ -59,6 +69,7 @@
                     :title="$data['title'] ?? ''"
                     :src="route('shop.api.products.index', $data['filters'] ?? [])"
                     :navigation-link="route('shop.search.index', $data['filters'] ?? [])"
+                    aria-label="Product Carousel"
                 />
 
                 @break

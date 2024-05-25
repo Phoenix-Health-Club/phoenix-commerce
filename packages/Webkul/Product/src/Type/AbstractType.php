@@ -17,7 +17,6 @@ use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
-use Webkul\Tax\Helpers\Tax;
 
 abstract class AbstractType
 {
@@ -62,6 +61,13 @@ abstract class AbstractType
      * @var bool
      */
     protected $canBeMovedFromWishlistToCart = true;
+
+    /**
+     * Product can be added to cart with options or not.
+     *
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = true;
 
     /**
      * Products of this type can be copied in the admin backend.
@@ -577,6 +583,16 @@ abstract class AbstractType
     }
 
     /**
+     * Return true if product can be added to cart without options.
+     *
+     * @return bool
+     */
+    public function canBeAddedToCartWithoutOptions()
+    {
+        return $this->canBeAddedToCartWithoutOptions;
+    }
+
+    /**
      * Retrieve product attributes.
      *
      * @param  \Webkul\Attribute\Contracts\Group  $group
@@ -761,12 +777,12 @@ abstract class AbstractType
     {
         return [
             'regular' => [
-                'price'           => core()->convertPrice($regularPrice = $this->evaluatePrice($this->product->price)),
-                'formatted_price' => core()->currency($regularPrice),
+                'price'           => core()->convertPrice($this->product->price),
+                'formatted_price' => core()->currency($this->product->price),
             ],
 
             'final'   => [
-                'price'           => core()->convertPrice($minimalPrice = $this->evaluatePrice($this->getMinimalPrice())),
+                'price'           => core()->convertPrice($minimalPrice = $this->getMinimalPrice()),
                 'formatted_price' => core()->currency($minimalPrice),
             ],
         ];
@@ -786,56 +802,15 @@ abstract class AbstractType
     }
 
     /**
-     * Get inclusive tax rates.
-     *
-     * @param  float  $totalPrice
-     * @return float
-     */
-    public function getTaxInclusiveRate($totalPrice)
-    {
-        if (! $taxCategory = $this->getTaxCategory()) {
-            return $totalPrice;
-        }
-
-        if (auth()->guard('customer')->check()) {
-            $address = auth()->guard('customer')->user()->addresses->where('default_address', 1)->first();
-        } else {
-            $address = Tax::getDefaultAddress();
-        }
-
-        Tax::isTaxApplicableInCurrentAddress($taxCategory, $address, function ($rate) use (&$totalPrice) {
-            $totalPrice = round($totalPrice, 4) + round(($totalPrice * $rate->tax_rate) / 100, 4);
-        });
-
-        return $totalPrice;
-    }
-
-    /**
      * Get tax category.
      *
      * @return \Webkul\Tax\Models\TaxCategory
      */
     public function getTaxCategory()
     {
-        $taxCategoryId = $this->product->parent
-            ? $this->product->parent->tax_category_id
-            : $this->product->tax_category_id;
+        $taxCategoryId = $this->product->parent?->tax_category_id ?? $this->product->tax_category_id;
 
         return core()->getTaxCategoryById($taxCategoryId);
-    }
-
-    /**
-     * Evaluate price.
-     *
-     * @return array
-     */
-    public function evaluatePrice($price)
-    {
-        $roundedOffPrice = round($price, 2);
-
-        return Tax::isTaxInclusive()
-            ? $this->getTaxInclusiveRate($roundedOffPrice)
-            : $roundedOffPrice;
     }
 
     /**
@@ -858,19 +833,23 @@ abstract class AbstractType
 
         $products = [
             [
-                'product_id'        => $this->product->id,
-                'sku'               => $this->product->sku,
-                'quantity'          => $data['quantity'],
-                'name'              => $this->product->name,
-                'price'             => $convertedPrice = core()->convertPrice($price),
-                'base_price'        => $price,
-                'total'             => $convertedPrice * $data['quantity'],
-                'base_total'        => $price * $data['quantity'],
-                'weight'            => $this->product->weight ?? 0,
-                'total_weight'      => ($this->product->weight ?? 0) * $data['quantity'],
-                'base_total_weight' => ($this->product->weight ?? 0) * $data['quantity'],
-                'type'              => $this->product->type,
-                'additional'        => $this->getAdditionalOptions($data),
+                'product_id'          => $this->product->id,
+                'sku'                 => $this->product->sku,
+                'quantity'            => $data['quantity'],
+                'name'                => $this->product->name,
+                'price'               => $convertedPrice = core()->convertPrice($price),
+                'price_incl_tax'      => $convertedPrice,
+                'base_price'          => $price,
+                'base_price_incl_tax' => $price,
+                'total'               => $convertedPrice * $data['quantity'],
+                'total_incl_tax'      => $convertedPrice * $data['quantity'],
+                'base_total'          => $price * $data['quantity'],
+                'base_total_incl_tax' => $price * $data['quantity'],
+                'weight'              => $this->product->weight ?? 0,
+                'total_weight'        => ($this->product->weight ?? 0) * $data['quantity'],
+                'base_total_weight'   => ($this->product->weight ?? 0) * $data['quantity'],
+                'type'                => $this->product->type,
+                'additional'          => $this->getAdditionalOptions($data),
             ],
         ];
 
@@ -971,29 +950,35 @@ abstract class AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $result = new CartItemValidationResult();
+        $validation = new CartItemValidationResult();
 
         if ($this->isCartItemInactive($item)) {
-            $result->itemIsInactive();
+            $validation->itemIsInactive();
 
-            return $result;
+            return $validation;
         }
 
-        $price = round($this->getFinalPrice($item->quantity), 4);
+        $basePrice = round($this->getFinalPrice($item->quantity), 4);
 
-        if ($price == $item->base_price) {
-            return $result;
+        if ($basePrice == $item->base_price_incl_tax) {
+            return $validation;
         }
 
-        $item->base_price = $price;
-        $item->price = core()->convertPrice($price);
+        $item->base_price = $basePrice;
+        $item->base_price_incl_tax = $basePrice;
 
-        $item->base_total = $price * $item->quantity;
-        $item->total = core()->convertPrice($price * $item->quantity);
+        $item->price = ($price = core()->convertPrice($basePrice));
+        $item->price_incl_tax = $price;
+
+        $item->base_total = $basePrice * $item->quantity;
+        $item->base_total_incl_tax = $basePrice * $item->quantity;
+
+        $item->total = ($total = core()->convertPrice($basePrice * $item->quantity));
+        $item->total_incl_tax = $total;
 
         $item->save();
 
-        return $result;
+        return $validation;
     }
 
     /**

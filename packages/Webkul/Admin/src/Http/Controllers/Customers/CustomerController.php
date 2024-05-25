@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\InvoicesDatagrid;
+use Webkul\Admin\DataGrids\Customers\View\OrdersDataGrid;
+use Webkul\Admin\DataGrids\Customers\View\ReviewDatagrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
@@ -17,6 +20,21 @@ use Webkul\Customer\Repositories\CustomerRepository;
 
 class CustomerController extends Controller
 {
+    /**
+     * Ajax request for orders.
+     */
+    public const ORDERS = 'orders';
+
+    /**
+     * Ajax request for invoices.
+     */
+    public const INVOICES = 'invoices';
+
+    /**
+     * Ajax request for reviews.
+     */
+    public const REVIEWS = 'reviews';
+
     /**
      * Static pagination count.
      *
@@ -42,7 +60,7 @@ class CustomerController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            return app(CustomerDataGrid::class)->toJson();
+            return datagrid(CustomerDataGrid::class)->process();
         }
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
@@ -96,6 +114,7 @@ class CustomerController extends Controller
         }
 
         return new JsonResponse([
+            'data'    => $customer,
             'message' => trans('admin::app.customers.customers.index.create.create-success'),
         ]);
     }
@@ -140,6 +159,10 @@ class CustomerController extends Controller
 
         return new JsonResponse([
             'message' => trans('admin::app.customers.customers.update-success'),
+            'data'    => [
+                'customer' => $customer->fresh(),
+                'group'    => $customer->group,
+            ],
         ]);
     }
 
@@ -217,23 +240,22 @@ class CustomerController extends Controller
      */
     public function show(int $id)
     {
-        $customer = $this->customerRepository->with([
-            'orders',
-            'orders.addresses',
-            'invoices',
-            'reviews',
-            'notes',
-            'addresses',
-        ])->findOrFail($id);
-
-        if (request()->ajax()) {
-            return new JsonResponse([
-                'customer' => $customer,
-                'groups'   => $customer->group,
-            ]);
-        }
+        $customer = $this->customerRepository->with(['addresses', 'group'])->findOrFail($id);
 
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
+
+        if (request()->ajax()) {
+            switch (request()->query('type')) {
+                case self::ORDERS:
+                    return datagrid(OrdersDataGrid::class)->process();
+
+                case self::INVOICES:
+                    return datagrid(InvoicesDatagrid::class)->process();
+
+                case self::REVIEWS:
+                    return datagrid(ReviewDatagrid::class)->process();
+            }
+        }
 
         return view('admin::customers.customers.view', compact('customer', 'groups'));
     }

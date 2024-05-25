@@ -1,27 +1,27 @@
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
-        @lang('shop::app.customers.account.addresses.add-address')
+        @lang('shop::app.customers.account.addresses.index.add-address')
     </x-slot>
     
     <!-- Breadcrumbs -->
     @section('breadcrumbs')
         <x-shop::breadcrumbs name="addresses" />
     @endSection
-    <div class="flex justify-between items-center">
+    <div class="flex items-center justify-between">
         <div class="">
             <h2 class="text-2xl font-medium">
-                @lang('shop::app.customers.account.addresses.title')
+                @lang('shop::app.customers.account.addresses.index.title')
             </h2>
         </div>
 
         <a
             href="{{ route('shop.customers.account.addresses.create') }}"
-            class="secondary-button flex gap-x-2.5 items-center py-3 px-5 border-[#E9E9E9] font-normal"
+            class="secondary-button flex items-center gap-x-2.5 border-[#E9E9E9] px-5 py-3 font-normal"
         >
             <span class="icon-location text-2xl"></span>
 
-            @lang('shop::app.customers.account.addresses.add-address') 
+            @lang('shop::app.customers.account.addresses.index.add-address') 
         </a>
     </div>
 
@@ -30,10 +30,10 @@
 
         {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-        <div class="grid grid-cols-2 gap-5 mt-[60px] max-1060:grid-cols-[1fr]">
+        <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr]">
             @foreach ($addresses as $address)
-                <div class="p-5 border border-[#e5e5e5] rounded-xl max-sm:flex-wrap">
-                    <div class="flex justify-between items-center">
+                <div class="rounded-xl border border-[#e5e5e5] p-5 max-sm:flex-wrap">
+                    <div class="flex items-center justify-between">
                         <p class="text-base font-medium">
                             {{ $address->first_name }} {{ $address->last_name }}
 
@@ -42,25 +42,29 @@
                             @endif
                         </p>
 
-                        <div class="flex gap-4 items-center">
+                        <div class="flex items-center gap-4">
 
                             @if ($address->default_address)
                                 <div class="label-pending block w-max px-1.5 py-1">
-                                    @lang('shop::app.customers.account.addresses.default-address') 
+                                    @lang('shop::app.customers.account.addresses.index.default-address') 
                                 </div>
                             @endif
 
                             <!-- Dropdown Actions -->
                             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                                 <x-slot:toggle>
-                                    <button class="icon-more px-1.5 py-1 rounded-md text-2xl text-[#6E6E6E] cursor-pointer transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black"></button>
+                                    <button 
+                                        class="icon-more cursor-pointer rounded-md px-1.5 py-1 text-2xl text-[#6E6E6E] transition-all hover:bg-gray-100 hover:text-black focus:bg-gray-100 focus:text-black" 
+                                        aria-label="More Options"
+                                    >
+                                    </button>
                                 </x-slot>
 
                                 <x-slot:menu>
                                     <x-shop::dropdown.menu.item>
                                         <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                             <p class="w-full">
-                                                @lang('shop::app.customers.account.addresses.edit')
+                                                @lang('shop::app.customers.account.addresses.index.edit')
                                             </p>
                                         </a>    
                                     </x-shop::dropdown.menu.item>
@@ -84,7 +88,7 @@
                                             })"
                                         >
                                             <p class="w-full">
-                                                @lang('shop::app.customers.account.addresses.delete')
+                                                @lang('shop::app.customers.account.addresses.index.delete')
                                             </p>
                                         </a>
                                     </x-shop::dropdown.menu.item>
@@ -110,7 +114,7 @@
                                                 })"
                                             >
                                                 <button>
-                                                    @lang('shop::app.customers.account.addresses.set-as-default')
+                                                    @lang('shop::app.customers.account.addresses.index.set-as-default')
                                                 </button>
                                             </a>
                                         </x-shop::dropdown.menu.item>
@@ -120,7 +124,7 @@
                         </div>
                     </div>
 
-                    <p class="text-[#6E6E6E] mt-6">
+                    <p class="mt-6 text-[#6E6E6E]">
                         {{ $address->address }},
 
                         {{ $address->city }}, 
@@ -135,16 +139,15 @@
 
     @else
         <!-- Address Empty Page -->
-        <div class="grid items-center justify-items-center place-content-center w-full m-auto h-[476px] text-center">
+        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center">
             <img 
-                class="" 
-                src="{{ bagisto_asset('images/no-address.png') }}" 
+                class="" src="{{ bagisto_asset('images/no-address.png') }}" 
                 alt="" 
                 title=""
             >
             
             <p class="text-xl">
-                @lang('shop::app.customers.account.addresses.empty-address')
+                @lang('shop::app.customers.account.addresses.index.empty-address')
             </p>
         </div>    
     @endif

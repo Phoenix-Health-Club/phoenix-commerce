@@ -5,13 +5,13 @@ namespace Webkul\Paypal\Http\Controllers;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Sales\Repositories\OrderRepository;
+use Webkul\Sales\Transformers\OrderResource;
 
 class StandardController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @param  \Webkul\Attribute\Repositories\OrderRepository  $orderRepository
      * @return void
      */
     public function __construct(
@@ -49,11 +49,15 @@ class StandardController extends Controller
      */
     public function success()
     {
-        $order = $this->orderRepository->create(Cart::prepareDataForOrder());
+        $cart = Cart::getCart();
+
+        $data = (new OrderResource($cart))->jsonSerialize();
+
+        $order = $this->orderRepository->create($data);
 
         Cart::deActivateCart();
 
-        session()->flash('order', $order);
+        session()->flash('order_id', $order->id);
 
         return redirect()->route('shop.checkout.onepage.success');
     }
