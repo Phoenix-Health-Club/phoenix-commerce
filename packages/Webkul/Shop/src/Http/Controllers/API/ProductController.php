@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Log;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
 use Webkul\Product\Repositories\ProductRepository;
@@ -26,7 +27,11 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        $products = $this->productRepository->getAll(request()->query());
+        $defaultParams = [
+            'type' => 'configurable',
+        ];
+
+        $products = $this->productRepository->getAll(array_merge($defaultParams, request()->all()));
 
         if (! empty(request()->query('query'))) {
             /**
