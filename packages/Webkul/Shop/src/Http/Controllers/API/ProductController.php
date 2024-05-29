@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Log;
 use Webkul\Category\Repositories\CategoryRepository;
@@ -25,11 +26,17 @@ class ProductController extends APIController
     /**
      * Product listings.
      */
-    public function index(): JsonResource
+    public function index(Request $request): JsonResource
     {
-        $defaultParams = [
-            'type' => 'configurable',
-        ];
+        $defaultParams = [];
+
+        // Get the original URL from the custom header
+        // Only if the request originates from the search page, we show the variants
+        $originalUrl = $request->header('referer');
+
+        if ($originalUrl && !str_contains($originalUrl, '/search')) {
+            $defaultParams = ['type' => 'configurable'];
+        }
 
         $products = $this->productRepository->getAll(array_merge($defaultParams, request()->all()));
 
