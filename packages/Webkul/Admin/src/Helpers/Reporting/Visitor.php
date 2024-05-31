@@ -166,10 +166,15 @@ class Visitor extends AbstractReporting
             ->get();
 
         $visits->map(function ($visit) {
-            $visit->name = $visit->visitable->name;
+            if($visit->visitable != null)
+                $visit->name = $visit->visitable->name;
         });
 
-        return $visits;
+        $visits = $visits->filter(function ($value, $key) {
+            return $value->visitable;
+        });
+
+        return $visits->values();
     }
 
     /**
