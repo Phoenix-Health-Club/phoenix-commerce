@@ -10,6 +10,10 @@
     font-display: block;
 }
 
+img.lazy {
+  visibility: hidden;
+}
+
 @layer components {
     ::selection {
         background-color: rgba(6, 12, 59, .2);
@@ -339,6 +343,15 @@
         border-radius: 12px;
         border: 3px solid transparent;
         background-clip: content-box;
+    }
+
+    .scrollbar-width-hidden {
+        -ms-overflow-style: none; 
+        scrollbar-width: none;
+    }
+
+    .scrollbar-width-hidden::-webkit-scrollbar { 
+        display: none;
     }
 
     .custom-select {

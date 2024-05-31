@@ -38,9 +38,16 @@ class ProductController extends APIController
             $defaultParams = ['type' => 'configurable'];
         }
 
-        $products = $this->productRepository->getAll(array_merge($defaultParams, request()->all()));
+        $mergedParams = array_merge($defaultParams, request()->query(), [
+            'status'               => 1,
+            'visible_individually' => 1,
+        ]);
 
-        if (! empty(request()->query('query'))) {
+        $products = $this->productRepository
+            ->setSearchEngine(core()->getConfigData('catalog.products.search.storefront_mode'))
+            ->getAll($mergedParams);
+
+        if (!empty(request()->query('query'))) {
             /**
              * Update or create search term only if
              * there is only one filter that is query param

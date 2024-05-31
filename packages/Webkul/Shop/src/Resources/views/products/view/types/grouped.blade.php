@@ -1,7 +1,7 @@
 @if ($product->type == 'grouped')
     {!! view_render_event('bagisto.shop.products.view.grouped_products.before', ['product' => $product]) !!}
 
-    <div class="w-[455px] max-w-full">
+    <div class="w-[455px] max-w-full max-sm:w-full">
         @php
             $groupedProducts = $product->grouped_products()->orderBy('sort_order')->get();
         @endphp
@@ -16,7 +16,7 @@
                                     @lang('shop::app.products.view.type.grouped.name')
                                 </p>
 
-                                <p class="mt-1.5 text-[#6E6E6E]">
+                                <p class="mt-1.5 text-zinc-500">
                                     {{ $groupedProduct->associated_product->name . ' + ' . core()->currency($groupedProduct->associated_product->getTypeInstance()->getFinalPrice()) }}
                                 </p>
 
