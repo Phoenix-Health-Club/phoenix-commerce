@@ -51,7 +51,7 @@ class ProductRepository extends Repository
      */
     public function create(array $data)
     {
-        $typeInstance = app(config('product_types.'.$data['type'].'.class'));
+        $typeInstance = app(config('product_types.' . $data['type'] . '.class'));
 
         $product = $typeInstance->create($data);
 
@@ -194,9 +194,10 @@ class ProductRepository extends Repository
     {
         $product = $this->findBySlug($slug);
 
-        if (! $product) {
+        if (!$product) {
             throw (new ModelNotFoundException)->setModel(
-                get_class($this->model), $slug
+                get_class($this->model),
+                $slug
             );
         }
 
@@ -226,7 +227,7 @@ class ProductRepository extends Repository
     {
         $params['url_key'] ??= null;
 
-        if (! empty($params['query'])) {
+        if (!empty($params['query'])) {
             $params['name'] = $params['query'];
         }
 
@@ -243,7 +244,7 @@ class ProductRepository extends Repository
 
             $qb = $query->distinct()
                 ->select('products.*')
-                ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
+                ->leftJoin('products as variants', DB::raw('COALESCE(' . $prefix . 'variants.parent_id, ' . $prefix . 'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
                     $customerGroup = $this->customerRepository->getCurrentGroup();
 
@@ -251,19 +252,22 @@ class ProductRepository extends Repository
                         ->where('product_price_indices.customer_group_id', $customerGroup->id);
                 });
 
-            if (! empty($params['category_id'])) {
-                $qb->leftJoin('product_categories', 'product_categories.product_id', '=', 'products.id')
-                    ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
+            if (!empty($params['category_id'])) {
+                // Join with parent categories if the product type is simple
+                $qb->leftJoin('product_categories as simple_categories', function ($join) use ($prefix) {
+                    $join->on('products.id', '=', 'simple_categories.product_id')
+                        ->orOn('products.parent_id', '=', 'simple_categories.product_id');
+                })->whereIn('simple_categories.category_id', explode(',', $params['category_id']));
             }
 
-            if (! empty($params['type'])) {
+            if (!empty($params['type'])) {
                 $qb->where('products.type', $params['type']);
             }
 
             /**
              * Filter query by price.
              */
-            if (! empty($params['price'])) {
+            if (!empty($params['price'])) {
                 $priceRange = explode(',', $params['price']);
 
                 $qb->whereBetween('product_price_indices.min_price', [
@@ -291,31 +295,31 @@ class ProductRepository extends Repository
              * Filter collection by required attributes.
              */
             foreach ($attributes as $attribute) {
-                $alias = $attribute->code.'_product_attribute_values';
+                $alias = $attribute->code . '_product_attribute_values';
 
-                $qb->leftJoin('product_attribute_values as '.$alias, 'products.id', '=', $alias.'.product_id')
-                    ->where($alias.'.attribute_id', $attribute->id);
+                $qb->leftJoin('product_attribute_values as ' . $alias, 'products.id', '=', $alias . '.product_id')
+                    ->where($alias . '.attribute_id', $attribute->id);
 
                 if ($attribute->code == 'name') {
                     $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
 
                     $qb->where(function ($subQuery) use ($alias, $synonyms) {
                         foreach ($synonyms as $synonym) {
-                            $subQuery->orWhere($alias.'.text_value', 'like', '%'.$synonym.'%');
+                            $subQuery->orWhere($alias . '.text_value', 'like', '%' . $synonym . '%');
                         }
                     });
                 } elseif ($attribute->code == 'url_key') {
                     if (empty($params['url_key'])) {
-                        $qb->whereNotNull($alias.'.text_value');
+                        $qb->whereNotNull($alias . '.text_value');
                     } else {
-                        $qb->where($alias.'.text_value', 'like', '%'.urldecode($params['url_key']).'%');
+                        $qb->where($alias . '.text_value', 'like', '%' . urldecode($params['url_key']) . '%');
                     }
                 } else {
                     if (is_null($params[$attribute->code])) {
                         continue;
                     }
 
-                    $qb->where($alias.'.'.$attribute->column_name, 1);
+                    $qb->where($alias . '.' . $attribute->column_name, 1);
                 }
             }
 
@@ -344,12 +348,12 @@ class ProductRepository extends Repository
                             $values = explode(',', $params[$attribute->code]);
 
                             if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.'.$attribute->column_name, [
+                                $attributeQuery->whereBetween('product_attribute_values.' . $attribute->column_name, [
                                     core()->convertToBasePrice(current($values)),
                                     core()->convertToBasePrice(end($values)),
                                 ]);
                             } else {
-                                $attributeQuery->whereIn('product_attribute_values.'.$attribute->column_name, $values);
+                                $attributeQuery->whereIn('product_attribute_values.' . $attribute->column_name, $values);
                             }
                         });
                     }
@@ -372,13 +376,13 @@ class ProductRepository extends Repository
                     } else {
                         $alias = 'sort_product_attribute_values';
 
-                        $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
-                            $join->on('products.id', '=', $alias.'.product_id')
-                                ->where($alias.'.attribute_id', $attribute->id)
-                                ->where($alias.'.channel', core()->getRequestedChannelCode())
-                                ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                        $qb->leftJoin('product_attribute_values as ' . $alias, function ($join) use ($alias, $attribute) {
+                            $join->on('products.id', '=', $alias . '.product_id')
+                                ->where($alias . '.attribute_id', $attribute->id)
+                                ->where($alias . '.channel', core()->getRequestedChannelCode())
+                                ->where($alias . '.locale', core()->getRequestedLocaleCode());
                         })
-                            ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
+                            ->orderBy($alias . '.' . $attribute->column_name, $sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -395,6 +399,7 @@ class ProductRepository extends Repository
 
         return $query->paginate($limit);
     }
+
 
     /**
      * Search product from elastic search.
@@ -438,7 +443,7 @@ class ProductRepository extends Repository
                 ->whereIn('products.id', $indices['ids']);
 
             //Sort collection
-            $qb->orderBy(DB::raw('FIELD(id, '.implode(',', $indices['ids']).')'));
+            $qb->orderBy(DB::raw('FIELD(id, ' . implode(',', $indices['ids']) . ')'));
 
             return $qb;
         });
@@ -510,7 +515,7 @@ class ProductRepository extends Repository
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->where('product_price_indices.customer_group_id', $customerGroup->id);
 
-        if (! empty($params['category_id'])) {
+        if (!empty($params['category_id'])) {
             $query->where('product_categories.category_id', $params['category_id']);
         }
 
