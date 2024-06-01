@@ -395,9 +395,10 @@ class ProductRepository extends Repository
             return $qb->groupBy('products.id');
         });
 
-        $limit = $this->getPerPageLimit($params);
 
-        return $query->paginate($limit);
+        // $limit = $this->getPerPageLimit($params);
+
+        return $query->paginate(100);
     }
 
 
