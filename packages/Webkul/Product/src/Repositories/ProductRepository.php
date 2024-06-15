@@ -73,10 +73,6 @@ class ProductRepository extends Repository
 
         $product->refresh();
 
-        if (isset($data['channels'])) {
-            $product['channels'] = $data['channels'];
-        }
-
         return $product;
     }
 
@@ -239,6 +235,11 @@ class ProductRepository extends Repository
             'price_indices',
             'inventory_indices',
             'reviews',
+            'variants',
+            'variants.attribute_family',
+            'variants.attribute_values',
+            'variants.price_indices',
+            'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
@@ -260,7 +261,12 @@ class ProductRepository extends Repository
                 })->whereIn('simple_categories.category_id', explode(',', $params['category_id']));
             }
 
-            if (!empty($params['type'])) {
+            if (! empty($params['channel_id'])) {
+                $qb->leftJoin('product_channels', 'products.id', '=', 'product_channels.product_id')
+                    ->where('product_channels.channel_id', explode(',', $params['channel_id']));
+            }
+
+            if (! empty($params['type'])) {
                 $qb->where('products.type', $params['type']);
             }
 
@@ -338,22 +344,24 @@ class ProductRepository extends Repository
              * Filter query by attributes.
              */
             if ($attributes->isNotEmpty()) {
-                $qb->leftJoin('product_attribute_values', 'products.id', '=', 'product_attribute_values.product_id');
+                $qb->where(function ($filterQuery) use ($qb, $params, $attributes) {
+                    $aliases = [
+                        'products' => 'product_attribute_values',
+                        'variants' => 'variant_attribute_values',
+                    ];
 
-                $qb->where(function ($filterQuery) use ($params, $attributes) {
-                    foreach ($attributes as $attribute) {
-                        $filterQuery->orWhere(function ($attributeQuery) use ($params, $attribute) {
-                            $attributeQuery = $attributeQuery->where('product_attribute_values.attribute_id', $attribute->id);
+                    foreach ($aliases as $table => $tableAlias) {
+                        $filterQuery->orWhere(function ($subFilterQuery) use ($qb, $params, $attributes, $table, $tableAlias) {
+                            foreach ($attributes as $attribute) {
+                                $alias = $attribute->code.'_'.$tableAlias;
 
-                            $values = explode(',', $params[$attribute->code]);
+                                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($table, $alias, $attribute) {
+                                    $join->on($table.'.id', '=', $alias.'.product_id');
 
-                            if ($attribute->type == 'price') {
-                                $attributeQuery->whereBetween('product_attribute_values.' . $attribute->column_name, [
-                                    core()->convertToBasePrice(current($values)),
-                                    core()->convertToBasePrice(end($values)),
-                                ]);
-                            } else {
-                                $attributeQuery->whereIn('product_attribute_values.' . $attribute->column_name, $values);
+                                    $join->where($alias.'.attribute_id', $attribute->id);
+                                });
+
+                                $subFilterQuery->whereIn($alias.'.'.$attribute->column_name, explode(',', $params[$attribute->code]));
                             }
                         });
                     }
@@ -376,13 +384,24 @@ class ProductRepository extends Repository
                     } else {
                         $alias = 'sort_product_attribute_values';
 
-                        $qb->leftJoin('product_attribute_values as ' . $alias, function ($join) use ($alias, $attribute) {
-                            $join->on('products.id', '=', $alias . '.product_id')
-                                ->where($alias . '.attribute_id', $attribute->id)
-                                ->where($alias . '.channel', core()->getRequestedChannelCode())
-                                ->where($alias . '.locale', core()->getRequestedLocaleCode());
+                        $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $attribute) {
+                            $join->on('products.id', '=', $alias.'.product_id')
+                                ->where($alias.'.attribute_id', $attribute->id);
+
+                            if ($attribute->value_per_channel) {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode())
+                                        ->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                } else {
+                                    $join->where($alias.'.channel', core()->getRequestedChannelCode());
+                                }
+                            } else {
+                                if ($attribute->value_per_locale) {
+                                    $join->where($alias.'.locale', core()->getRequestedLocaleCode());
+                                }
+                            }
                         })
-                            ->orderBy($alias . '.' . $attribute->column_name, $sortOptions['order']);
+                            ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -404,10 +423,6 @@ class ProductRepository extends Repository
 
     /**
      * Search product from elastic search.
-     *
-     * To Do (@devansh-webkul): Need to reduce all the request query from this repo and provide
-     * good request parameter with an array type as an argument. Make a clean pull request for
-     * this to have track record.
      *
      * @return \Illuminate\Support\Collection
      */

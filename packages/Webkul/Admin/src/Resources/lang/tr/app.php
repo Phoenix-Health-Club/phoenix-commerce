@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Müşteri Ekle',
             'add-product'                 => 'Ürün Ekle',
+            'all-channels'                => 'Tüm Kanallar',
             'attribute-code'              => 'Özellik Kodu',
             'average-sale'                => 'Ortalama Sipariş Tutarı',
             'color'                       => 'Renk',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'Dolandırıcılık',
                     'grand-total'     => 'Genel Toplam',
                     'id'              => '#:id',
-                    'images'          => 'Görseller',
+                    'items'           => 'Öğeler',
                     'location'        => 'Konum',
                     'order-id'        => 'Sipariş Kimliği',
                     'pay-by'          => 'Şunu İle Ödeme Yap - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Banka Detayları',
                 'bill-to'                    => 'Fatura Edilen',
-                'contact'                    => 'İletişim',
                 'contact-number'             => 'İletişim Numarası',
+                'contact'                    => 'İletişim',
                 'date'                       => 'Fatura Tarihi',
                 'discount'                   => 'İndirim',
+                'excl-tax'                   => 'KDV Hariç:',
                 'grand-total'                => 'Genel Toplam',
-                'invoice'                    => 'Fatura',
                 'invoice-id'                 => 'Fatura ID',
+                'invoice'                    => 'Fatura',
                 'order-date'                 => 'Sipariş Tarihi',
                 'order-id'                   => 'Sipariş ID',
                 'payment-method'             => 'Ödeme Yöntemi',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Ara Toplam (KDV Hariç)',
                 'subtotal-incl-tax'          => 'Ara Toplam (KDV Dahil)',
                 'subtotal'                   => 'Ara Toplam',
-                'tax'                        => 'Vergi',
                 'tax-amount'                 => 'Vergi Tutarı',
+                'tax'                        => 'Vergi',
                 'vat-number'                 => 'Vergi Numarası',
-                'excl-tax'                   => 'KDV Hariç:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Özellik Ailesi',
                     'attribute-family-value' => 'Özellik Ailesi - :attribute_family',
                     'category'               => 'Kategori',
+                    'channel'                => 'Kanal',
                     'copy-of'                => 'Kopyası :value',
                     'copy-of-slug'           => 'kopyası-:value',
                     'delete'                 => 'Sil',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Aktif',
                     'address'        => ':address  Adres(ler)',
                     'address-count'  => 'Adres Sayısı',
+                    'channel'        => 'Kanal',
                     'delete'         => 'Sil',
                     'delete-success' => 'Seçilen veriler başarıyla silindi',
                     'email'          => 'E-posta',
@@ -2224,7 +2227,7 @@ return [
                     'title'      => 'Arama Terimleriniz',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanal',
+                        'channel'             => 'Kanal',
                         'actions'             => 'İşlemler',
                         'channel'             => 'Kanal',
                         'delete'              => 'Sil',
@@ -2239,7 +2242,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanal',
                         'channel'        => 'Kanal',
                         'delete-warning' => 'Bu işlemi gerçekleştirmek istediğinizden emin misiniz?',
                         'locale'         => 'Yerel Ayar',
@@ -2347,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'İşlemler',
+                        'category'            => 'Kategori',
+                        'cms-page'            => 'CMS Sayfası',
                         'delete'              => 'Sil',
                         'edit'                => 'Düzenle',
                         'for'                 => 'İçin',
@@ -2354,6 +2358,7 @@ return [
                         'locale'              => 'Yerel',
                         'mass-delete-success' => 'Seçili URL Yeniden Yönlendirmeleri Başarıyla Silindi',
                         'permanent-redirect'  => 'Kalıcı (301)',
+                        'product'             => 'Ürün',
                         'redirect-type'       => 'Yönlendirme Türü',
                         'request-path'        => 'İstek Yolu',
                         'target-path'         => 'Hedef Yol',
@@ -2396,6 +2401,7 @@ return [
             'title'         => 'Sayfalar',
 
             'datagrid' => [
+                'channel'             => 'Kanal',
                 'delete'              => 'Sil',
                 'edit'                => 'Düzenle',
                 'id'                  => 'ID',
@@ -3087,6 +3093,7 @@ return [
                 'name'       => 'Ad',
                 'save-btn'   => 'Tema kaydet',
                 'sort-order' => 'Sıralama Sırası',
+                'themes'     => 'Temalar',
                 'title'      => 'Tema Oluştur',
 
                 'type' => [
@@ -3101,6 +3108,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktif',
                 'add-filter-btn'                => 'Filtre Ekle',
                 'add-footer-link-btn'           => 'Alt Bağlantı Ekle',
                 'add-image-btn'                 => 'Resim Ekle',
@@ -3129,13 +3137,15 @@ return [
                 'image-size'                    => 'Resim çözünürlüğü (1920 piksel x 700 piksel) olmalıdır',
                 'image-title'                   => 'Resim Başlığı',
                 'image-upload-message'          => 'Sadece resimler (.jpeg, .jpg, .png, .webp, ..) izin verilir.',
+                'inactive'                      => 'Pasif',
                 'key'                           => 'Anahtar: :key',
                 'key-input'                     => 'Anahtar',
                 'limit'                         => 'Sınır',
                 'link'                          => 'Bağlantı',
-                'no'                            => 'Hayır',
-                'new'                           => 'Yeni',
                 'name'                          => 'Ad',
+                'new'                           => 'Yeni',
+                'no'                            => 'Hayır',
+                'parent-id'                     => 'Üst Kimlik',
                 'preview'                       => 'Önizleme',
                 'product-carousel'              => 'Ürün Karuseli',
                 'product-carousel-description'  => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',
@@ -3151,6 +3161,7 @@ return [
                 'static-content'                => 'Statik İçerik',
                 'static-content-description'    => 'Kitleniz için özgün, bilgilendirici statik içerikle etkileşimi artırın.',
                 'status'                        => 'Durum',
+                'themes'                        => 'Temalar',
                 'title'                         => 'Tema Düzenle',
                 'update-slider'                 => 'Slider\'ı Güncelle',
                 'url'                           => 'URL',
@@ -3192,6 +3203,7 @@ return [
                 'abandoned-revenue'             => 'Terk Edilen Gelir',
                 'added-to-cart'                 => 'Sepete Eklendi',
                 'added-to-cart-info'            => 'Sadece :progress ziyaretçisi ürünleri sepete ekledi',
+                'all-channels'                  => 'Tüm Kanallar',
                 'average-order-value-over-time' => 'Zaman İçinde Ortalama Sipariş Değeri',
                 'average-sales'                 => 'Ortalama Sipariş Değeri',
                 'count'                         => 'Sayı',
@@ -3230,6 +3242,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Tüm Kanallar',
                 'count'                       => 'Sayı',
                 'customers'                   => 'Müşteriler',
                 'customers-over-time'         => 'Zaman İçinde Müşteriler',
@@ -3258,6 +3271,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Tüm Kanallar',
                 'channel'                          => 'Kanal',
                 'end-date'                         => 'Bitiş Tarihi',
                 'id'                               => 'Kimlik',
@@ -3291,6 +3305,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Tüm Kanallar',
             'day'           => 'Gün',
             'end-date'      => 'Bitiş Tarihi',
             'export-csv'    => 'CSV Olarak Dışa Aktar',
@@ -3983,7 +3998,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtrele',
+                    'apply-filters-btn' => 'Filtreleri Uygula',
+                    'back-btn'          => 'Geri',
+                    'create-new-filter' => 'Yeni Filtre Oluştur',
+                    'custom-filters'    => 'Özel Filtreler',
+                    'delete-error'      => 'Filtre silinirken bir hata oluştu, lütfen tekrar deneyin.',
+                    'delete-success'    => 'Filtre başarıyla silindi.',
+                    'empty-description' => 'Kaydedilecek seçili filtre yok. Lütfen kaydetmek için filtreleri seçin.',
+                    'empty-title'       => 'Kaydedilecek Filtreler Ekle',
+                    'name'              => 'Adı',
+                    'quick-filters'     => 'Hızlı Filtreler',
+                    'save-btn'          => 'Kaydet',
+                    'save-filter'       => 'Filtreyi Kaydet',
+                    'saved-success'     => 'Filtre başarıyla kaydedildi.',
+                    'selected-filters'  => 'Seçilen Filtreler',
+                    'title'             => 'Filtre',
+                    'update'            => 'Güncelle',
+                    'update-filter'     => 'Filtreyi güncelle',
+                    'updated-success'   => 'Filtre başarıyla güncellendi.',
                 ],
 
                 'search' => [
@@ -3993,7 +4025,7 @@ return [
 
             'filters' => [
                 'select' => 'Seçiniz',
-                'title'  => 'Filtreleri Uygula',
+                'title'  => 'Filtreler',
 
                 'dropdown' => [
                     'searchable' => [

@@ -269,6 +269,30 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                         <!-- Themes -->
+                         <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.themes.edit.themes')
+                            </x-admin::form.control-group.label>
+    
+                            <x-admin::form.control-group.control
+                                type="select"
+                                id="theme_code"
+                                name="theme_code"
+                                :value="$theme->theme_code"
+                                rules="required"
+                                :label="trans('admin::app.settings.themes.edit.themes')"
+                            >
+                                @foreach (config('themes.shop') as $themeCode => $shopTheme)
+                                    <option value="{{ $themeCode }}">
+                                        {{ $shopTheme['name'] }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+    
+                            <x-admin::form.control-group.error control-name="theme" />
+                        </x-admin::form.control-group>
+
                         <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
@@ -294,7 +318,7 @@
                                 </v-field>
                     
                                 <label
-                                    class="peer-checked:bg-navyBlue peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
+                                    class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                                     for="status"
                                 ></label>
                             </label>
@@ -315,7 +339,7 @@
                 <x-admin::modal ref="productFilterModal">
                     <!-- Modal Header -->
                     <x-slot:header>
-                        <p class="text-lg text-gray-800 dark:text-white font-bold">
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
                             @lang('admin::app.settings.themes.edit.create-filter')
                         </p>
                     </x-slot>
@@ -363,7 +387,7 @@
                                     <option
                                         v-for="option in filters.applied.options"
                                         :value="option.id"
-                                        :text="option.name"
+                                        :text="option.label ?? option.admin_name"
                                     ></option>
                                 </x-admin::form.control-group.control>
                             </template>
@@ -374,7 +398,7 @@
                                     name="value"
                                     rules="required"
                                     :label="trans('admin::app.settings.themes.edit.value-input')"
-                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')"
+                                    :placeholder="trans('admin::app.settings.themes.edit.value-input')" 
                                 />
                             </template>
 
@@ -416,11 +440,11 @@
                                 options: [
                                     {
                                         'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.no')',
                                     },
                                     {
                                         'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.yes')',
                                     },
                                 ],
                             },
@@ -432,11 +456,11 @@
                                 options: [
                                     {
                                         'id': 0,
-                                        'name': '@lang('admin::app.settings.themes.edit.no')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.no')',
                                     },
                                     {
                                         'id': 1,
-                                        'name': '@lang('admin::app.settings.themes.edit.yes')',
+                                        'admin_name': '@lang('admin::app.settings.themes.edit.yes')',
                                     },
                                 ],
                             },
@@ -463,6 +487,8 @@
                         key: key,
                         value: this.options.filters[key],
                     }));
+
+                [this.filters.applied] = this.filters.available;
             },
 
             methods: {

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Додати клієнта',
             'add-product'                 => 'Додати продукт',
+            'all-channels'                => 'Усі канали',
             'attribute-code'              => 'Код атрибута',
             'average-sale'                => 'Середній обсяг замовлення',
             'color'                       => 'Колір',
@@ -139,28 +140,28 @@ return [
                 ],
 
                 'datagrid' => [
-                    'canceled'         => 'Скасовано',
-                    'channel-name'     => 'Канал',
-                    'closed'           => 'Закрито',
-                    'completed'        => 'Завершено',
-                    'customer'         => 'Клієнт',
-                    'date'             => 'Дата',
-                    'email'            => 'Електронна пошта',
-                    'fraud'            => 'Шахрайство',
-                    'grand-total'      => 'Загальний підсумок',
-                    'id'               => '#:id',
-                    'images'           => 'Зображення',
-                    'location'         => 'Місцезнаходження',
-                    'order-id'         => 'Номер замовлення',
-                    'pay-by'           => 'Сплачено через - :method',
-                    'pay-via'          => 'Сплатити через',
-                    'pending-payment'  => 'Очікується оплата',
-                    'pending'          => 'В очікуванні',
-                    'processing'       => 'Обробка',
-                    'product-count'    => ':count + Ще більше продуктів',
-                    'status'           => 'Статус',
-                    'success'          => 'Успішно',
-                    'view'             => 'Перегляд',
+                    'canceled'        => 'Скасовано',
+                    'channel-name'    => 'Канал',
+                    'closed'          => 'Закрито',
+                    'completed'       => 'Завершено',
+                    'customer'        => 'Клієнт',
+                    'date'            => 'Дата',
+                    'email'           => 'Електронна пошта',
+                    'fraud'           => 'Шахрайство',
+                    'grand-total'     => 'Загальний підсумок',
+                    'id'              => '#:id',
+                    'items'           => 'Товари',
+                    'location'        => 'Місцезнаходження',
+                    'order-id'        => 'Номер замовлення',
+                    'pay-by'          => 'Сплачено через - :method',
+                    'pay-via'         => 'Сплатити через',
+                    'pending-payment' => 'Очікується оплата',
+                    'pending'         => 'В очікуванні',
+                    'processing'      => 'Обробка',
+                    'product-count'   => ':count + Ще більше продуктів',
+                    'status'          => 'Статус',
+                    'success'         => 'Успішно',
+                    'view'            => 'Перегляд',
                 ],
             ],
 
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Банківські реквізити',
                 'bill-to'                    => 'Платник',
-                'contact'                    => 'Контакт',
                 'contact-number'             => 'Контактний номер',
+                'contact'                    => 'Контакт',
                 'date'                       => 'Дата рахунку',
                 'discount'                   => 'Знижка',
+                'excl-tax'                   => 'Без податку:',
                 'grand-total'                => 'Загальна сума',
-                'invoice'                    => 'Рахунок-фактура',
                 'invoice-id'                 => 'ID рахунку-фактури',
+                'invoice'                    => 'Рахунок-фактура',
                 'order-date'                 => 'Дата замовлення',
                 'order-id'                   => 'ID замовлення',
                 'payment-method'             => 'Спосіб оплати',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Підсумок (без податку)',
                 'subtotal-incl-tax'          => 'Підсумок (з податком)',
                 'subtotal'                   => 'Підсумок',
-                'tax'                        => 'Податок',
                 'tax-amount'                 => 'Сума податку',
+                'tax'                        => 'Податок',
                 'vat-number'                 => 'Номер платника ПДВ',
-                'excl-tax'                   => 'Без податку:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Сімейство атрибутів',
                     'attribute-family-value' => 'Сімейство атрибутів - :attribute_family',
                     'category'               => 'Категорія',
+                    'channel'                => 'Канал',
                     'copy-of'                => 'Копія :value',
                     'copy-of-slug'           => 'копія-:value',
                     'delete'                 => 'Видалити',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Активний',
                     'address'        => ':address Адреса(и)',
                     'address-count'  => 'Кількість адрес',
+                    'channel'        => 'Канал',
                     'delete'         => 'Видалити',
                     'delete-success' => 'Вибрані дані успішно видалено',
                     'email'          => 'Електронна пошта',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Терміни пошуку',
 
                     'datagrid' => [
-                        'Channel'             => 'Канал',
+                        'channel'             => 'Канал',
                         'actions'             => 'Дії',
                         'channel'             => 'Канал',
                         'delete'              => 'Видалити',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Канал',
                         'channel'        => 'Канал',
                         'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
                         'locale'         => 'Локаль',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Дії',
+                        'category'            => 'Категорія',
+                        'cms-page'            => 'Сторінка CMS',
                         'delete'              => 'Видалити',
                         'edit'                => 'Редагувати',
                         'for'                 => 'Для',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'Локаль',
                         'mass-delete-success' => 'Вибрані переадресації URL успішно видалено',
                         'permanent-redirect'  => 'Постійна (301)',
+                        'product'             => 'Продукт',
                         'redirect-type'       => 'Тип переадресації',
                         'request-path'        => 'Шлях запиту',
                         'target-path'         => 'Цільовий шлях',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'Сторінки',
 
             'datagrid' => [
+                'channel'             => 'Канал',
                 'delete'              => 'Видалити',
                 'edit'                => 'Редагувати',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'Назва',
                 'save-btn'   => 'Зберегти тему',
                 'sort-order' => 'Порядок Сортування',
+                'themes'     => 'Теми',
                 'title'      => 'Створити Тему',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Активна',
                 'add-filter-btn'                => 'Додати Фільтр',
                 'add-footer-link-btn'           => 'Додати Посилання У Підвалі',
                 'add-image-btn'                 => 'Додати Зображення',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'Розмір зображення повинен бути (1920 пікселів x 700 пікселів)',
                 'image-title'                   => 'Заголовок зображення',
                 'image-upload-message'          => 'Дозволено лише зображення (.jpeg, .jpg, .png, .webp, ..).',
+                'inactive'                      => 'Неактивна',
                 'key'                           => 'Ключ: :key',
                 'key-input'                     => 'Ключ',
                 'limit'                         => 'Обмеження',
                 'link'                          => 'Посилання',
                 'name'                          => 'Назва',
-                'no'                            => 'Ні',
                 'new'                           => 'Новий',
+                'no'                            => 'Ні',
+                'parent-id'                     => 'Батьківський ID',
                 'preview'                       => 'Попередній Перегляд',
                 'product-carousel'              => 'Карусель Товарів',
                 'product-carousel-description'  => 'Елегантно представляйте товари за допомогою динамічної та відзивної каруселі товарів.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'Статичний Контент',
                 'static-content-description'    => 'Покращуйте взаємодію з аудиторією завдяки лаконічному та інформативному статичному контенту.',
                 'status'                        => 'Статус',
+                'themes'                        => 'Теми',
                 'title'                         => 'Редагувати Тему',
                 'update-slider'                 => 'Оновити Слайдер',
                 'url'                           => 'URL',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'Дохід від залишених товарів',
                 'added-to-cart'                 => 'Додано в кошик',
                 'added-to-cart-info'            => 'Лише :progress відвідувачів додали товари в кошик',
+                'all-channels'                  => 'Усі канали',
                 'average-order-value-over-time' => 'Середній обсяг замовлення відносно часу',
                 'average-sales'                 => 'Середній обсяг замовлення',
                 'count'                         => 'Кількість',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Усі канали',
                 'count'                       => 'Кількість',
                 'customers'                   => 'Клієнти',
                 'customers-over-time'         => 'Клієнти відносно часу',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Усі канали',
                 'channel'                          => 'Канал',
                 'end-date'                         => 'Дата закінчення',
                 'id'                               => 'Ідентифікатор',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Усі канали',
             'day'           => 'День',
             'end-date'      => 'Дата закінчення',
             'export-csv'    => 'Експорт у форматі CSV',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Фільтр',
+                    'apply-filters-btn' => 'Застосувати фільтри',
+                    'back-btn'          => 'Назад',
+                    'create-new-filter' => 'Створити новий фільтр',
+                    'custom-filters'    => 'Користувацькі фільтри',
+                    'delete-error'      => 'Щось пішло не так під час видалення фільтра, будь ласка, спробуйте ще раз.',
+                    'delete-success'    => 'Фільтр успішно видалено.',
+                    'empty-description' => 'Немає вибраних фільтрів для збереження. Будь ласка, виберіть фільтри для збереження.',
+                    'empty-title'       => 'Додати фільтри для збереження',
+                    'name'              => 'Назва',
+                    'quick-filters'     => 'Швидкі фільтри',
+                    'save-btn'          => 'Зберегти',
+                    'save-filter'       => 'Зберегти фільтр',
+                    'saved-success'     => 'Фільтр успішно збережено.',
+                    'selected-filters'  => 'Вибрані фільтри',
+                    'title'             => 'Фільтр',
+                    'update'            => 'Оновити',
+                    'update-filter'     => 'Оновити фільтр',
+                    'updated-success'   => 'Фільтр було успішно оновлено.',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'Вибрати',
-                'title'  => 'Застосувати фільтри',
+                'title'  => 'Фільтри',
 
                 'dropdown' => [
                     'searchable' => [

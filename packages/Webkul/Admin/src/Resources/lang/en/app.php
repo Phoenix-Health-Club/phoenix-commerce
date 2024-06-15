@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Add Customer',
             'add-product'                 => 'Add Product',
+            'all-channels'                => 'All Channels',
             'attribute-code'              => 'Attribute Code',
             'average-sale'                => 'Average Order Sale',
             'color'                       => 'Color',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'Fraud',
                     'grand-total'     => 'Grand Total',
                     'id'              => '#:id',
-                    'images'          => 'Images',
+                    'items'           => 'Items',
                     'location'        => 'Location',
                     'order-id'        => 'Order ID',
                     'pay-by'          => 'Pay By - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Bank Details',
                 'bill-to'                    => 'Bill to',
-                'contact'                    => 'Contact',
                 'contact-number'             => 'Contact Number',
+                'contact'                    => 'Contact',
                 'date'                       => 'Invoice Date',
                 'discount'                   => 'Discount',
+                'excl-tax'                   => 'Excl. Tax:',
                 'grand-total'                => 'Grand Total',
-                'invoice'                    => 'Invoice',
                 'invoice-id'                 => 'Invoice ID',
+                'invoice'                    => 'Invoice',
                 'order-date'                 => 'Order Date',
                 'order-id'                   => 'Order ID',
                 'payment-method'             => 'Payment Method',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Subtotal (Excl. Tax)',
                 'subtotal-incl-tax'          => 'Subtotal (Incl. Tax)',
                 'subtotal'                   => 'Subtotal',
-                'tax'                        => 'Tax',
                 'tax-amount'                 => 'Tax Amount',
+                'tax'                        => 'Tax',
                 'vat-number'                 => 'Vat Number',
-                'excl-tax'                   => 'Excl. Tax:',
             ],
         ],
 
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Active',
-                    'attribute-family'              => 'Attribute Family',
-                    'attribute-family-value'        => 'Attribute Family - :attribute_family',
-                    'category'                      => 'Category',
-                    'copy-of'                       => 'Copy Of :value',
-                    'copy-of-slug'                  => 'copy-of-:value',
-                    'delete'                        => 'Delete',
-                    'disable'                       => 'Disable',
-                    'id'                            => 'Id',
-                    'id-value'                      => 'Id - :id',
-                    'image'                         => 'Image',
-                    'mass-delete-success'           => 'Selected Products Deleted Successfully',
-                    'mass-update-success'           => 'Selected Products Updated Successfully',
-                    'name'                          => 'Name',
-                    'out-of-stock'                  => 'Out of Stock',
-                    'price'                         => 'Price',
-                    'product-image'                 => 'Product Image',
-                    'qty'                           => 'Quantity',
-                    'qty-value'                     => ':qty Available',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Type',
-                    'update-status'                 => 'Update Status',
+                    'active'                 => 'Active',
+                    'attribute-family-value' => 'Attribute Family - :attribute_family',
+                    'attribute-family'       => 'Attribute Family',
+                    'category'               => 'Category',
+                    'channel'                => 'Channel',
+                    'copy-of-slug'           => 'copy-of-:value',
+                    'copy-of'                => 'Copy Of :value',
+                    'delete'                 => 'Delete',
+                    'disable'                => 'Disable',
+                    'id-value'               => 'Id - :id',
+                    'id'                     => 'Id',
+                    'image'                  => 'Image',
+                    'mass-delete-success'    => 'Selected Products Deleted Successfully',
+                    'mass-update-success'    => 'Selected Products Updated Successfully',
+                    'name'                   => 'Name',
+                    'out-of-stock'           => 'Out of Stock',
+                    'price'                  => 'Price',
+                    'product-image'          => 'Product Image',
+                    'qty-value'              => ':qty Available',
+                    'qty'                    => 'Quantity',
+                    'sku-value'              => 'SKU - :sku',
+                    'sku'                    => 'SKU',
+                    'status'                 => 'Status',
+                    'type'                   => 'Type',
+                    'update-status'          => 'Update Status',
                 ],
             ],
 
@@ -772,6 +774,10 @@ return [
                 'remove'   => 'Remove',
                 'save-btn' => 'Save Product',
                 'title'    => 'Edit Product',
+
+                'channels' => [
+                    'title' => 'Channels',
+                ],
 
                 'price' => [
                     'group' => [
@@ -1215,8 +1221,8 @@ return [
 
                 'datagrid' => [
                     'active'         => 'Active',
-                    'delete'         => 'Delete',
                     'delete-success' => 'Selected :resource were successfully deleted',
+                    'delete'         => 'Delete',
                     'edit'           => 'Edit',
                     'id'             => 'ID',
                     'inactive'       => 'Inactive',
@@ -1395,6 +1401,7 @@ return [
                     'active'         => 'Active',
                     'address'        => ':address  Address(s)',
                     'address-count'  => 'Address Count',
+                    'channel'        => 'Channel',
                     'delete'         => 'Delete',
                     'delete-success' => 'Selected data successfully deleted',
                     'email'          => 'Email',
@@ -2234,11 +2241,10 @@ return [
                         'delete'              => 'Delete',
                         'channel'             => 'Channel',
                         'actions'             => 'Actions',
-                        'Channel'             => 'Channel',
+                        'channel'             => 'Channel',
                     ],
 
                     'create' => [
-                        'Channel'        => 'Channel',
                         'channel'        => 'Channel',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'locale'         => 'Locale',
@@ -2346,6 +2352,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Actions',
+                        'category'            => 'Category',
+                        'cms-page'            => 'CMS Page',
                         'delete'              => 'Delete',
                         'edit'                => 'Edit',
                         'for'                 => 'For',
@@ -2353,6 +2361,7 @@ return [
                         'locale'              => 'Locale',
                         'mass-delete-success' => 'Selected URL Rewrites Deleted Successfully',
                         'permanent-redirect'  => 'Permanent (301)',
+                        'product'             => 'Product',
                         'redirect-type'       => 'Redirect Type',
                         'request-path'        => 'Request Path',
                         'target-path'         => 'Target Path',
@@ -2395,6 +2404,7 @@ return [
             'title'         => 'Pages',
 
             'datagrid' => [
+                'channel'             => 'Channel',
                 'delete'              => 'Delete',
                 'edit'                => 'Edit',
                 'id'                  => 'ID',
@@ -3085,6 +3095,7 @@ return [
                 'name'       => 'Name',
                 'save-btn'   => 'Save Theme',
                 'sort-order' => 'Sort Order',
+                'themes'     => 'Themes',
                 'title'      => 'Create Theme',
 
                 'type' => [
@@ -3099,6 +3110,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Active',
                 'add-filter-btn'                => 'Add Filter',
                 'add-footer-link-btn'           => 'Add Footer Link',
                 'add-image-btn'                 => 'Add Image',
@@ -3127,13 +3139,15 @@ return [
                 'image-size'                    => 'Image resolution should be (1920px X 700px)',
                 'image-title'                   => 'Image Title',
                 'image-upload-message'          => 'Only images (.jpeg, .jpg, .png, .webp, ..) are allowed.',
+                'inactive'                      => 'Inactive',
                 'key'                           => 'Key: :key',
                 'key-input'                     => 'Key',
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
-                'no'                            => 'No',
                 'new'                           => 'New',
+                'no'                            => 'No',
+                'parent-id'                     => 'Parent ID',
                 'preview'                       => 'Preview',
                 'product-carousel'              => 'Product Carousel',
                 'product-carousel-description'  => 'Showcase products elegantly with a dynamic and responsive product carousel.',
@@ -3149,6 +3163,7 @@ return [
                 'static-content'                => 'Static Content',
                 'static-content-description'    => 'Improve engagement with concise, informative static content for your audience.',
                 'status'                        => 'Status',
+                'themes'                        => 'Themes',
                 'title'                         => 'Edit Theme',
                 'update-slider'                 => 'Update Slider',
                 'url'                           => 'URL',
@@ -3188,8 +3203,9 @@ return [
                 'abandoned-products'            => 'Abandoned Products',
                 'abandoned-rate'                => 'Abandoned Rate',
                 'abandoned-revenue'             => 'Abandoned Revenue',
-                'added-to-cart'                 => 'Added to Cart',
                 'added-to-cart-info'            => 'Only :progress visitors added products to cart',
+                'added-to-cart'                 => 'Added to Cart',
+                'all-channels'                  => 'All Channels',
                 'average-order-value-over-time' => 'Average Order Value Over Time',
                 'average-sales'                 => 'Average Order Value',
                 'count'                         => 'Count',
@@ -3228,6 +3244,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'All Channels',
                 'count'                       => 'Count',
                 'customers'                   => 'Customers',
                 'customers-over-time'         => 'Customers Over Time',
@@ -3256,6 +3273,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'All Channels',
                 'channel'                          => 'Channel',
                 'end-date'                         => 'End Date',
                 'id'                               => 'Id',
@@ -3289,6 +3307,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'All Channels',
             'day'           => 'Day',
             'end-date'      => 'End Date',
             'export-csv'    => 'Export CSV',
@@ -3982,7 +4001,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'apply-filters-btn' => 'Apply Filters',
+                    'back-btn'          => 'Back',
+                    'create-new-filter' => 'Create New Filter',
+                    'custom-filters'    => 'Custom Filters',
+                    'delete-error'      => 'Something went wrong while deleting the filter, please try again.',
+                    'delete-success'    => 'Filter has been deleted successfully.',
+                    'empty-description' => 'There is no selected filters available to save. Please select filters to save.',
+                    'empty-title'       => 'Add Filters to Save',
+                    'name'              => 'Name',
+                    'quick-filters'     => 'Quick Filters',
+                    'save-btn'          => 'Save',
+                    'save-filter'       => 'Save Filter',
+                    'saved-success'     => 'Filter has been saved successfully.',
+                    'selected-filters'  => 'Selected Filters',
+                    'title'             => 'Filter',
+                    'update'            => 'Update',
+                    'update-filter'     => 'Update Filter',
+                    'updated-success'   => 'Filter has been updated successfully.',
                 ],
 
                 'search' => [
@@ -3992,7 +4028,7 @@ return [
 
             'filters' => [
                 'select' => 'Select',
-                'title'  => 'Apply Filters',
+                'title'  => 'Filters',
 
                 'dropdown' => [
                     'searchable' => [

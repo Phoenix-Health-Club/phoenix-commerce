@@ -30,6 +30,7 @@ class ProductController extends APIController
     public function index(Request $request): JsonResource
     {
         $mergedParams = array_merge(request()->query(), [
+            'channel_id'           => core()->getCurrentChannel()->id,
             'status'               => 1,
             'visible_individually' => 1,
         ]);

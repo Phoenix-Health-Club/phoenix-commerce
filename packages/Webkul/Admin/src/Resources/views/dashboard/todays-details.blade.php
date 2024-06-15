@@ -190,7 +190,7 @@
                                 <!-- Ordered Product Images -->
                                 <div
                                     class="flex flex-wrap gap-1.5"
-                                    v-html="order.image"
+                                    v-html="order.items"
                                 >
                                 </div>
                             </div>
@@ -220,6 +220,8 @@
 
             mounted() {
                 this.getStats({});
+
+                this.$emitter.on('reporting-filter-updated', this.getStats);
             },
 
             methods: {

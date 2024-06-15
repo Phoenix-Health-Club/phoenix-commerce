@@ -128,7 +128,11 @@ abstract class AbstractType
      */
     public function create(array $data)
     {
-        return $this->productRepository->getModel()->create($data);
+        $product = $this->productRepository->getModel()->create($data);
+
+        $product->channels()->sync(core()->getDefaultChannel()->id);
+
+        return $product;
     }
 
     /**
@@ -197,7 +201,6 @@ abstract class AbstractType
             $locale = $attribute->value_per_locale ? ($data['locale'] ?? core()->getDefaultLocaleCodeFromDefaultChannel()) : null;
 
             if ($attribute->value_per_channel) {
-
                 if ($attribute->value_per_locale) {
                     $filteredAttributeValues = $attributeValues
                         ->where('channel', $channel)
@@ -217,14 +220,14 @@ abstract class AbstractType
 
             $attributeValue = $filteredAttributeValues->first();
 
-            if (! $attributeValue) {
-                $uniqueId = implode('|', array_filter([
-                    $channel,
-                    $locale,
-                    $product->id,
-                    $attribute->id,
-                ]));
+            $uniqueId = implode('|', array_filter([
+                $channel,
+                $locale,
+                $product->id,
+                $attribute->id,
+            ]));
 
+            if (! $attributeValue) {
                 $this->attributeValueRepository->create([
                     'product_id'            => $product->id,
                     'attribute_id'          => $attribute->id,
@@ -260,7 +263,10 @@ abstract class AbstractType
                     }
                 }
 
-                $attributeValue->update([$attribute->column_name => $data[$attribute->code]]);
+                $attributeValue->update([
+                    $attribute->column_name => $data[$attribute->code],
+                    'unique_id'             => $uniqueId,
+                ]);
             }
         }
 
@@ -279,6 +285,12 @@ abstract class AbstractType
         $product->cross_sells()->sync($data['cross_sells'] ?? []);
 
         $product->related_products()->sync($data['related_products'] ?? []);
+
+        if (empty($data['channels'])) {
+            $data['channels'][] = core()->getDefaultChannel()->id;
+        }
+
+        $product->channels()->sync($data['channels']);
 
         $this->productInventoryRepository->saveInventories($data, $product);
 

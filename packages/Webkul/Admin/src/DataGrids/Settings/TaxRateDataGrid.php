@@ -14,8 +14,8 @@ class TaxRateDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('tax_rates')
-            ->addSelect(
+        return DB::table('tax_rates')
+            ->select(
                 'id',
                 'identifier',
                 'state',
@@ -25,8 +25,6 @@ class TaxRateDataGrid extends DataGrid
                 'zip_to',
                 'tax_rate'
             );
-
-        return $queryBuilder;
     }
 
     /**
@@ -40,7 +38,6 @@ class TaxRateDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.taxes.rates.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);

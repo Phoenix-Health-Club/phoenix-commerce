@@ -2,7 +2,7 @@
     <div class="flex items-center justify-between">
         <h3 class="shimmer h-8 w-[200px] max-sm:h-7"></h3>
 
-        <div class="flex items-center justify-between gap-8 max-sm:hidden">
+        <div class="flex items-center justify-between gap-8 max-lg:hidden">
             <span
                 class="shimmer inline-block h-6 w-6"
                 role="presentation"
@@ -14,12 +14,12 @@
             ></span>
         </div>
 
-        <div class="shimmer h-5 w-[68px] sm:hidden"></div>
+        <div class="shimmer h-7 w-24 max-sm:h-5 max-sm:w-[68px] lg:hidden"></div>
     </div>
 
     <div class="scrollbar-hide mt-10 flex gap-8 overflow-auto pb-2.5 max-sm:mt-5 max-sm:gap-4">
         <x-shop::shimmer.products.cards.grid
-            class="min-w-[291px] max-sm:min-w-[198px]"
+            class="min-w-[291px] max-sm:min-w-[192px]"
             :count="4"
         />
     </div>

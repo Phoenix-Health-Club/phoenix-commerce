@@ -14,8 +14,8 @@ class ImportDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('imports')
-            ->addSelect(
+        return DB::table('imports')
+            ->select(
                 'id',
                 'state',
                 'file_path',
@@ -24,8 +24,6 @@ class ImportDataGrid extends DataGrid
                 'completed_at',
                 'summary',
             );
-
-        return $queryBuilder;
     }
 
     /**
@@ -39,7 +37,6 @@ class ImportDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -47,8 +44,7 @@ class ImportDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'state',
             'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.state'),
-            'type'       => 'text',
-            'searchable' => false,
+            'type'       => 'string',
             'filterable' => true,
             'sortable'   => true,
         ]);
@@ -56,56 +52,47 @@ class ImportDataGrid extends DataGrid
         $this->addColumn([
             'index'      => 'file_path',
             'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.uploaded-file'),
-            'type'       => 'text',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
+            'type'       => 'string',
             'closure'    => function ($row) {
-                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->file_path.'<a>';
             },
         ]);
 
         $this->addColumn([
             'index'      => 'error_file_path',
             'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.error-file'),
-            'type'       => 'text',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
+            'type'       => 'string',
             'closure'    => function ($row) {
                 if (empty($row->error_file_path)) {
                     return '';
                 }
 
-                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="text-blue-600 hover:underline cursor-pointer">'.$row->error_file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->error_file_path.'<a>';
             },
         ]);
 
         $this->addColumn([
-            'index'      => 'started_at',
-            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.started-at'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'started_at',
+            'label'           => trans('admin::app.settings.data-transfer.imports.index.datagrid.started-at'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
-            'index'      => 'completed_at',
-            'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.completed-at'),
-            'type'       => 'date_range',
-            'searchable' => false,
-            'filterable' => true,
-            'sortable'   => true,
+            'index'           => 'completed_at',
+            'label'           => trans('admin::app.settings.data-transfer.imports.index.datagrid.completed-at'),
+            'type'            => 'date',
+            'filterable'      => true,
+            'filterable_type' => 'date_range',
+            'sortable'        => true,
         ]);
 
         $this->addColumn([
             'index'      => 'summary',
             'label'      => trans('admin::app.settings.data-transfer.imports.index.datagrid.summary'),
-            'type'       => 'text',
-            'searchable' => false,
-            'filterable' => false,
-            'sortable'   => false,
+            'type'       => 'string',
             'closure'    => function ($row) {
                 if (empty($row->summary)) {
                     return '';

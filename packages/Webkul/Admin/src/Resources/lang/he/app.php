@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'הוסף לקוח',
             'add-product'                 => 'הוסף מוצר',
+            'all-channels'                => 'כל הערוצים',
             'attribute-code'              => 'קוד תכונה',
             'average-sale'                => 'ממוצע מכירות הזמנות',
             'color'                       => 'צבע',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'הונאה',
                     'grand-total'     => 'סכום כולל',
                     'id'              => '#:מזהה',
-                    'images'          => 'תמונות',
+                    'items'           => 'פריטים',
                     'location'        => 'מיקום',
                     'order-id'        => 'מזהה הזמנה',
                     'pay-by'          => 'שלם באמצעות - :שיטה',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'פרטי הבנק',
                 'bill-to'                    => 'חשבונית ל',
-                'contact'                    => 'צור קשר',
                 'contact-number'             => 'מספר טלפון ליצירת קשר',
+                'contact'                    => 'צור קשר',
                 'date'                       => 'תאריך חשבונית',
                 'discount'                   => 'הנחה',
+                'excl-tax'                   => 'לא כולל מס:',
                 'grand-total'                => 'סכום כולל',
-                'invoice'                    => 'חשבונית',
                 'invoice-id'                 => 'מספר זיהוי חשבונית',
+                'invoice'                    => 'חשבונית',
                 'order-date'                 => 'תאריך הזמנה',
                 'order-id'                   => 'מספר הזמנה',
                 'payment-method'             => 'אמצעי תשלום',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'סה"כ ביניים (לא כולל מס)',
                 'subtotal-incl-tax'          => 'סה"כ ביניים (כולל מס)',
                 'subtotal'                   => 'סה"כ ביניים',
-                'tax'                        => 'מס',
                 'tax-amount'                 => 'סכום מס',
+                'tax'                        => 'מס',
                 'vat-number'                 => 'מספר ת.ז.',
-                'excl-tax'                   => 'לא כולל מס:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'משפחת מאפיינים',
                     'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
                     'category'               => 'קטגוריה',
+                    'channel'                => 'ערוץ',
                     'copy-of'                => 'העתק של :value',
                     'copy-of-slug'           => 'העתק-של-:value',
                     'delete'                 => 'מחק',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'פעיל',
                     'address'        => ':address  כתובת(ות)',
                     'address-count'  => 'סך הכתובות',
+                    'channel'        => 'ערוץ',
                     'delete'         => 'מחיקה',
                     'delete-success' => 'המידע שנבחר נמחק בהצלחה',
                     'email'          => 'אימייל',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'ביטויי חיפוש',
 
                     'datagrid' => [
-                        'Channel'             => 'ערוץ',
+                        'channel'             => 'ערוץ',
                         'actions'             => 'פעולות',
                         'channel'             => 'ערוץ',
                         'delete'              => 'מחיקה',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'ערוץ',
                         'channel'        => 'ערוץ',
                         'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
                         'locale'         => 'מיקום',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'פעולות',
+                        'category'            => 'קטגוריה',
+                        'cms-page'            => 'דף CMS',
                         'delete'              => 'מחיקה',
                         'edit'                => 'עריכה',
                         'for'                 => 'עבור',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'אזור שפה',
                         'mass-delete-success' => 'כתובות URL משכתבות שנבחרו נמחקו בהצלחה.',
                         'permanent-redirect'  => 'קבוע (301)',
+                        'product'             => 'מוצר',
                         'redirect-type'       => 'סוג ההפניה',
                         'request-path'        => 'נתיב הבקשה',
                         'target-path'         => 'נתיב היעד',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'עמודים',
 
             'datagrid' => [
+                'channel'             => 'ערוץ',
                 'delete'              => 'מחק',
                 'edit'                => 'ערוך',
                 'id'                  => 'מזהה',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'שם',
                 'save-btn'   => 'שמור ערכת נושא',
                 'sort-order' => 'סדר מיון',
+                'themes'     => 'נושאים',
                 'title'      => 'צור ערכת עיצוב',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'פעיל',
                 'add-filter-btn'                => 'הוסף מסנן',
                 'add-footer-link-btn'           => 'הוסף קישור לתחתית',
                 'add-image-btn'                 => 'הוסף תמונה',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'גודל התמונה צריך להיות (1920px X 700px)',
                 'image-title'                   => 'כותרת התמונה',
                 'image-upload-message'          => 'רק תמונות (.jpeg, .jpg, .png, .webp, ..) מותרות.',
+                'inactive'                      => 'לא פעיל',
                 'key'                           => 'מפתח: :key',
                 'key-input'                     => 'מפתח',
                 'limit'                         => 'מגבלה',
                 'link'                          => 'קישור',
                 'name'                          => 'שם',
-                'no'                            => 'לא',
                 'new'                           => 'חדש',
+                'no'                            => 'לא',
+                'parent-id'                     => 'מזהה הורה',
                 'preview'                       => 'תצוגה מקדימה',
                 'product-carousel'              => 'קרוסלת מוצרים',
                 'product-carousel-description'  => 'הצגת מוצרים בצורה אלגנטית עם קרוסלת מוצרים דינמית ורספונסיבית.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'תוכן סטטי',
                 'static-content-description'    => 'שפרו את ההתערבות עם תוכן סטטי כמוי ומידע לקהל שלכם.',
                 'status'                        => 'סטטוס',
+                'themes'                        => 'נושאים',
                 'title'                         => 'ערוך ערכת עיצוב',
                 'update-slider'                 => 'עדכן מחוון',
                 'url'                           => 'קישור',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'רווח נטוש',
                 'added-to-cart'                 => 'נוסף לעגלה',
                 'added-to-cart-info'            => 'רק :progress מבקרים הוסיפו מוצרים לעגלה',
+                'all-channels'                  => 'כל הערוצים',
                 'average-order-value-over-time' => 'ערך הזמנה ממוצע במהלך הזמן',
                 'average-sales'                 => 'ערך הזמנה ממוצע',
                 'count'                         => 'מספר',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'כל הערוצים',
                 'count'                       => 'כמות',
                 'customers'                   => 'לקוחות',
                 'customers-over-time'         => 'לקוחות לפי זמן',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'כל הערוצים',
                 'channel'                          => 'ערוץ',
                 'end-date'                         => 'תאריך סיום',
                 'id'                               => 'מזהה',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'כל הערוצים',
             'day'           => 'יום',
             'end-date'      => 'תאריך סיום',
             'export-csv'    => 'ייצוא ל־CSV',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'סנן',
+                    'apply-filters-btn' => 'החל מסננים',
+                    'back-btn'          => 'חזרה',
+                    'create-new-filter' => 'צור פילטר חדש',
+                    'custom-filters'    => 'פילטרים מותאמים אישית',
+                    'delete-error'      => 'משהו השתבש בעת מחיקת המסנן, אנא נסה שוב.',
+                    'delete-success'    => 'הפילטר נמחק בהצלחה.',
+                    'empty-description' => 'אין פילטרים נבחרים זמינים לשמירה. יש לבחור פילטרים לשמירה.',
+                    'empty-title'       => 'הוסף פילטרים לשמירה',
+                    'name'              => 'שם',
+                    'quick-filters'     => 'פילטרים מהירים',
+                    'save-btn'          => 'שמור',
+                    'save-filter'       => 'שמור פילטר',
+                    'saved-success'     => 'הפילטר נשמר בהצלחה.',
+                    'selected-filters'  => 'פילטרים נבחרים',
+                    'title'             => 'פילטר',
+                    'update'            => 'עדכן',
+                    'update-filter'     => 'עדכן מסנן',
+                    'updated-success'   => 'המסנן עודכן בהצלחה.',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'בחר',
-                'title'  => 'החל סינון',
+                'title'  => 'מסננים',
 
                 'dropdown' => [
                     'searchable' => [

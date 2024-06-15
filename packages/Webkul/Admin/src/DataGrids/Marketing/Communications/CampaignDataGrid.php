@@ -14,7 +14,13 @@ class CampaignDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('marketing_campaigns')->addSelect('id', 'name', 'subject', 'status');
+        $queryBuilder = DB::table('marketing_campaigns')
+            ->select(
+                'id',
+                'name',
+                'subject',
+                'status'
+            );
 
         $this->addFilter('status', 'marketing_campaigns.status');
 
@@ -32,7 +38,6 @@ class CampaignDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.communications.campaigns.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'sortable'   => true,
             'filterable' => true,
         ]);

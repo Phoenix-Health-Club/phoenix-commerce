@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => '添加客户',
             'add-product'                 => '添加产品',
+            'all-channels'                => '所有渠道',
             'attribute-code'              => '属性代码',
             'average-sale'                => '平均订单销售额',
             'color'                       => '颜色',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => '欺诈',
                     'grand-total'     => '总计',
                     'id'              => '订单号：#:id',
-                    'images'          => '图片',
+                    'items'           => '商品',
                     'location'        => '地点',
                     'order-id'        => '订单编号',
                     'pay-by'          => '支付方式 - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => '银行详细信息',
                 'bill-to'                    => '账单给',
-                'contact'                    => '联系人',
                 'contact-number'             => '联系电话',
+                'contact'                    => '联系人',
                 'date'                       => '发票日期',
                 'discount'                   => '折扣',
+                'excl-tax'                   => '不含税：',
                 'grand-total'                => '总计',
-                'invoice'                    => '发票',
                 'invoice-id'                 => '发票ID',
+                'invoice'                    => '发票',
                 'order-date'                 => '订单日期',
                 'order-id'                   => '订单ID',
                 'payment-method'             => '付款方式',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => '小计（不含税）',
                 'subtotal-incl-tax'          => '小计（含税）',
                 'subtotal'                   => '小计',
-                'tax'                        => '税费',
                 'tax-amount'                 => '税费金额',
+                'tax'                        => '税费',
                 'vat-number'                 => '增值税号码',
-                'excl-tax'                   => '不含税：',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => '属性家族',
                     'attribute-family-value' => '属性家族 - :attribute_family',
                     'category'               => '类别',
+                    'channel'                => '渠道',
                     'copy-of'                => '复制 :value',
                     'copy-of-slug'           => '复制-:value',
                     'delete'                 => '删除',
@@ -1394,6 +1396,7 @@ return [
                     'active'         => '活跃',
                     'address'        => ':address  地址',
                     'address-count'  => '地址数量',
+                    'channel'        => '渠道',
                     'delete'         => '删除',
                     'delete-success' => '成功删除所选数据',
                     'email'          => '电子邮件',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => '搜索词条',
 
                     'datagrid' => [
-                        'Channel'             => '频道',
+                        'channel'             => '频道',
                         'actions'             => '操作',
                         'channel'             => '频道',
                         'delete'              => '删除',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => '频道',
                         'channel'        => '频道',
                         'delete-warning' => '您确定要执行此操作吗？',
                         'locale'         => '本地化',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => '操作',
+                        'category'            => '类别',
+                        'cms-page'            => 'CMS 页面',
                         'delete'              => '删除',
                         'edit'                => '编辑',
                         'for'                 => '适用对象',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => '语言环境',
                         'mass-delete-success' => '已成功删除选定的 URL 重写。',
                         'permanent-redirect'  => '永久（301）',
+                        'product'             => '产品',
                         'redirect-type'       => '重定向类型',
                         'request-path'        => '请求路径',
                         'target-path'         => '目标路径',
@@ -2395,6 +2400,7 @@ return [
             'title'         => '页面',
 
             'datagrid' => [
+                'channel'             => '渠道',
                 'delete'              => '删除',
                 'edit'                => '编辑',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => '名称',
                 'save-btn'   => '保存主题',
                 'sort-order' => '排序顺序',
+                'themes'     => '主题',
                 'title'      => '创建主题',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => '活动',
                 'add-filter-btn'                => '添加过滤器',
                 'add-footer-link-btn'           => '添加页脚链接',
                 'add-image-btn'                 => '添加图片',
@@ -3122,6 +3130,7 @@ return [
                 'footer-link-form-title'        => '页脚链接',
                 'footer-title'                  => '标题',
                 'general'                       => '通用',
+                'inactive'                      => '非活动',
                 'html'                          => 'HTML',
                 'image'                         => '图片',
                 'image-size'                    => '图片分辨率应为（1920px x 700px）',
@@ -3134,6 +3143,7 @@ return [
                 'name'                          => '名称',
                 'no'                            => '不',
                 'new'                           => '新',
+                'parent-id'                     => '父ID',
                 'preview'                       => '预览',
                 'product-carousel'              => '产品轮播',
                 'product-carousel-description'  => '使用动态和响应式产品轮播优雅地展示产品。',
@@ -3154,6 +3164,7 @@ return [
                 'url'                           => '网址',
                 'value'                         => '值：:value',
                 'value-input'                   => '值',
+                'themes'                        => '主题',
 
                 'services-content' => [
                     'add-btn'            => '添加服务',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => '被遗弃的收入',
                 'added-to-cart'                 => '已添加到购物车',
                 'added-to-cart-info'            => '仅 :progress 位访客将产品添加到购物车',
+                'all-channels'                  => '所有渠道',
                 'average-order-value-over-time' => '随时间的平均订单价值',
                 'average-sales'                 => '平均订单价值',
                 'count'                         => '数量',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => '所有渠道',
                 'count'                       => '数量',
                 'customers'                   => '客户',
                 'customers-over-time'         => '随时间的客户数',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => '所有渠道',
                 'channel'                          => '频道',
                 'end-date'                         => '结束日期',
                 'id'                               => 'ID',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => '所有渠道',
             'day'           => '日',
             'end-date'      => '结束日期',
             'export-csv'    => '导出CSV',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => '筛选',
+                    'apply-filters-btn' => '应用过滤器',
+                    'back-btn'          => '返回',
+                    'create-new-filter' => '创建新过滤器',
+                    'custom-filters'    => '自定义过滤器',
+                    'delete-error'      => '删除过滤器时出了点问题，请再试一次。',
+                    'delete-success'    => '成功删除过滤器。',
+                    'empty-description' => '没有可保存的选定过滤器。请选择要保存的过滤器。',
+                    'empty-title'       => '添加要保存的过滤器',
+                    'name'              => '名称',
+                    'quick-filters'     => '快速过滤器',
+                    'save-btn'          => '保存',
+                    'save-filter'       => '保存过滤器',
+                    'saved-success'     => '成功保存过滤器。',
+                    'selected-filters'  => '已选过滤器',
+                    'title'             => '过滤器',
+                    'update'            => '更新',
+                    'update-filter'     => '更新筛选器',
+                    'updated-success'   => '过滤器已成功更新。',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => '选择',
-                'title'  => '应用筛选',
+                'title'  => '过滤器',
 
                 'dropdown' => [
                     'searchable' => [

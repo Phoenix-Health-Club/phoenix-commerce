@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'පාරිභෝගිකයක් එකතු කරන්න',
             'add-product'                 => 'නිෂ්පාදනයක් එකතු කරන්න',
+            'all-channels'                => 'සියලු චැනල්',
             'attribute-code'              => 'ගුණාංග කේතය',
             'average-sale'                => 'මධ්‍යම ඇනවුම වින්‍යාසය',
             'color'                       => 'පරාසය',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'වලංගු',
                     'grand-total'     => 'සාමාජික එකට වර්ෂය',
                     'id'              => '#:id',
-                    'images'          => 'රූප',
+                    'items'           => 'අයිතම්',
                     'location'        => 'ස්ථාව',
                     'order-id'        => 'ඇණවුමේ අංකය',
                     'pay-by'          => 'වෙනත් - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'බැංකු විස්තර',
                 'bill-to'                    => 'බිල් කරන්න',
-                'contact'                    => 'සබඳතා',
                 'contact-number'             => 'සබඳතා අංකය',
+                'contact'                    => 'සබඳතා',
                 'date'                       => 'ඉල්ලීම් දිනය',
                 'discount'                   => 'වට්ටම්',
+                'excl-tax'                   => 'බදු නොමැති:',
                 'grand-total'                => 'මුළු මුදල',
-                'invoice'                    => 'ඉල්ලීම්',
                 'invoice-id'                 => 'ඉල්ලීම් අංකය',
+                'invoice'                    => 'ඉල්ලීම්',
                 'order-date'                 => 'ඇණවුම් දිනය',
                 'order-id'                   => 'ඇණවුම් අංකය',
                 'payment-method'             => 'ගෙවීම් ක්රමය',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'උප මුදල (බදු නොමැති)',
                 'subtotal-incl-tax'          => 'උප මුදල (බදු සහිත)',
                 'subtotal'                   => 'උප මුදල',
-                'tax'                        => 'බදු',
                 'tax-amount'                 => 'බදු මුදල',
+                'tax'                        => 'බදු',
                 'vat-number'                 => 'වැට් අංකය',
-                'excl-tax'                   => 'බදු නොමැති:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'සැකසුම් පවුර',
                     'attribute-family-value' => 'සැකසුම් පවුර - :attribute_family',
                     'category'               => 'ප්‍රවර්ගය',
+                    'channel'                => 'චැනල්',
                     'copy-of'                => 'සාකච්චා :value',
                     'copy-of-slug'           => 'පිටුගත :value',
                     'delete'                 => 'මකාදමන්',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'ක්‍රියාකාරී',
                     'address'        => ':address  ලිපිනය(හොය)',
                     'address-count'  => 'ලිපිනය ගණන',
+                    'channel'        => 'චැනල්',
                     'delete'         => 'මකන්න',
                     'delete-success' => 'තෝරාගත් දත්ත සාර්ථකව මකන ලදි',
                     'email'          => 'ඊමේල්',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'සෙවුම් නියමයන්',
 
                     'datagrid' => [
-                        'Channel'             => 'නාලිකාව',
+                        'channel'             => 'නාලිකාව',
                         'actions'             => 'ක්රියාවන්',
                         'channel'             => 'නාලිකාව',
                         'delete'              => 'මකන්න',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'නාලිකාව',
                         'channel'        => 'නාලිකාව',
                         'delete-warning' => 'ඔබට මෙම ක්‍රියාව සිදු කිරීමට අවශ්‍ය බව විශ්වාසද?',
                         'locale'         => 'දේශීය',
@@ -2347,6 +2349,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'ක්රියාවන්',
+                        'category'            => 'වර්ගය',
+                        'cms-page'            => 'CMS පිටුව',
                         'delete'              => 'මකන්න',
                         'edit'                => 'සංස්කරණය කරන්න',
                         'for'                 => 'සදහා',
@@ -2354,6 +2358,7 @@ return [
                         'locale'              => 'දේශීය',
                         'mass-delete-success' => 'තෝරාගත් URL නැවත ලිවීම සාර්ථකව මකා ඇත',
                         'permanent-redirect'  => 'ස්ථිර (301)',
+                        'product'             => 'නිෂ්පාදන',
                         'redirect-type'       => 'හරවා යැවීමේ වර්ගය',
                         'request-path'        => 'ඉල්ලීම් මාර්ගය',
                         'target-path'         => 'ඉලක්ක මාර්ගය',
@@ -2396,6 +2401,7 @@ return [
             'title'         => 'පිටුවෙන්',
 
             'datagrid' => [
+                'channel'             => 'චැනල්',
                 'delete'              => 'මකනවා',
                 'edit'                => 'සංස්කරණය',
                 'id'                  => 'අංකය',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'නම',
                 'save-btn'   => 'තේමාව සුරකින්න',
                 'sort-order' => 'සුප්‍රතා අනුකුරු',
+                'themes'     => 'තේමා',
                 'title'      => 'තේමා නිර්මාණය කරන්න',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'ක්‍රියාකාරී',
                 'add-filter-btn'                => 'ශ්‍රිතයක් එක්කරන්න',
                 'add-footer-link-btn'           => 'පිටු සල්ලිකරන්න',
                 'add-image-btn'                 => 'පින්තූරයක් එක්කරන්න',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'රූපයේ ප්‍රනාන්දු මානාව (1920px X 700px) විය යුතුය',
                 'image-title'                   => 'පින්තූර සිටුවක්',
                 'image-upload-message'          => 'පින්තූර පමණක් (.jpeg, .jpg, .png, .webp, ..) සඳහා ඉඩ දෙනු ලැබේ.',
+                'inactive'                      => 'අක්‍රියාකාරී',
                 'key'                           => 'යතුර: :key',
                 'key-input'                     => 'යතුර',
                 'limit'                         => 'සීමාව',
                 'link'                          => 'සබැඳිය',
                 'name'                          => 'නම',
-                'no'                            => 'නැත',
                 'new'                           => 'නව',
+                'no'                            => 'නැත',
+                'parent-id'                     => 'මවුලක් අංකය',
                 'preview'                       => 'පෙරදසුන',
                 'product-carousel'              => 'නිෂ්පාදන කැරූසල්',
                 'product-carousel-description'  => 'නිෂ්පාදනය සහිතවෙනි ස්ථානයට සුපිරි ආදරයක් පෙනවීමට ජලානන හා සංකීර්ණ නිෂ්පාදන කැරූසල් සැකසුම්.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'ස්ථිර අන්තරජනනය',
                 'static-content-description'    => 'ඔබේ පළමු ජලයේ සෂ්කාර හා තොරතුරු සඳහා සංකීර්ණ තවත් අන්තරජනනය ස්ථානයක් හෝ උද්දේජන සංකීර්ණයක් සංදර්ශනය කරනු ලැබේ.',
                 'status'                        => 'තත්ත්වය',
+                'themes'                        => 'තේමා',
                 'title'                         => 'තේමා සංස්කරණය',
                 'update-slider'                 => 'ස්ලයිඩරය යාවත්කාලීන කරන්න',
                 'url'                           => 'URL',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'අබන්ඩන් හුදුන්',
                 'added-to-cart'                 => 'කරුණට එකතු කරන ලදි',
                 'added-to-cart-info'            => 'පතිරූක :progress පිටවල් එකතු කරන ලදි',
+                'all-channels'                  => 'සියලු චැනල්',
                 'average-order-value-over-time' => 'කාලය හා මධ්‍යම ඇණවුම අගය',
                 'average-sales'                 => 'මධ්‍යම ඇණවුමේ වටින',
                 'count'                         => 'ගණන',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'සියලු චැනල්',
                 'count'                       => 'ගණන',
                 'customers'                   => 'කුරුණු',
                 'customers-over-time'         => 'කාලය හා කුරුණු',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'සියලු චැනල්',
                 'channel'                          => 'නාලිකාව',
                 'end-date'                         => 'අවසන් දිනය',
                 'id'                               => 'ID',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'සියලු චැනල්',
             'day'           => 'දිනය',
             'end-date'      => 'අවසන් දිනය',
             'export-csv'    => 'CSV අපනයය',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'වෙනස් කරන්න',
+                    'apply-filters-btn' => 'පෙරනිමි විමසීමක්',
+                    'back-btn'          => 'ආපසු',
+                    'create-new-filter' => 'නව පෙරහන් කරන්න',
+                    'custom-filters'    => 'සැකසුම් පෙරහන්',
+                    'delete-error'      => 'පෙරහන ඉවත් කරන අතරේ වරදක් ඇතිවිය, කරුණාකර නැවත උත්සහ කරන්න.',
+                    'delete-success'    => 'පෙරහන සාර්ථකව මකා දමන ලදි.',
+                    'empty-description' => 'සුරැකියා ගෙන එන පෙරහැරීම් ඇතුලත් කර නොමැත. කරුණාකර සුරැකියා ගෙන එන පෙරහැරීම් තෝරන්න.',
+                    'empty-title'       => 'සුරැකි කිරීමට පෙරහැරීම් එකතු කරන්න',
+                    'name'              => 'නම',
+                    'quick-filters'     => 'ඉකුත් පෙරහන්',
+                    'save-btn'          => 'සුරකින්න',
+                    'save-filter'       => 'පෙරහන සුරකින්න',
+                    'saved-success'     => 'පෙරහන සාර්ථකව සුරක්ෂිත කර ඇත.',
+                    'selected-filters'  => 'තෝරාගත් පෙරහන්',
+                    'title'             => 'පෙරහන',
+                    'update'            => 'යාවත්කාලීන',
+                    'update-filter'     => 'පෙරහන යාවත්කාලීන කරන්න',
+                    'updated-success'   => 'පෙරනිමිතුරු සාර්ථකව යාවත්කාලීන කරන ලදි.',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'තේරීම',
-                'title'  => 'වෙනස් කිරීමට',
+                'title'  => 'පෙරහන',
 
                 'dropdown' => [
                     'searchable' => [

@@ -5,7 +5,7 @@
         id="v-static-content-template"
     >
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
-            <div class="flex flex-1 flex-col gap-2 min-w-[931px] max-xl:flex-auto">
+            <div class="flex min-w-[931px] flex-1 flex-col gap-2 max-xl:flex-auto">
                 <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
                     <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                         <div class="flex flex-col gap-1">
@@ -119,6 +119,7 @@
                             value="static_content"
                         />
 
+                        <!-- Name -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.name')
@@ -139,6 +140,7 @@
                             <x-admin::form.control-group.error control-name="name" />
                         </x-admin::form.control-group>
 
+                        <!-- Sort Order -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.sort-order')
@@ -159,6 +161,7 @@
                             <x-admin::form.control-group.error control-name="sort_order" />
                         </x-admin::form.control-group>
 
+                        <!-- Channel -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.channels')
@@ -178,6 +181,31 @@
                             <x-admin::form.control-group.error control-name="channel_id" />
                         </x-admin::form.control-group>
 
+                        <!-- Themes -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.settings.themes.edit.themes')
+                            </x-admin::form.control-group.label>
+    
+                            <x-admin::form.control-group.control
+                                type="select"
+                                id="theme_code"
+                                name="theme_code"
+                                :value="$theme->theme_code"
+                                rules="required"
+                                :label="trans('admin::app.settings.themes.edit.themes')"
+                            >
+                                @foreach (config('themes.shop') as $themeCode => $shopTheme)
+                                    <option value="{{ $themeCode }}">
+                                        {{ $shopTheme['name'] }}
+                                    </option>
+                                @endforeach
+                            </x-admin::form.control-group.control>
+    
+                            <x-admin::form.control-group.error control-name="theme" />
+                        </x-admin::form.control-group>
+
+                        <!-- Status -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.themes.edit.status')
@@ -202,7 +230,7 @@
                                 </v-field>
                     
                                 <label
-                                    class="peer-checked:bg-navyBlue peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
+                                    class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                                     for="status"
                                 ></label>
                             </label>

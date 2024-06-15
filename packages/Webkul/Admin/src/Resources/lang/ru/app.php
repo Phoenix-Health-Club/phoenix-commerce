@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Добавить клиента',
             'add-product'                 => 'Добавить товар',
+            'all-channels'                => 'Все каналы',
             'attribute-code'              => 'Код атрибута',
             'average-sale'                => 'Средний заказ',
             'color'                       => 'Цвет',
@@ -139,28 +140,28 @@ return [
                 ],
 
                 'datagrid' => [
-                    'canceled'         => 'Отменено',
-                    'channel-name'     => 'Канал',
-                    'closed'           => 'Закрыто',
-                    'completed'        => 'Завершено',
-                    'customer'         => 'Клиент',
-                    'date'             => 'Дата',
-                    'email'            => 'Email',
-                    'fraud'            => 'Мошенничество',
-                    'grand-total'      => 'Итоговая сумма',
-                    'id'               => '#:id',
-                    'images'           => 'Изображения',
-                    'location'         => 'Местоположение',
-                    'order-id'         => 'Номер заказа',
-                    'pay-by'           => 'Оплата через - :method',
-                    'pay-via'          => 'Оплачено через',
-                    'pending-payment'  => 'Ожидание оплаты',
-                    'pending'          => 'В ожидании',
-                    'processing'       => 'Обработка',
-                    'product-count'    => ':count + Еще продукты',
-                    'status'           => 'Статус',
-                    'success'          => 'Успешно',
-                    'view'             => 'Просмотр',
+                    'canceled'        => 'Отменено',
+                    'channel-name'    => 'Канал',
+                    'closed'          => 'Закрыто',
+                    'completed'       => 'Завершено',
+                    'customer'        => 'Клиент',
+                    'date'            => 'Дата',
+                    'email'           => 'Email',
+                    'fraud'           => 'Мошенничество',
+                    'grand-total'     => 'Итоговая сумма',
+                    'id'              => '#:id',
+                    'items'           => 'Товары',
+                    'location'        => 'Местоположение',
+                    'order-id'        => 'Номер заказа',
+                    'pay-by'          => 'Оплата через - :method',
+                    'pay-via'         => 'Оплачено через',
+                    'pending-payment' => 'Ожидание оплаты',
+                    'pending'         => 'В ожидании',
+                    'processing'      => 'Обработка',
+                    'product-count'   => ':count + Еще продукты',
+                    'status'          => 'Статус',
+                    'success'         => 'Успешно',
+                    'view'            => 'Просмотр',
                 ],
             ],
 
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Банковские реквизиты',
                 'bill-to'                    => 'Выставить счет',
-                'contact'                    => 'Контакт',
                 'contact-number'             => 'Контактный номер',
+                'contact'                    => 'Контакт',
                 'date'                       => 'Дата счета',
                 'discount'                   => 'Скидка',
+                'excl-tax'                   => 'Без налога:',
                 'grand-total'                => 'Общая сумма',
-                'invoice'                    => 'Счет',
                 'invoice-id'                 => 'ID счета',
+                'invoice'                    => 'Счет',
                 'order-date'                 => 'Дата заказа',
                 'order-id'                   => 'ID заказа',
                 'payment-method'             => 'Способ оплаты',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Подытог (без налога)',
                 'subtotal-incl-tax'          => 'Подытог (с налогом)',
                 'subtotal'                   => 'Подытог',
-                'tax'                        => 'Налог',
                 'tax-amount'                 => 'Сумма налога',
+                'tax'                        => 'Налог',
                 'vat-number'                 => 'Номер НДС',
-                'excl-tax'                   => 'Без налога:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Семейство атрибутов',
                     'attribute-family-value' => 'Семейство атрибутов - :attribute_family',
                     'category'               => 'Категория',
+                    'channel'                => 'Канал',
                     'copy-of'                => 'Копия :value',
                     'copy-of-slug'           => 'копия-:value',
                     'delete'                 => 'Удалить',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Активный',
                     'address'        => ':address  Адрес(ов)',
                     'address-count'  => 'Количество адресов',
+                    'channel'        => 'Канал',
                     'delete'         => 'Удалить',
                     'delete-success' => 'Выбранные данные успешно удалены',
                     'email'          => 'Электронная почта',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Термины поиска',
 
                     'datagrid' => [
-                        'Channel'             => 'Канал',
+                        'channel'             => 'Канал',
                         'actions'             => 'Действия',
                         'channel'             => 'Канал',
                         'delete'              => 'Удалить',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Канал',
                         'channel'        => 'Канал',
                         'delete-warning' => 'Вы уверены, что хотите выполнить эту операцию?',
                         'locale'         => 'Региональные настройки',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Действия',
+                        'category'            => 'Категория',
+                        'cms-page'            => 'Страница CMS',
                         'delete'              => 'Удалить',
                         'edit'                => 'Редактировать',
                         'for'                 => 'Для',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'Локаль',
                         'mass-delete-success' => 'Выбранные перенаправления URL были успешно удалены.',
                         'permanent-redirect'  => 'Постоянное (301)',
+                        'product'             => 'Продукт',
                         'redirect-type'       => 'Тип перенаправления',
                         'request-path'        => 'Путь запроса',
                         'target-path'         => 'Целевой путь',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'Страницы',
 
             'datagrid' => [
+                'channel'             => 'Канал',
                 'delete'              => 'Удалить',
                 'edit'                => 'Редактировать',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'Название',
                 'save-btn'   => 'Сохранить тему',
                 'sort-order' => 'Порядок Сортировки',
+                'themes'     => 'Темы',
                 'title'      => 'Создать Тему',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Активно',
                 'add-filter-btn'                => 'Добавить Фильтр',
                 'add-footer-link-btn'           => 'Добавить Ссылку в Подвале',
                 'add-image-btn'                 => 'Добавить Изображение',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'Разрешение изображения должно быть (1920px X 700px)',
                 'image-title'                   => 'Заголовок изображения',
                 'image-upload-message'          => 'Разрешены только изображения (.jpeg, .jpg, .png, .webp, ..).',
+                'inactive'                      => 'Неактивно',
                 'key'                           => 'Ключ: :key',
                 'key-input'                     => 'Ключ',
                 'limit'                         => 'Лимит',
                 'link'                          => 'Ссылка',
                 'name'                          => 'Название',
-                'no'                            => 'Нет',
                 'new'                           => 'Новый',
+                'no'                            => 'Нет',
+                'parent-id'                     => 'Родительский ID',
                 'preview'                       => 'Просмотр',
                 'product-carousel'              => 'Карусель Продуктов',
                 'product-carousel-description'  => 'Презентация продуктов элегантным образом с использованием динамической и адаптивной карусели продуктов.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'Статическое Содержание',
                 'static-content-description'    => 'Улучшите взаимодействие с кратким и информативным статическим содержанием для вашей аудитории.',
                 'status'                        => 'Статус',
+                'themes'                        => 'Темы',
                 'title'                         => 'Редактировать Тему',
                 'update-slider'                 => 'Обновить Слайдер',
                 'url'                           => 'URL',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'Заброшенная выручка',
                 'added-to-cart'                 => 'Добавлено в корзину',
                 'added-to-cart-info'            => 'Только :progress посетителей добавили продукты в корзину',
+                'all-channels'                  => 'Все каналы',
                 'average-order-value-over-time' => 'Средний объем заказа со временем',
                 'average-sales'                 => 'Средний объем продаж',
                 'count'                         => 'Количество',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Все каналы',
                 'count'                       => 'Количество',
                 'customers'                   => 'Клиенты',
                 'customers-over-time'         => 'Клиенты со временем',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Все каналы',
                 'channel'                          => 'Канал',
                 'end-date'                         => 'Дата окончания',
                 'id'                               => 'Идентификатор',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'All Channels',
             'day'           => 'День',
             'end-date'      => 'Дата окончания',
             'export-csv'    => 'Экспорт в CSV',
@@ -3981,7 +3996,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Фильтр',
+                    'apply-filters-btn' => 'Применить фильтры',
+                    'back-btn'          => 'Назад',
+                    'create-new-filter' => 'Создать новый фильтр',
+                    'custom-filters'    => 'Пользовательские фильтры',
+                    'delete-error'      => 'Произошла ошибка при удалении фильтра, пожалуйста, попробуйте снова.',
+                    'delete-success'    => 'Фильтр успешно удален.',
+                    'empty-description' => 'Нет выбранных фильтров для сохранения. Пожалуйста, выберите фильтры для сохранения.',
+                    'empty-title'       => 'Добавить фильтры для сохранения',
+                    'name'              => 'Название',
+                    'quick-filters'     => 'Быстрые фильтры',
+                    'save-btn'          => 'Сохранить',
+                    'save-filter'       => 'Сохранить фильтр',
+                    'saved-success'     => 'Фильтр успешно сохранен.',
+                    'selected-filters'  => 'Выбранные фильтры',
+                    'title'             => 'Фильтр',
+                    'update'            => 'Обновить',
+                    'update-filter'     => 'Обновить фильтр',
+                    'updated-success'   => 'Фильтр успешно обновлён.',
                 ],
 
                 'search' => [
@@ -3991,7 +4023,7 @@ return [
 
             'filters' => [
                 'select' => 'Выбрать',
-                'title'  => 'Применить фильтры',
+                'title'  => 'Фильтры',
 
                 'dropdown' => [
                     'searchable' => [

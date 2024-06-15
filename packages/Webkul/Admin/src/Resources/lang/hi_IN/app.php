@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'ग्राहक जोड़ें',
             'add-product'                 => 'उत्पाद जोड़ें',
+            'all-channels'                => 'सभी चैनल',
             'attribute-code'              => 'विशेषता कोड',
             'average-sale'                => 'औसत आदेश बेची गई राशि',
             'color'                       => 'रंग',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'धोखाधड़ी',
                     'grand-total'     => 'कुल योग',
                     'id'              => '#:id',
-                    'images'          => 'छवियाँ',
+                    'items'           => 'आइटम',
                     'location'        => 'स्थान',
                     'order-id'        => 'आदेश आईडी',
                     'pay-by'          => ':method के द्वारा भुगतान करें',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'बैंक विवरण',
                 'bill-to'                    => 'बिल करने के लिए',
-                'contact'                    => 'संपर्क',
                 'contact-number'             => 'संपर्क नंबर',
+                'contact'                    => 'संपर्क',
                 'date'                       => 'चालान तिथि',
                 'discount'                   => 'डिस्काउंट',
+                'excl-tax'                   => 'कर छोड़कर:',
                 'grand-total'                => 'कुल योग',
-                'invoice'                    => 'चालान',
                 'invoice-id'                 => 'चालान आईडी',
+                'invoice'                    => 'चालान',
                 'order-date'                 => 'आदेश तिथि',
                 'order-id'                   => 'आदेश आईडी',
                 'payment-method'             => 'भुगतान का तरीका',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'उपकुल (कर छोड़कर)',
                 'subtotal-incl-tax'          => 'उपकुल (कर सहित)',
                 'subtotal'                   => 'उपकुल',
-                'tax'                        => 'कर',
                 'tax-amount'                 => 'कर राशि',
+                'tax'                        => 'कर',
                 'vat-number'                 => 'वैट नंबर',
-                'excl-tax'                   => 'कर छोड़कर:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'गुण परिवार',
                     'attribute-family-value' => 'गुण परिवार - :attribute_family',
                     'category'               => 'श्रेणी',
+                    'channel'                => 'चैनल',
                     'copy-of'                => ':value की प्रतिलिपि',
                     'copy-of-slug'           => ':value-की-प्रतिलिपि',
                     'delete'                 => 'हटाएं',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'सक्रिय',
                     'address'        => ':address पता(ओं)',
                     'address-count'  => 'पता गणना',
+                    'channel'        => 'चैनल',
                     'delete'         => 'हटाएँ',
                     'delete-success' => 'चयनित डेटा सफलतापूर्वक हटा दिया गया',
                     'email'          => 'ईमेल',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'खोज शब्द',
 
                     'datagrid' => [
-                        'Channel'             => 'चैनल',
+                        'channel'             => 'चैनल',
                         'actions'             => 'क्रियाएँ',
                         'channel'             => 'चैनल',
                         'delete'              => 'हटायें',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'चैनल',
                         'channel'        => 'चैनल',
                         'delete-warning' => 'क्या आप इस ऑपरेशन को पूरा करना चाहते हैं?',
                         'locale'         => 'स्थानीयीकरण',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'कार्य',
+                        'category'            => 'श्रेणी',
+                        'cms-page'            => 'CMS पृष्ठ',
                         'delete'              => 'हटाएं',
                         'edit'                => 'संपादित करें',
                         'for'                 => 'के लिए',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'भाषा क्षेत्र',
                         'mass-delete-success' => 'चुने गए URL अनुकूलन सफलतापूर्वक हटा दिए गए हैं।',
                         'permanent-redirect'  => 'स्थायी (301)',
+                        'product'             => 'उत्पाद',
                         'redirect-type'       => 'अनुवर्तन प्रकार',
                         'request-path'        => 'अनुरोध पथ',
                         'target-path'         => 'लक्ष्य पथ',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'पेज',
 
             'datagrid' => [
+                'channel'             => 'चैनल',
                 'delete'              => 'हटाएं',
                 'edit'                => 'संपादित करें',
                 'id'                  => 'आईडी',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'नाम',
                 'save-btn'   => 'थीम सहेजें',
                 'sort-order' => 'क्रमबद्ध करें',
+                'themes'     => 'थीम',
                 'title'      => 'थीम बनाएं',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'सक्रिय',
                 'add-filter-btn'                => 'फ़िल्टर जोड़ें',
                 'add-footer-link-btn'           => 'फ़ुटर लिंक जोड़ें',
                 'add-image-btn'                 => 'छवि जोड़ें',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'छवि संकल्प (1920px X 700px) होना चाहिए',
                 'image-title'                   => 'चित्र शीर्षक',
                 'image-upload-message'          => 'केवल छवियाँ (.jpeg, .jpg, .png, .webp, ..) की अनुमति हैं।',
+                'inactive'                      => 'निष्क्रिय',
                 'key'                           => 'कुंजी: :key',
                 'key-input'                     => 'कुंजी',
                 'limit'                         => 'सीमा',
                 'link'                          => 'लिंक',
                 'name'                          => 'नाम',
-                'no'                            => 'नहीं',
                 'new'                           => 'नया',
+                'no'                            => 'नहीं',
+                'parent-id'                     => 'मूल आईडी',
                 'preview'                       => 'पूर्वावलोकन',
                 'product-carousel'              => 'उत्पाद कैरोसल',
                 'product-carousel-description'  => 'डायनामिक और प्रतिस्थापनीय उत्पाद कैरोसल के साथ उत्पादों का सुंदर प्रदर्शन करें।',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'स्थिर सामग्री',
                 'static-content-description'    => 'अपने दर्शकों के लिए संक्षेप, जानकारीक स्थिर सामग्री के साथ आकर्षित करें।',
                 'status'                        => 'स्थिति',
+                'themes'                        => 'थीम',
                 'title'                         => 'थीम संपादित करें',
                 'update-slider'                 => 'स्लाइडर अपडेट करें',
                 'url'                           => 'यूआरएल',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'छोड़े गए राजस्व',
                 'added-to-cart'                 => 'कार्ट में जोड़ा गया',
                 'added-to-cart-info'            => 'केवल :progress दर्शकों ने उत्पाद कार्ट में जोड़े',
+                'all-channels'                  => 'सभी चैनल',
                 'average-order-value-over-time' => 'समय के साथ औसत आदेश मूल्य',
                 'average-sales'                 => 'औसत आदेश मूल्य',
                 'count'                         => 'गणना',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'सभी चैनल',
                 'count'                       => 'गणना',
                 'customers'                   => 'ग्राहक',
                 'customers-over-time'         => 'समय के साथ ग्राहक',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'सभी चैनल',
                 'channel'                          => 'चैनल',
                 'end-date'                         => 'समापन तिथि',
                 'id'                               => 'आईडी',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'सभी चैनल',
             'day'           => 'दिन',
             'end-date'      => 'समापन तिथि',
             'export-csv'    => 'CSV पर्याप्त',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'फ़िल्टर',
+                    'apply-filters-btn' => 'फ़िल्टर लागू करें',
+                    'back-btn'          => 'वापस',
+                    'create-new-filter' => 'नया फ़िल्टर बनाएं',
+                    'custom-filters'    => 'कस्टम फ़िल्टर',
+                    'delete-error'      => 'फ़िल्टर को हटाते समय कुछ गलत हो गया, कृपया पुनः प्रयास करें।',
+                    'delete-success'    => 'फ़िल्टर को सफलतापूर्वक हटा दिया गया है।',
+                    'empty-description' => 'सहेजने के लिए कोई चयनित फ़िल्टर उपलब्ध नहीं है। कृपया सहेजने के लिए फ़िल्टर चुनें।',
+                    'empty-title'       => 'सहेजने के लिए फ़िल्टर जोड़ें',
+                    'name'              => 'नाम',
+                    'quick-filters'     => 'त्वरित फ़िल्टर',
+                    'save-btn'          => 'सहेजें',
+                    'save-filter'       => 'फ़िल्टर सहेजें',
+                    'saved-success'     => 'फ़िल्टर को सफलतापूर्वक सहेजा गया है।',
+                    'selected-filters'  => 'चयनित फ़िल्टर',
+                    'title'             => 'फ़िल्टर',
+                    'update'            => 'अपडेट करें',
+                    'update-filter'     => 'फिल्टर अपडेट करें',
+                    'updated-success'   => 'फिल्टर सफलतापूर्वक अपडेट किया गया है।',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'चुनें',
-                'title'  => 'फ़िल्टर लागू करें',
+                'title'  => 'फ़िल्टर',
 
                 'dropdown' => [
                     'searchable' => [

@@ -13,7 +13,7 @@
         <x-shop::layouts.account.navigation />
     </div>
 
-    <div class="mx-4 flex-auto">
+    <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="mb-8 flex items-center max-md:mb-5">
             <!-- Back Button -->
             <a
@@ -23,7 +23,7 @@
                 <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
             </a>
 
-            <h2 class="text-2xl font-medium max-md:text-xl ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+            <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
                 @lang('shop::app.customers.account.reviews.title')
             </h2>
         </div>
@@ -118,7 +118,7 @@
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
     
                                             <x-shop::media.images.lazy
-                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-xl"
+                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-lg"
                                                 src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                 alt="Review Image"                   
                                             />
@@ -136,7 +136,7 @@
 
                                                 {!! view_render_event('bagisto.shop.customers.account.reviews.created_at.before', ['reviews' => $reviews]) !!}
 
-                                                <p class="mt-1.5 font-normal text-zinc-100 max-md:mt-0 max-md:text-xs">
+                                                <p class="mt-1.5 font-normal text-zinc-500 max-md:mt-0 max-md:text-xs">
                                                     {{ $review->created_at }}
                                                 </p>
             

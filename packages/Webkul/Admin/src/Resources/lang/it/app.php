@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Aggiungi Cliente',
             'add-product'                 => 'Aggiungi Prodotto',
+            'all-channels'                => 'Tutti i Canali',
             'attribute-code'              => 'Codice Attributo',
             'average-sale'                => 'Vendita Media Ordine',
             'color'                       => 'Colore',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'Frode',
                     'grand-total'     => 'Totale Generale',
                     'id'              => '#:id',
-                    'images'          => 'Immagini',
+                    'items'           => 'Prodotti',
                     'location'        => 'Posizione',
                     'order-id'        => 'ID Ordine',
                     'pay-by'          => 'Paga con - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Dettagli Bancari',
                 'bill-to'                    => 'Fatturato a',
-                'contact'                    => 'Contatto',
                 'contact-number'             => 'Numero di Contatto',
+                'contact'                    => 'Contatto',
                 'date'                       => 'Data Fattura',
                 'discount'                   => 'Sconto',
+                'excl-tax'                   => 'Escl. Tasse:',
                 'grand-total'                => 'Totale Generale',
-                'invoice'                    => 'Fattura',
                 'invoice-id'                 => 'ID Fattura',
+                'invoice'                    => 'Fattura',
                 'order-date'                 => 'Data Ordine',
                 'order-id'                   => 'ID Ordine',
                 'payment-method'             => 'Metodo di Pagamento',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Subtotale (Escl. Tasse)',
                 'subtotal-incl-tax'          => 'Subtotale (Incl. Tasse)',
                 'subtotal'                   => 'Subtotale',
-                'tax'                        => 'Imposta',
                 'tax-amount'                 => 'Importo Imposta',
+                'tax'                        => 'Imposta',
                 'vat-number'                 => 'Numero di Partita IVA',
-                'excl-tax'                   => 'Escl. Tasse:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Famiglia di Attributi',
                     'attribute-family-value' => 'Famiglia di Attributi - :attribute_family',
                     'category'               => 'Categoria',
+                    'channel'                => 'Canale',
                     'copy-of'                => 'Copia di :value',
                     'copy-of-slug'           => 'copia-di-:value',
                     'delete'                 => 'Elimina',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Attivo',
                     'address'        => ':address Indirizzo(i)',
                     'address-count'  => 'Conteggio Indirizzi',
+                    'channel'        => 'Canale',
                     'delete'         => 'Elimina',
                     'delete-success' => 'Dati selezionati eliminati con successo',
                     'email'          => 'Email',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Termini di Ricerca',
 
                     'datagrid' => [
-                        'Channel'             => 'Canale',
+                        'channel'             => 'Canale',
                         'actions'             => 'Azioni',
                         'channel'             => 'Canale',
                         'delete'              => 'Elimina',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Canale',
                         'channel'        => 'Canale',
                         'delete-warning' => 'Sei sicuro di voler eseguire questa azione?',
                         'locale'         => 'Località',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Azioni',
+                        'category'            => 'Categoria',
+                        'cms-page'            => 'Pagina CMS',
                         'delete'              => 'Elimina',
                         'edit'                => 'Modifica',
                         'for'                 => 'Per',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'Località',
                         'mass-delete-success' => 'Riscritture URL Selezionate Eliminate con Successo',
                         'permanent-redirect'  => 'Permanente (301)',
+                        'product'             => 'Prodotto',
                         'redirect-type'       => 'Tipo di Reindirizzamento',
                         'request-path'        => 'Percorso Richiesto',
                         'target-path'         => 'Percorso di Destinazione',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'Pagine',
 
             'datagrid' => [
+                'channel'             => 'Canale',
                 'delete'              => 'Elimina',
                 'edit'                => 'Modifica',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'Nome',
                 'save-btn'   => 'Salva Tema',
                 'sort-order' => 'Ordinamento',
+                'themes'     => 'Temi',
                 'title'      => 'Crea Tema',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Attivo',
                 'add-filter-btn'                => 'Aggiungi Filtro',
                 'add-footer-link-btn'           => 'Aggiungi Link Piè di Pagina',
                 'add-image-btn'                 => 'Aggiungi Immagine',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'La risoluzione dell\'immagine dovrebbe essere (1920px X 700px)',
                 'image-title'                   => 'Titolo Immagine',
                 'image-upload-message'          => 'Sono consentite solo immagini (.jpeg, .jpg, .png, .webp, ..).',
+                'inactive'                      => 'Inattivo',
                 'key'                           => 'Chiave: :key',
                 'key-input'                     => 'Chiave',
                 'limit'                         => 'Limite',
                 'link'                          => 'Link',
                 'name'                          => 'Nome',
-                'no'                            => 'No',
                 'new'                           => 'Nuovo',
+                'no'                            => 'No',
+                'parent-id'                     => 'ID Genitore',
                 'preview'                       => 'Anteprima',
                 'product-carousel'              => 'Carosello Prodotti',
                 'product-carousel-description'  => 'Mostra i prodotti in modo elegante con un carosello di prodotti dinamico e responsivo.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'Contenuto Statico',
                 'static-content-description'    => 'Aumenta l\'interazione con contenuti statici concisi e informativi per il tuo pubblico.',
                 'status'                        => 'Stato',
+                'themes'                        => 'Temi',
                 'title'                         => 'Modifica Tema',
                 'update-slider'                 => 'Aggiorna Slider',
                 'url'                           => 'URL',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'Ricavo Abbandonato',
                 'added-to-cart'                 => 'Aggiunto al Carrello',
                 'added-to-cart-info'            => 'Solo :progress visitatori hanno aggiunto prodotti al carrello',
+                'all-channels'                  => 'Tutti i Canali',
                 'average-order-value-over-time' => 'Valore Medio Ordine Nel Tempo',
                 'average-sales'                 => 'Valore Medio Ordine',
                 'count'                         => 'Conteggio',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Tutti i Canali',
                 'count'                       => 'Conteggio',
                 'customers'                   => 'Clienti',
                 'customers-over-time'         => 'Clienti Nel Tempo',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Tutti i Canali',
                 'channel'                          => 'Canale',
                 'end-date'                         => 'Data di Fine',
                 'id'                               => 'Id',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Tutti i Canali',
             'day'           => 'Giorno',
             'end-date'      => 'Data di Fine',
             'export-csv'    => 'Esporta CSV',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtro',
+                    'apply-filters-btn' => 'Applica filtri',
+                    'back-btn'          => 'Indietro',
+                    'create-new-filter' => 'Crea nuovo filtro',
+                    'custom-filters'    => 'Filtri personalizzati',
+                    'delete-error'      => 'Si è verificato un errore durante l\'eliminazione del filtro, per favore riprova.',
+                    'delete-success'    => 'Il filtro è stato eliminato con successo.',
+                    'empty-description' => 'Non ci sono filtri selezionati disponibili per il salvataggio. Selezionare i filtri da salvare.',
+                    'empty-title'       => 'Aggiungi filtri da salvare',
+                    'name'              => 'Nome',
+                    'quick-filters'     => 'Filtri rapidi',
+                    'save-btn'          => 'Salva',
+                    'save-filter'       => 'Salva filtro',
+                    'saved-success'     => 'Il filtro è stato salvato con successo.',
+                    'selected-filters'  => 'Filtri selezionati',
+                    'title'             => 'Filtro',
+                    'update'            => 'Aggiorna',
+                    'update-filter'     => 'Aggiorna filtro',
+                    'updated-success'   => 'Il filtro è stato aggiornato con successo.',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'Seleziona',
-                'title'  => 'Applica Filtri',
+                'title'  => 'Filtri',
 
                 'dropdown' => [
                     'searchable' => [

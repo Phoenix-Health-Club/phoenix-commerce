@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Kunde hinzufügen',
             'add-product'                 => 'Produkt hinzufügen',
+            'all-channels'                => 'Alle Kanäle',
             'attribute-code'              => 'Attributcode',
             'average-sale'                => 'Durchschnittlicher Bestellumsatz',
             'color'                       => 'Farbe',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'Betrug',
                     'grand-total'     => 'Gesamtsumme',
                     'id'              => 'Bestellnummer #:id',
-                    'images'          => 'Bilder',
+                    'items'           => 'Artikel',
                     'location'        => 'Ort',
                     'order-id'        => 'Bestellnummer',
                     'pay-by'          => 'Bezahlen mit - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Bankverbindung',
                 'bill-to'                    => 'Rechnung an',
-                'contact'                    => 'Kontakt',
                 'contact-number'             => 'Kontaktnummer',
+                'contact'                    => 'Kontakt',
                 'date'                       => 'Rechnungsdatum',
                 'discount'                   => 'Rabatt',
+                'excl-tax'                   => 'Exkl. MwSt.:',
                 'grand-total'                => 'Gesamtsumme',
-                'invoice'                    => 'Rechnung',
                 'invoice-id'                 => 'Rechnungsnummer',
+                'invoice'                    => 'Rechnung',
                 'order-date'                 => 'Bestelldatum',
                 'order-id'                   => 'Bestellnummer',
                 'payment-method'             => 'Zahlungsmethode',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Zwischensumme (exkl. MwSt.)',
                 'subtotal-incl-tax'          => 'Zwischensumme (inkl. MwSt.)',
                 'subtotal'                   => 'Zwischensumme',
-                'tax'                        => 'MwSt.',
                 'tax-amount'                 => 'MwSt.-Betrag',
+                'tax'                        => 'MwSt.',
                 'vat-number'                 => 'USt-IdNr.',
-                'excl-tax'                   => 'Exkl. MwSt.:',
             ],
         ],
 
@@ -744,6 +745,7 @@ return [
                     'attribute-family'       => 'Attributfamilie',
                     'attribute-family-value' => 'Attributfamilie - :attribute_family',
                     'category'               => 'Kategorie',
+                    'channel'                => 'Kanal',
                     'copy-of'                => 'Kopie von :value',
                     'copy-of-slug'           => 'kopie-von-:value',
                     'delete'                 => 'Löschen',
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Aktiv',
                     'address'        => ':address Adresse(n)',
                     'address-count'  => 'Anzahl der Adressen',
+                    'channel'        => 'Kanal',
                     'delete'         => 'Löschen',
                     'delete-success' => 'Ausgewählte Daten erfolgreich gelöscht',
                     'email'          => 'E-Mail',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => 'Suchbegriffe',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanal',
+                        'channel'             => 'Kanal',
                         'actions'             => 'Aktionen',
                         'channel'             => 'Kanal',
                         'delete'              => 'Löschen',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanal',
                         'channel'        => 'Kanal',
                         'delete-warning' => 'Möchten Sie diese Aktion wirklich ausführen?',
                         'locale'         => 'Lokalisierung',
@@ -2346,6 +2348,8 @@ return [
 
                     'datagrid' => [
                         'actions'             => 'Aktionen',
+                        'category'            => 'Kategorie',
+                        'cms-page'            => 'CMS-Seite',
                         'delete'              => 'Löschen',
                         'edit'                => 'Bearbeiten',
                         'for'                 => 'Für',
@@ -2353,6 +2357,7 @@ return [
                         'locale'              => 'Lokalisierung',
                         'mass-delete-success' => 'Ausgewählte URL-Weiterleitungen erfolgreich gelöscht',
                         'permanent-redirect'  => 'Permanent (301)',
+                        'product'             => 'Produkt',
                         'redirect-type'       => 'Weiterleitungstyp',
                         'request-path'        => 'Anforderungs-Pfad',
                         'target-path'         => 'Zielpfad',
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'Seiten',
 
             'datagrid' => [
+                'channel'             => 'Kanal',
                 'delete'              => 'Löschen',
                 'edit'                => 'Bearbeiten',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'Name',
                 'save-btn'   => 'Thema speichern',
                 'sort-order' => 'Sortierreihenfolge',
+                'themes'     => 'Themen',
                 'title'      => 'Thema erstellen',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Aktiv',
                 'add-filter-btn'                => 'Filter hinzufügen',
                 'add-footer-link-btn'           => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn'                 => 'Bild hinzufügen',
@@ -3127,13 +3135,15 @@ return [
                 'image-size'                    => 'Die Bildauflösung sollte (1920px X 700px) sein',
                 'image-title'                   => 'Bildtitel',
                 'image-upload-message'          => 'Nur Bilder (.jpeg, .jpg, .png, .webp, ..) sind erlaubt.',
+                'inactive'                      => 'Inaktiv',
                 'key'                           => 'Schlüssel: :key',
                 'key-input'                     => 'Schlüssel',
                 'limit'                         => 'Limit',
                 'link'                          => 'Link',
                 'name'                          => 'Name',
-                'no'                            => 'Nein',
                 'new'                           => 'Neu',
+                'no'                            => 'Nein',
+                'parent-id'                     => 'Eltern-ID',
                 'preview'                       => 'Vorschau',
                 'product-carousel'              => 'Produkt Karussell',
                 'product-carousel-description'  => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',
@@ -3149,6 +3159,7 @@ return [
                 'static-content'                => 'Statischer Inhalt',
                 'static-content-description'    => 'Verbessern Sie die Interaktion mit prägnantem, informativem statischem Inhalt für Ihr Publikum.',
                 'status'                        => 'Status',
+                'themes'                        => 'Themen',
                 'title'                         => 'Thema bearbeiten',
                 'update-slider'                 => 'Slider aktualisieren',
                 'url'                           => 'URL',
@@ -3190,6 +3201,7 @@ return [
                 'abandoned-revenue'             => 'Abgebrochene Einnahmen',
                 'added-to-cart'                 => 'Zum Warenkorb hinzugefügt',
                 'added-to-cart-info'            => 'Nur :progress Besucher haben Produkte zum Warenkorb hinzugefügt',
+                'all-channels'                  => 'Alle Kanäle',
                 'average-order-value-over-time' => 'Durchschnittlicher Bestellwert im Laufe der Zeit',
                 'average-sales'                 => 'Durchschnittlicher Bestellwert',
                 'count'                         => 'Anzahl',
@@ -3228,6 +3240,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Alle Kanäle',
                 'count'                       => 'Anzahl',
                 'customers'                   => 'Kunden',
                 'customers-over-time'         => 'Kunden im Laufe der Zeit',
@@ -3256,6 +3269,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Alle Kanäle',
                 'channel'                          => 'Kanal',
                 'end-date'                         => 'Enddatum',
                 'id'                               => 'ID',
@@ -3289,6 +3303,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Alle Kanäle',
             'day'           => 'Tag',
             'end-date'      => 'Enddatum',
             'export-csv'    => 'CSV exportieren',
@@ -3982,7 +3997,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filtern',
+                    'apply-filters-btn' => 'Filter anwenden',
+                    'back-btn'          => 'Zurück',
+                    'create-new-filter' => 'Neuen Filter erstellen',
+                    'custom-filters'    => 'Benutzerdefinierte Filter',
+                    'delete-error'      => 'Beim Löschen des Filters ist etwas schief gelaufen, bitte versuchen Sie es erneut.',
+                    'delete-success'    => 'Filter wurde erfolgreich gelöscht.',
+                    'empty-description' => 'Es sind keine ausgewählten Filter zum Speichern verfügbar. Bitte wählen Sie Filter zum Speichern aus.',
+                    'empty-title'       => 'Filter zum Speichern hinzufügen',
+                    'name'              => 'Name',
+                    'quick-filters'     => 'Schnellfilter',
+                    'save-btn'          => 'Speichern',
+                    'save-filter'       => 'Filter speichern',
+                    'saved-success'     => 'Filter wurde erfolgreich gespeichert.',
+                    'selected-filters'  => 'Ausgewählte Filter',
+                    'title'             => 'Filter',
+                    'update'            => 'Aktualisieren',
+                    'update-filter'     => 'Filter aktualisieren',
+                    'updated-success'   => 'Der Filter wurde erfolgreich aktualisiert.',
                 ],
 
                 'search' => [
@@ -3992,7 +4024,7 @@ return [
 
             'filters' => [
                 'select' => 'Auswählen',
-                'title'  => 'Filter anwenden',
+                'title'  => 'Filter',
 
                 'dropdown' => [
                     'searchable' => [

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => '顧客を追加',
             'add-product'                 => '製品を追加',
+            'all-channels'                => 'すべてのチャネル',
             'attribute-code'              => '属性コード',
             'average-sale'                => '平均注文売上',
             'color'                       => 'カラー',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => '詐欺',
                     'grand-total'     => '合計金額',
                     'id'              => '#:id',
-                    'images'          => '画像',
+                    'items'           => 'アイテム',
                     'location'        => '場所',
                     'order-id'        => '注文ID',
                     'pay-by'          => ':method で支払う',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => '銀行詳細',
                 'bill-to'                    => '請求先',
-                'contact'                    => '連絡先',
                 'contact-number'             => '連絡先番号',
+                'contact'                    => '連絡先',
                 'date'                       => '請求日',
                 'discount'                   => '割引',
+                'excl-tax'                   => '税抜き:',
                 'grand-total'                => '総合計',
-                'invoice'                    => '請求書',
                 'invoice-id'                 => '請求書ID',
+                'invoice'                    => '請求書',
                 'order-date'                 => '注文日',
                 'order-id'                   => '注文ID',
                 'payment-method'             => '支払方法',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => '小計（税抜き）',
                 'subtotal-incl-tax'          => '小計（税込み）',
                 'subtotal'                   => '小計',
-                'tax'                        => '税金',
                 'tax-amount'                 => '税額',
+                'tax'                        => '税金',
                 'vat-number'                 => 'VAT番号',
-                'excl-tax'                   => '税抜き:',
             ],
         ],
 
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid'   => [
-                    'active'                        => 'アクティブ',
-                    'attribute-family'              => '属性ファミリー',
-                    'attribute-family-value'        => '属性ファミリー - :attribute_family',
-                    'category'                      => 'カテゴリー',
-                    'copy-of'                       => 'コピー :value',
-                    'copy-of-slug'                  => 'コピー-:value',
-                    'delete'                        => '削除',
-                    'disable'                       => '無効',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => '画像',
-                    'mass-delete-success'           => '選択した製品が正常に削除されました',
-                    'mass-update-success'           => '選択した製品が正常に更新されました',
-                    'name'                          => '名前',
-                    'out-of-stock'                  => '在庫切れ',
-                    'price'                         => '価格',
-                    'product-image'                 => '製品画像',
-                    'qty'                           => '数量',
-                    'qty-value'                     => ':qty 個の利用可能',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'ステータス',
-                    'type'                          => 'タイプ',
-                    'update-status'                 => 'ステータスを更新',
+                    'active'                 => 'アクティブ',
+                    'attribute-family'       => '属性ファミリー',
+                    'attribute-family-value' => '属性ファミリー - :attribute_family',
+                    'category'               => 'カテゴリー',
+                    'channel'                => 'チャンネル',
+                    'copy-of'                => 'コピー :value',
+                    'copy-of-slug'           => 'コピー-:value',
+                    'delete'                 => '削除',
+                    'disable'                => '無効',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => '画像',
+                    'mass-delete-success'    => '選択した製品が正常に削除されました',
+                    'mass-update-success'    => '選択した製品が正常に更新されました',
+                    'name'                   => '名前',
+                    'out-of-stock'           => '在庫切れ',
+                    'price'                  => '価格',
+                    'product-image'          => '製品画像',
+                    'qty'                    => '数量',
+                    'qty-value'              => ':qty 個の利用可能',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'ステータス',
+                    'type'                   => 'タイプ',
+                    'update-status'          => 'ステータスを更新',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'アクティブ',
                     'address'        => ':address 住所',
                     'address-count'  => '住所数',
+                    'channel'        => 'チャンネル',
                     'delete'         => '削除',
                     'delete-success' => '選択したデータが正常に削除されました',
                     'email'          => 'メール',
@@ -2223,7 +2226,7 @@ return [
                     'title'      => '検索キーワード',
 
                     'datagrid' => [
-                        'Channel'             => 'チャンネル',
+                        'channel'             => 'チャンネル',
                         'actions'             => 'アクション',
                         'channel'             => 'チャンネル',
                         'delete'              => '削除',
@@ -2238,7 +2241,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'チャンネル',
                         'channel'        => 'チャンネル',
                         'delete-warning' => 'この操作を実行してもよろしいですか？',
                         'locale'         => 'ロケール',
@@ -2357,6 +2359,9 @@ return [
                         'request-path'        => 'リクエストパス',
                         'target-path'         => 'ターゲットパス',
                         'temporary-redirect'  => '一時的なリダイレクト(302)',
+                        'category'            => 'カテゴリ',
+                        'cms-page'            => 'CMSページ',
+                        'product'             => '製品',
                     ],
 
                     'create' => [
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'ページ',
 
             'datagrid' => [
+                'channel'             => 'チャンネル',
                 'delete'              => '削除',
                 'edit'                => '編集',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => '名前',
                 'save-btn'   => 'テーマを保存する',
                 'sort-order' => '並び替え順',
+                'themes'     => 'テーマ',
                 'title'      => 'テーマを作成',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'アクティブ',
                 'add-filter-btn'                => 'フィルターを追加',
                 'add-footer-link-btn'           => 'フッターリンクを追加',
                 'add-image-btn'                 => '画像を追加',
@@ -3132,8 +3140,9 @@ return [
                 'limit'                         => '制限',
                 'link'                          => 'リンク',
                 'name'                          => '名前',
-                'no'                            => 'いいえ',
                 'new'                           => '新しい',
+                'no'                            => 'いいえ',
+                'parent-id'                     => '親ID',
                 'preview'                       => 'プレビュー',
                 'product-carousel'              => '商品カルーセル',
                 'product-carousel-description'  => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',
@@ -3149,6 +3158,7 @@ return [
                 'static-content'                => '静的コンテンツ',
                 'static-content-description'    => '観客に向けて簡潔で情報豊かな静的コンテンツでエンゲージメントを向上させます。',
                 'status'                        => 'ステータス',
+                'themes'                        => 'テーマ',
                 'title'                         => 'テーマを編集',
                 'update-slider'                 => 'スライダーを更新',
                 'url'                           => 'URL',
@@ -3190,6 +3200,7 @@ return [
                 'abandoned-revenue'             => '放棄された売上',
                 'added-to-cart'                 => 'カートに追加',
                 'added-to-cart-info'            => '進捗中の訪問者のみがカートに商品を追加',
+                'all-channels'                  => 'すべてのチャンネル',
                 'average-order-value-over-time' => '平均注文金額の推移',
                 'average-sales'                 => '平均注文金額',
                 'count'                         => 'カウント',
@@ -3228,6 +3239,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'すべてのチャンネル',
                 'count'                       => 'カウント',
                 'customers'                   => '顧客',
                 'customers-over-time'         => '顧客の推移',
@@ -3256,6 +3268,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'すべてのチャンネル',
                 'channel'                          => 'チャンネル',
                 'end-date'                         => '終了日',
                 'id'                               => 'ID',
@@ -3289,6 +3302,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'すべてのチャンネル',
             'day'           => '日',
             'end-date'      => '終了日',
             'export-csv'    => 'CSVエクスポート',
@@ -3982,7 +3996,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'フィルター',
+                    'apply-filters-btn' => 'フィルタを適用する',
+                    'back-btn'          => '戻る',
+                    'create-new-filter' => '新しいフィルターを作成',
+                    'custom-filters'    => 'カスタムフィルター',
+                    'delete-error'      => 'フィルターの削除中に問題が発生しました。もう一度お試しください。',
+                    'delete-success'    => 'フィルターは正常に削除されました。',
+                    'empty-description' => '保存する選択されたフィルターはありません。保存するフィルターを選択してください。',
+                    'empty-title'       => '保存するフィルターを追加',
+                    'name'              => '名前',
+                    'quick-filters'     => 'クイックフィルター',
+                    'save-btn'          => '保存',
+                    'save-filter'       => 'フィルターを保存',
+                    'saved-success'     => 'フィルターは正常に保存されました。',
+                    'selected-filters'  => '選択したフィルター',
+                    'title'             => 'フィルター',
+                    'update'            => '更新',
+                    'update-filter'     => 'フィルターを更新',
+                    'updated-success'   => 'フィルターが正常に更新されました',
                 ],
 
                 'search' => [
@@ -3992,7 +4023,7 @@ return [
 
             'filters' => [
                 'select' => '選択',
-                'title'  => 'フィルターを適用',
+                'title'  => 'フィルター',
 
                 'dropdown' => [
                     'searchable' => [

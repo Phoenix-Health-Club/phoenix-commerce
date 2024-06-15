@@ -9,6 +9,7 @@
 - [The `Webkul\Product\Type\Configurable` class](#the-configurable-type-class)
 - [Shop API Response Updates](#the-shop-api-response-updates)
 - [Admin and Shop Menu Updates](#the-admin-shop-menu-updates)
+- [Admin ACL Updates](#the-admin-acl-updates)
 
 ## Medium Impact Changes
 
@@ -18,6 +19,7 @@
 - [The `Webkul\Checkout\Models\Cart` model](#the-cart-model)
 - [The Checkout Tables Schema Updates](#the-checkout-tables-schema-updates)
 - [The `Webkul\DataGrid\DataGrid` class](#the-datagrid-class)
+- [The `Webkul/DataGrid/src/Column` class](#the-column-class)
 - [The `Webkul\Product\Repositories\ElasticSearchRepository` Repository](#the-elastic-search-repository)
 - [The `Webkul\Product\Repositories\ProductRepository` Repository](#the-product-repository)
 - [The product Elastic Search indexing](#the-elastic-indexing)
@@ -39,6 +41,7 @@
 - [Renamed Shop API Route Names](#renamed-shop-api-routes-names)
 - [Renamed Shop Controller Method Names](#renamed-shop-controller-method-names)
 - [Renamed Admin View Render Event Names](#renamed-admin-view-render-event-names)
+- [Optimize the configuration section](#optimize-the-configuration-section)
 
 ## Upgrading To v2.2.0 From v2.1.0
 
@@ -130,6 +133,61 @@ There is no dependency needed to be updated at for this upgrade.
 
 `core()->getConfigData('catalog.products.search.engine')` represents the search engine for products. If "Elastic Search" is selected, elastic indexing will be enabled. The other two configurations (`catalog.products.search.admin_mode` and `catalog.products.search.storefront_mode`) will function relative to this configuration.
 
+5: The `locale_based` setting in the sales shipping origin configuration has been updated to support multiple locale values.
+
+```diff
+[
+    'key'    => 'sales.shipping.origin',
+    'name'   => 'admin::app.configuration.index.sales.shipping.origin.title',
+    'info'   => 'admin::app.configuration.index.sales.shipping.origin.title-info',
+    'sort'   => 0,
+    'fields' => [
+        [
+            'name'          => 'city',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.city',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'address',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.street-address',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'zipcode',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.zip',
+            'type'          => 'text',
+            'validation'    => 'required',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'store_name',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.store-name',
+            'type'          => 'text',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ], [
+            'name'          => 'bank_details',
+            'title'         => 'admin::app.configuration.index.sales.shipping.origin.bank-details',
+            'type'          => 'textarea',
+            'channel_based' => true,
+-           'locale_based'  => false,
++           'locale_based'  => true,
+        ],
+    ],
+]
+```
+
+If you are migrating your existing store to this version, please save the configuration values again, as previously saved values will no longer work.
+
+
 
 <a name="renamed-admin-api-routes-names"></a>
 #### Renamed Admin API Route Names
@@ -178,6 +236,461 @@ There is no dependency needed to be updated at for this upgrade.
 
 - {!! view_render_event('bagisto.admin.dashboard.todays_detailes.after') !!}
 + {!! view_render_event('bagisto.admin.dashboard.todays_details.after') !!}
+```
+
+<a name="optimize-the-configuration-section"></a>
+#### Optimize the configuration section
+
+We are removing the `packages/Webkul/Core/src/Tree.php` file and also removing the `CoreConfigField` trait from `CoreConfigRepository.php` file. Its important methods have been moved into `packages/Webkul/Core/src/SystemConfig/ItemField.php` because the `ItemField.php` file is responsible for each field of configuration items.
+
+```diff
+-<?php
+-
+-namespace Webkul\Core;
+-
+-use Illuminate\Support\Facades\Request;
+-
+-class Tree
+-{
+-    /**
+-     * Contains tree item
+-     *
+-     * @var array
+-     */
+-    public $items = [];
+-
+-    /**
+-     * Contains acl roles
+-     *
+-     * @var array
+-     */
+-    public $roles = [];
+-
+-    /**
+-     * Contains current item route
+-     *
+-     * @var string
+-     */
+-    public $current;
+-
+-    /**
+-     * Contains current item key
+-     *
+-     * @var string
+-     */
+-    public $currentKey;
+-
+-    /**
+-     * Create a new instance.
+-     *
+-     * @return void
+-     */
+-    public function __construct()
+-    {
+-        $this->current = Request::url();
+-    }
+-
+-    /**
+-     * Shortcut method for create a Config with a callback.
+-     * This will allow you to do things like fire an event on creation.
+-     *
+-     * @param  callable  $callback  Callback to use after the Config creation
+-     * @return object
+-     */
+-    public static function create($callback = null)
+-    {
+-        $tree = new Tree();
+-
+-        if ($callback) {
+-            $callback($tree);
+-        }
+-
+-        return $tree;
+-    }
+-
+-    /**
+-     * Add a Config item to the item stack
+-     *
+-     * @param  string  $item
+-     * @return void
+-     */
+-    public function add($item, $type = '')
+-    {
+-        $item['children'] = [];
+-
+-        if ($type == 'menu') {
+-            $item['url'] = route($item['route'], $item['params'] ?? []);
+-
+-            if (strpos($this->current, $item['url']) !== false) {
+-                $this->currentKey = $item['key'];
+-            }
+-        } elseif ($type == 'acl') {
+-            $item['name'] = trans($item['name']);
+-
+-            $this->roles[$item['route']] = $item['key'];
+-        }
+-
+-        $children = str_replace('.', '.children.', $item['key']);
+-
+-        core()->array_set($this->items, $children, $item);
+-    }
+-}
+```
+
+```diff
+-<?php
+-
+-namespace Webkul\Core\Traits;
+-
+-use Illuminate\Support\Str;
+-
+-trait CoreConfigField
+-{
+-    /**
+-     * Laravel to Vee Validation mappings.
+-     *
+-     * @var array
+-     */
+-    protected $veeValidateMappings = [
+-        'min'=> 'min_value',
+-    ];
+-
+-    /**
+-     * Get name field for forms in configuration page.
+-     *
+-     * @param  string  $key
+-     * @return string
+-     */
+-    public function getNameField($key)
+-    {
+-        $nameField = '';
+-
+-        foreach (explode('.', $key) as $key => $field) {
+-            $nameField .= $key === 0 ? $field : '['.$field.']';
+-        }
+-
+-        return $nameField;
+-    }
+-
+-    /**
+-     * Get validations for forms in configuration page.
+-     *
+-     * @param  array  $field
+-     * @return string
+-     */
+-    public function getValidations($field)
+-    {
+-        $field['validation'] = $field['validation'] ?? '';
+-
+-        foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
+-            $field['validation'] = str_replace($laravelRule, $veeValidateRule, $field['validation']);
+-        }
+-
+-        return $field['validation'];
+-    }
+-
+-    /**
+-     * Get channel/locale indicator for form fields. So, that form fields can be detected,
+-     * whether it is channel based or locale based or both.
+-     *
+-     * @param  array  $field
+-     * @param  string  $channel
+-     * @param  string  $locale
+-     * @return string
+-     */
+-    public function getChannelLocaleInfo($field, $channel, $locale)
+-    {
+-        $info = [];
+-
+-        if (! empty($field['channel_based'])) {
+-            $info[] = $channel;
+-        }
+-
+-        if (! empty($field['locale_based'])) {
+-            $info[] = $locale;
+-        }
+-
+-        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
+-    }
+-
+-    /**
+-     * Returns the select options for the field.
+-     */
+-    public function getOptions(array|string $options): array
+-    {
+-        if (is_array($options)) {
+-            return $options;
+-        }
+-
+-        [$class, $method] = Str::parseCallback($options);
+-
+-        return app($class)->$method();
+-    }
+-}
+
+```
+
+The method `getChannelLocaleInfo`, which was in the `CoreConfigField` trait, has been completely removed as it is no longer needed. The `getNameField`, `getValidations`, and `getOptions` methods, along with their class properties, have been moved to the `packages/Webkul/Core/src/SystemConfig/ItemField.php` file, which is handled by the `ItemField` class.
+
+```diff
+-    /**
+-     * Get channel/locale indicator for form fields. So, that form fields can be detected,
+-     * whether it is channel based or locale based or both.
+-     *
+-     * @param  array  $field
+-     * @param  string  $channel
+-     * @param  string  $locale
+-     * @return string
+-     */
+-    public function getChannelLocaleInfo($field, $channel, $locale)
+-    {
+-        $info = [];
+-
+-        if (! empty($field['channel_based'])) {
+-            $info[] = $channel;
+-        }
+-
+-        if (! empty($field['locale_based'])) {
+-            $info[] = $locale;
+-        }
+-
+-        return ! empty($info) ? '['.implode(' - ', $info).']' : '';
+-    }
+```
+
+To achieve this, we are using the code provided below.
+
+```diff
++ <span
++     v-if="field['channel_based'] && channelCount"
++     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
++     v-text="JSON.parse(currentChannel).name"
++ >
++ </span>
++ 
++ <span
++     v-if="field['locale_based']"
++     class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
++     v-text="JSON.parse(currentLocale).name"
++ >
++ </span>
+```
+
+In `packages/Webkul/Admin/src/Resources/views/configuration/index.blade.php`, we have completely changed the way to get/fetch the configuration items. We are now using `packages/Webkul/Core/src/SystemConfig/Item.php`, `packages/Webkul/Core/src/SystemConfig/ItemField.php`, and `packages/Webkul/Core/src/SystemConfig.php`, which are responsible for handling the configuration items and their fields.
+
+The changes in `index.blade.php` are shown below:
+
+```diff
+<div class="grid gap-y-8">
+-    @foreach ($config->items as $itemKey => $item)
++    @foreach (system_config()->getItems() as $item)
+        <div>
+            <div class="grid gap-1">
+                <!-- Title of the Main Card -->
+                <p class="font-semibold text-gray-600 dark:text-gray-300">
+-                   @lang($item['name'] ?? '')
++                   {{ $item->getName() }}
+                </p>
+
+                <!-- Info of the Main Card -->
+                <p class="text-gray-600 dark:text-gray-300">
+-                   @lang($item['info'] ?? '')
++                   {{ $item->getInfo() }}
+                </p>
+            </div>
+
+            <div class="box-shadow max-1580:grid-cols-3 mt-2 grid grid-cols-4 flex-wrap justify-between gap-12 rounded bg-white p-4 dark:bg-gray-900 max-xl:grid-cols-2 max-sm:grid-cols-1">
+                <!-- Menus cards -->
+-               @foreach ($item['children'] as $childKey =>  $child)
++               @foreach ($item->getChildren() as $key => $child)
+                    <a 
+                        class="flex max-w-[360px] items-center gap-2 rounded-lg p-2 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+-                        href="{{ route('admin.configuration.index', ($itemKey . '/' . $childKey)) }}"
++                        href="{{ route('admin.configuration.index', ($item->getKey() . '/' . $key)) }}"
+                    >
+-                       @if (isset($child['icon']))
++                       @if ($icon = $child->getIcon())
+                            <img
+                                class="h-[60px] w-[60px] dark:mix-blend-exclusion dark:invert"
+-                               src="{{ bagisto_asset('images/' . $child['icon'] ?? '') }}"
++                               src="{{ bagisto_asset('images/' . $icon) }}"
+                            >
+                        @endif
+
+                        <div class="grid">
+                            <p class="mb-1.5 text-base font-semibold text-gray-800 dark:text-white">
+-                               @lang($child['name'])
++                               {{ $child->getName() }}
+                            </p>
+
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
+-                               @lang($child['info'] ?? '')
++                               {{ $child->getInfo() }}
+                            </p>
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    @endforeach
+</div>
+```
+
+In `packages/Webkul/Admin/src/Resources/views/configuration/edit.blade.php`, we were previously using iteration and conditions based on routes. Now, we are using the `facade` helper method named `system_config()` to get the active configuration items and their fields.
+
+```diff
+@php
+    $channels = core()->getAllChannels();
+
+    $currentChannel = core()->getRequestedChannel();
+
+    $currentLocale = core()->getRequestedLocale();
+
++   $activeConfiguration = system_config()->getActiveConfigurationItem();
+@endphp
+
+<x-admin::layouts>
+    <x-slot:title>
+-        @if ($items = Arr::get($config->items, request()->route('slug') . '.children'))
+-            @foreach ($items as $key => $item)
+-                @if ( $key == request()->route('slug2'))
+-                    {{ $title = trans($item['name']) }}
+-                @endif
+-            @endforeach
+-        @endif
+
++       {{ $name = $activeConfiguration->getName() }}
+    </x-slot>
+
+    <p class="text-xl font-bold text-gray-800 dark:text-white">
+-       {{ $title }}
++       {{ $name }}
+    </p>
+//
+</x-admin::layouts>
+```
+
+```diff
+-@if ($groups)
+    <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:flex-wrap">
+-       @foreach ($groups as $key => $item)
++       @foreach ($activeConfiguration->getChildren() as $child)
+            <div class="grid content-start gap-2.5">
+                <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+-                   @lang($item['name'])
++                   {{ $child->getName() }}
+                </p>
+
+                <p class="leading-[140%] text-gray-600 dark:text-gray-300">
+-                   @lang($item['info'] ?? '')
++                   {!! $child->getInfo() !!}
+                </p>
+            </div>
+
+            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+-               @foreach ($item['fields'] as $field)
++               @foreach ($child->getFields() as $field)
+                    @if (
+-                       $field['type'] == 'blade'
++                       $field->getType() == 'blade'
+-                       && view()->exists($field['path'])
++                       && view()->exists($path = $field->getPath())
+                    )
+-                       {!! view($field['path'], compact('field'))->render() !!}
++                       {!! view($path, compact('field', 'item'))->render() !!}
+                    @else 
+                        @include ('admin::configuration.field-type')
+                    @endif
+
+-                   @php ($hint = $field['title'] . '-hint')
+-
+-                   @if ($hint !== __($hint))
+-                       <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+-                           @lang($hint)
+-                       </p>
+-                   @endif
+                @endforeach
+            </div>
+        @endforeach
+    </div>
+-@endif
+```
+
+The changes in field-type.blade.php are shown below:
+
+```diff
+-@inject('coreConfigRepository', 'Webkul\Core\Repositories\CoreConfigRepository')
+
+@php
+-    $nameKey = $item['key'] . '.' . $field['name'];
+-    $name = $coreConfigRepository->getNameField($nameKey);
+-    $validations = $coreConfigRepository->getValidations($field);
+-    $isRequired = Str::contains($validations, 'required') ? 'required' : '';
+-    $channelLocaleInfo = $coreConfigRepository->getChannelLocaleInfo($field, $currentChannel->code, $currentLocale->code);
+-    $field = collect([
+-        ...$field,
+-        'isVisible' => true,
+-    ])->map(function ($value, $key) use($coreConfigRepository) {
+-        if ($key == 'options') {
+-            return collect($coreConfigRepository->getOptions($value))->map(fn ($option) => [
+-                'title' => trans($option['title']),
+-                'value' => $option['value'],
+-            ])->toArray();
+-        }
+-        return $value;
+-    })->toArray();
+-    if (! empty($field['depends'])) {
+-        [$fieldName, $fieldValue] = explode(':' , $field['depends']);
+-        $dependNameKey = $item['key'] . '.' . $fieldName;
+-    }
++    $value = system_config()->getConfigData($field->getNameKey(), $currentChannel->code, $currentLocale->code);
+@endphp
+
+<input
+    type="hidden"
+    name="keys[]"
+-    value="{{ json_encode($item) }}"
++    value="{{ json_encode($child) }}"
+/>
+
+-<v-configurable
+-    channel-count="{{ core()->getAllChannels()->count() }}"
+-    channel-locale="{{ $channelLocaleInfo }}"
+-    current-channel="{{ $currentChannel }}"
+-    current-locale="{{ $currentLocale }}"
+-    depend-name="{{ isset($field['depends']) ? $coreConfigRepository->getNameField($dependNameKey) : ''}}"
+-    field-data="{{ json_encode($field) }}"
+-    info="{{ trans($field['info'] ?? '') }}"
+-    is-require="{{ $isRequired }}"
+-    label="{{ trans($field['title']) }}"
+-    name="{{ $name }}"
+-    src="{{ Storage::url(core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code)) }}"
+-    validations="{{ $validations }}"
+-    value="{{ core()->getConfigData($nameKey, $currentChannel->code, $currentLocale->code) ?? '' }}"
+->
+-    <div class="mb-4">
++<div class="mb-4 last:!mb-0">
++    <v-configurable
++        name="{{ $field->getNameField() }}"
++        value="{{ $value }}"
++        label="{{ trans($field->getTitle()) }}"
++        info="{{ trans($field->getInfo()) }}"
++        validations="{{ $field->getValidations() }}"
++        is-require="{{ $field->isRequired() }}"
++        depend-name="{{ $field->getDependFieldName() }}"
++        src="{{ Storage::url($value) }}"
++        field-data="{{ json_encode($field) }}"
++        channel-count="{{ $channels->count() }}"
++        current-channel="{{ $currentChannel }}"
++        current-locale="{{ $currentLocale }}"
++    >
+        <div class="shimmer mb-1.5 h-4 w-24"></div>
+
+        <div class="shimmer flex h-[42px] w-full rounded-md"></div>
+-    </div>
++    </v-configurable>
++</div>
+-</v-configurable>
 ```
 
 <a name="admin-customized-datagrid-parameters-updated"></a>
@@ -481,6 +994,140 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 + datagrid(AttributeDataGrid::class)->process();
 ```
 
+3. The setExportFile method will now only accept the file format:
+
+```diff
+- public function setExportFile($records, $format = 'csv') 
++ public function setExportFile($format = 'csv')
+```
+
+<a name="the-column-class"></a>
+#### The `Webkul/DataGrid/src/Column` Class
+
+**Impact Probability: Medium**
+
+1. The `Column` class has undergone a change in how it stores the fully qualified column name. The property name and its access level have been modified.
+
+```diff
+- public $databaseColumnName;
++ protected $columnName;
+
+- public string $index;
++ protected string $index;
+
+- public string $label;
++ protected string $label;
+
+- public string $type;
++ protected string $type;
+
+- public bool $searchable = false;
++ protected bool $searchable = false;
+
+- public bool $filterable = false,
++ protected bool $filterable = false;
+
+- public bool $sortable = false,
++ protected bool $sortable = false;
+
+- public mixed $closure = null,
++ protected mixed $closure = null;
+```
+
+2. The setDatabaseColumnName method has been renamed to setColumnName  and the getDatabaseColumnName method has been renamed to geDatabaseColumnName.
+
+```diff
+- public function setDatabaseColumnName(mixed $databaseColumnName = null)
++ public function setColumnName(mixed $columnName): void
+
+- public function getDatabaseColumnName(): mixed
++ public function getColumnName(): mixed
+```
+
+3. The `getRangeOptions` method has been removed from `Column` class and its functionality is now managed by the `DateRangeOptionEnum` class located in `Webkul/DataGrid/src/Enums/DateRangeOptionEnum.php` through the `options`  method.
+
+```diff
+- public function getRangeOptions(string $format = 'Y-m-d'): array
++ public static function options(string $format = 'Y-m-d H:i:s'): array
+```
+
+4. The following methods have been removed from the backend and their functionalities are now managed from the front end:
+
+```diff
+- public function setFormInputType(string $formInputType): void
+
+- public function getFormInputType(): ?string
+
+- public function setFormOptions(array $formOptions): void
+
+- public function getFormOptions(): ?array
+
+- public function getBooleanOptions(): array
+```
+
+5. The `Column` class constructor now accepts a single array of properties instead of individual parameters.
+
+```diff
+- public function __construct(
+-    public string $index,
+-    public string $label,
+-    public string $type,
+-    public ?array $options = null,
+-    public bool $searchable = false,
+-    public bool $filterable = false,
+-    public bool $sortable = false,
+-    public mixed $closure = null,
+- ) {
+-      $this->init();
+- }
++ public function __construct(array $column)
++ {
++   $this->init($column);
++ }
+```
+
+6. The column types are now updated The available column types are now defined as follows:`string`, `integer`, `float`, `boolean`, `date`, `datetime`, `aggregate`.
+And the available FilterType `filterable_type` are now defined as follows: `dropdown`,`date_range`,`datetime_range`.   
+
+```diff
+- $this->addColumn([
+-    'index'      => 'attribute_family',
+-    'label'      => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
+-    'type'       => 'dropdown',
+-    'options'    => [
+-        'type' => 'basic',
+-        'params' => [
+-            'options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
+-        ],
+-    ],
+-    'searchable' => false,
+-    'filterable' => true,
+-    'sortable'   => false,
+- ]); 
++ $this->addColumn([
++    'index'              => 'attribute_family',
++    'label'              => trans('admin::app.catalog.products.index.datagrid.attribute-family'),
++    'type'               => 'string',
++    'filterable'         => true,
++    'filterable_type'    => 'dropdown',
++    'filterable_options' => $this->attributeFamilyRepository->all(['name as label', 'id as value'])->toArray(),
++ ]);
+```
+
+7. By default, the properties `searchable`, `filterable`, and `sortable` will be false if you need to activate them, set them to `true`.
+
+<a name="the-datagrid-export-class"></a>
+#### The `Webkul\Admin\Exports\DataGridExport` Class
+
+**Impact Probability: Medium**
+
+1. This class will now accept the full DataGrid instance instead of the records to enhance the export features:
+
+```diff
+- public function __construct(protected $gridData = [])
++ public function __construct(protected DataGrid $datagrid)
+```
+
 
 
 <a name="notification"></a>
@@ -532,6 +1179,20 @@ All methods from the following traits have been relocated to the `Webkul\Checkou
 ```diff
 - public function getAll()
 + public function getAll(array $params = [])
+```
+
+Previously, this method returned only active products. Now, it returns all products by default. To retrieve active products, you need to pass `status` and `visible_individually` as `1`. Additionally, you can pass `channel_id` to filter products specific to a channel. You can also specify the search engine by using `setSearchEngine` and passing either `database` or `elastic`.
+
+```diff
+- $products = $this->productRepository->getAll();
+
++ $products = $this->productRepository
++     ->setSearchEngine('database')
++     ->getAll(array_merge(request()->query(), [
++         'channel_id'           => core()->getCurrentChannel()->id,
++         'status'               => 1,
++         'visible_individually' => 1,
++     ]));
 ```
 
 2. We've made revisions to the `searchFromDatabase` method to allow for optional search parameters.
@@ -978,6 +1639,70 @@ php artisan indexer:index --type=elastic
 }
 ```
 
+4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+```diff
+{
+    "data": [
+        {
+            "id": 174,
+            "sku": "COMPLETELOOKSET2023",
+            "name": "All-in-One Smart Casual Outfit Set",
+            "description": "All-in-One Smart Casual Outfit Set",
+            "url_key": "all-in-one-smart-casual-outfit-set",
+            "base_image": {
+                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+            },
+            "images": [
+                {
+                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
+                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
+                }
+            ],
+            "is_new": true,
+            "is_featured": true,
+            "on_sale": true,
+            "is_saleable": true,
+            "is_wishlist": true,
+            "min_price": "$168.96",
+            "prices": {
+                "from": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                },
+                "to": {
+                    "regular": {
+                        "price": "176.9600",
+                        "formatted_price": "$176.96"
+                    },
+                    "final": {
+                        "price": "168.9600",
+                        "formatted_price": "$168.96"
+                    }
+                }
+            },
+            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
+-           "avg_ratings": 4.5,
++           "ratings": {
++               "average": "2.0",
++               "total": 2
++           }
+        }
+    ]
+}
+```
+
 <a name="the-admin-shop-menu-updates"></a>
 #### Admin and Shop Menu Updates
 
@@ -1072,68 +1797,79 @@ class ShopServiceProvider extends ServiceProvider
 
 The getItems() methods of the menu() facade accept different areas of the menu. For example, for the admin area, you need to provide the config name of the menu, whereas for the shop area, you should provide the name 'customer'.
 
-4. The response for the Shop route `shop.api.products.index` or `/api/products` API has been updated. If you are consuming this API, please make the necessary changes to accommodate the updated response format.
+
+<a name="the-admin-acl-updates"></a>
+#### Admin ACL Updates
+
+**Impact Probability: High**
+
+1. Previously, the composeView method included logic to share a dynamically generated acl structure with several Blade views in the admin interface. This logic has been removed. Here’s a detailed breakdown of what was removed:
+
 
 ```diff
+class AdminServiceProvider extends ServiceProvider
 {
-    "data": [
-        {
-            "id": 174,
-            "sku": "COMPLETELOOKSET2023",
-            "name": "All-in-One Smart Casual Outfit Set",
-            "description": "All-in-One Smart Casual Outfit Set",
-            "url_key": "all-in-one-smart-casual-outfit-set",
-            "base_image": {
-                "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-            },
-            "images": [
-                {
-                    "small_image_url": "http://localhost/laravel/bagisto/public/cache/small/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "medium_image_url": "http://localhost/laravel/bagisto/public/cache/medium/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "large_image_url": "http://localhost/laravel/bagisto/public/cache/large/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp",
-                    "original_image_url": "http://localhost/laravel/bagisto/public/cache/original/product/174/6zgmyY14TQ2WqCxEEdENs8tSfI6bAJbq0bjljQOq.webp"
-                }
-            ],
-            "is_new": true,
-            "is_featured": true,
-            "on_sale": true,
-            "is_saleable": true,
-            "is_wishlist": true,
-            "min_price": "$168.96",
-            "prices": {
-                "from": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                },
-                "to": {
-                    "regular": {
-                        "price": "176.9600",
-                        "formatted_price": "$176.96"
-                    },
-                    "final": {
-                        "price": "168.9600",
-                        "formatted_price": "$168.96"
-                    }
-                }
-            },
-            "price_html": "<div class=\"grid gap-1.5\">\n<p class=\"flex items-center gap-4 max-sm:text-lg\">\n<span\nclass=\"text-zinc-500 line-through max-sm:text-base\"\n    aria-label=\"$176.96\"\n>\n$176.96\n</span>\n\n$168.96\n</p>\n\n</div>",
--           "avg_ratings": 4.5,
-+           "ratings": {
-+               "average": "2.0",
-+               "total": 2
-+           }
-        }
-    ]
+    public function boot(Router $router)
+    {
+        ...
+
+-        $this->registerACL();
+
+        ...
+
+        $this->app->register(EventServiceProvider::class);
+    }
+
+-   protected function composeView()
+-   {
+-       view()->composer([
+-           'admin::settings.roles.create',
+-           'admin::settings.roles.edit',
+-       ], function ($view) {
+-           $view->with('acl', $this->createACL());
+-       });
+-   }
+
+-    protected function registerACL()
+-    {
+-        $this->app->singleton('acl', function () {
+-            return $this->createACL();
+-        });
+-    }
+-
+-    protected function createACL()
+-    {
+-        static $tree;
+-
+-        if ($tree) {
+-            return $tree;
+-        }
+-
+-        $tree = Tree::create();
+-
+-        foreach (config('acl') as $item) {
+-            $tree->add($item, 'acl');
+-        }
+-
+-        $tree->items = core()->sortItems($tree->items);
+-
+-        return $tree;
+-    }
 }
+```
+
+#### How to use it?
+
+##### Get all acl items.
+
+```php
+    $acl = acl()->getItems();
+```
+
+##### Get all roles.
+
+```php 
+    $roles = acl()->getRoles();
 ```
 
 <a name="renamed-star-rating-blade"></a>

@@ -75,6 +75,7 @@ return [
         'index' => [
             'add-customer'                => 'Klant Toevoegen',
             'add-product'                 => 'Product Toevoegen',
+            'all-channels'                => 'Alle Kanalen',
             'attribute-code'              => 'Attribuutcode',
             'average-sale'                => 'Gemiddelde Bestelverkoop',
             'color'                       => 'Kleur',
@@ -149,7 +150,7 @@ return [
                     'fraud'           => 'Fraude',
                     'grand-total'     => 'Totaalbedrag',
                     'id'              => '#:id',
-                    'images'          => 'Afbeeldingen',
+                    'items'           => 'Artikelen',
                     'location'        => 'Locatie',
                     'order-id'        => 'Bestelnummer',
                     'pay-by'          => 'Betaal Via - :method',
@@ -636,13 +637,14 @@ return [
             'invoice-pdf' => [
                 'bank-details'               => 'Bankgegevens',
                 'bill-to'                    => 'Factuuradres',
-                'contact'                    => 'Contact',
                 'contact-number'             => 'Contactnummer',
+                'contact'                    => 'Contact',
                 'date'                       => 'Factuurdatum',
                 'discount'                   => 'Korting',
+                'excl-tax'                   => 'Excl. BTW:',
                 'grand-total'                => 'Totaalbedrag',
-                'invoice'                    => 'Factuur',
                 'invoice-id'                 => 'Factuurnummer',
+                'invoice'                    => 'Factuur',
                 'order-date'                 => 'Besteldatum',
                 'order-id'                   => 'Bestelnummer',
                 'payment-method'             => 'Betaalmethode',
@@ -659,10 +661,9 @@ return [
                 'subtotal-excl-tax'          => 'Subtotaal (excl. BTW)',
                 'subtotal-incl-tax'          => 'Subtotaal (incl. BTW)',
                 'subtotal'                   => 'Subtotaal',
-                'tax'                        => 'Belasting',
                 'tax-amount'                 => 'Belastingbedrag',
+                'tax'                        => 'Belasting',
                 'vat-number'                 => 'BTW-nummer',
-                'excl-tax'                   => 'Excl. BTW:',
             ],
         ],
 
@@ -740,30 +741,31 @@ return [
                 ],
 
                 'datagrid' => [
-                    'active'                        => 'Actief',
-                    'attribute-family'              => 'Attribuutfamilie',
-                    'attribute-family-value'        => 'Attribuutfamilie - :attribute_family',
-                    'category'                      => 'Categorie',
-                    'copy-of'                       => 'Kopie van :value',
-                    'copy-of-slug'                  => 'kopie-van-:value',
-                    'delete'                        => 'Verwijderen',
-                    'disable'                       => 'Uitschakelen',
-                    'id'                            => 'ID',
-                    'id-value'                      => 'ID - :id',
-                    'image'                         => 'Afbeelding',
-                    'mass-delete-success'           => 'Geselecteerde producten succesvol verwijderd',
-                    'mass-update-success'           => 'Geselecteerde producten succesvol bijgewerkt',
-                    'name'                          => 'Naam',
-                    'out-of-stock'                  => 'Niet op voorraad',
-                    'price'                         => 'Prijs',
-                    'product-image'                 => 'Productafbeelding',
-                    'qty'                           => 'Aantal',
-                    'qty-value'                     => ':qty Beschikbaar',
-                    'sku'                           => 'SKU',
-                    'sku-value'                     => 'SKU - :sku',
-                    'status'                        => 'Status',
-                    'type'                          => 'Type',
-                    'update-status'                 => 'Status bijwerken',
+                    'active'                 => 'Actief',
+                    'attribute-family'       => 'Attribuutfamilie',
+                    'attribute-family-value' => 'Attribuutfamilie - :attribute_family',
+                    'category'               => 'Categorie',
+                    'channel'                => 'Kanaal',
+                    'copy-of'                => 'Kopie van :value',
+                    'copy-of-slug'           => 'kopie-van-:value',
+                    'delete'                 => 'Verwijderen',
+                    'disable'                => 'Uitschakelen',
+                    'id'                     => 'ID',
+                    'id-value'               => 'ID - :id',
+                    'image'                  => 'Afbeelding',
+                    'mass-delete-success'    => 'Geselecteerde producten succesvol verwijderd',
+                    'mass-update-success'    => 'Geselecteerde producten succesvol bijgewerkt',
+                    'name'                   => 'Naam',
+                    'out-of-stock'           => 'Niet op voorraad',
+                    'price'                  => 'Prijs',
+                    'product-image'          => 'Productafbeelding',
+                    'qty'                    => 'Aantal',
+                    'qty-value'              => ':qty Beschikbaar',
+                    'sku'                    => 'SKU',
+                    'sku-value'              => 'SKU - :sku',
+                    'status'                 => 'Status',
+                    'type'                   => 'Type',
+                    'update-status'          => 'Status bijwerken',
                 ],
             ],
 
@@ -1395,6 +1397,7 @@ return [
                     'active'         => 'Actief',
                     'address'        => ':address  Adres(sen)',
                     'address-count'  => 'Aantal adressen',
+                    'channel'        => 'Kanaal',
                     'delete'         => 'Verwijderen',
                     'delete-success' => 'Geselecteerde gegevens succesvol verwijderd',
                     'email'          => 'E-mail',
@@ -2224,7 +2227,7 @@ return [
                     'title'      => 'Zoektermen',
 
                     'datagrid' => [
-                        'Channel'             => 'Kanaal',
+                        'channel'             => 'Kanaal',
                         'actions'             => 'Acties',
                         'channel'             => 'Kanaal',
                         'delete'              => 'Verwijderen',
@@ -2239,7 +2242,6 @@ return [
                     ],
 
                     'create' => [
-                        'Channel'        => 'Kanaal',
                         'channel'        => 'Kanaal',
                         'delete-warning' => 'Weet u zeker dat u deze actie wilt uitvoeren?',
                         'locale'         => 'Lokale instelling',
@@ -2357,6 +2359,9 @@ return [
                         'request-path'        => 'Aanvraagpad',
                         'target-path'         => 'Doelpad',
                         'temporary-redirect'  => 'Tijdelijke doorstuur (302)',
+                        'product'             => 'Product',
+                        'cms-page'            => 'CMS-pagina',
+                        'category'            => 'Categorie',
                     ],
 
                     'create' => [
@@ -2395,6 +2400,7 @@ return [
             'title'         => 'Pagina\'s',
 
             'datagrid' => [
+                'channel'             => 'Kanaal',
                 'delete'              => 'Verwijderen',
                 'edit'                => 'Bewerken',
                 'id'                  => 'ID',
@@ -3085,6 +3091,7 @@ return [
                 'name'       => 'Naam',
                 'save-btn'   => 'Thema opslaan',
                 'sort-order' => 'Sorteervolgorde',
+                'themes'     => 'Thema\'s',
                 'title'      => 'Thema aanmaken',
 
                 'type' => [
@@ -3099,6 +3106,7 @@ return [
             ],
 
             'edit' => [
+                'active'                        => 'Actief',
                 'add-filter-btn'                => 'Filter toevoegen',
                 'add-footer-link-btn'           => 'Voettekstlink toevoegen',
                 'add-image-btn'                 => 'Afbeelding toevoegen',
@@ -3132,8 +3140,9 @@ return [
                 'limit'                         => 'Limiet',
                 'link'                          => 'Link',
                 'name'                          => 'Naam',
-                'no'                            => 'Nee',
                 'new'                           => 'Nieuw',
+                'no'                            => 'Nee',
+                'parent-id'                     => 'Ouder-ID',
                 'preview'                       => 'Voorbeeld',
                 'product-carousel'              => 'Product Carrousel',
                 'product-carousel-description'  => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',
@@ -3149,6 +3158,7 @@ return [
                 'static-content'                => 'Statische Inhoud',
                 'static-content-description'    => 'Verbeter de betrokkenheid met beknopte, informatieve statische inhoud voor uw publiek.',
                 'status'                        => 'Status',
+                'themes'                        => 'Thema\'s',
                 'title'                         => 'Thema bewerken',
                 'update-slider'                 => 'Schuifregelaar bijwerken',
                 'url'                           => 'URL',
@@ -3190,6 +3200,7 @@ return [
                 'abandoned-revenue'             => 'Verlaten omzet',
                 'added-to-cart'                 => 'Toegevoegd aan winkelwagen',
                 'added-to-cart-info'            => 'Alleen :progress bezoekers hebben producten aan de winkelwagen toegevoegd',
+                'all-channels'                  => 'Alle kanalen',
                 'average-order-value-over-time' => 'Gemiddelde bestelwaarde in de tijd',
                 'average-sales'                 => 'Gemiddelde bestelwaarde',
                 'count'                         => 'Aantal',
@@ -3228,6 +3239,7 @@ return [
 
         'customers' => [
             'index' => [
+                'all-channels'                => 'Alle kanalen',
                 'count'                       => 'Aantal',
                 'customers'                   => 'Klanten',
                 'customers-over-time'         => 'Klanten in de loop der tijd',
@@ -3256,6 +3268,7 @@ return [
 
         'products' => [
             'index' => [
+                'all-channels'                     => 'Alle kanalen',
                 'channel'                          => 'Kanaal',
                 'end-date'                         => 'Einddatum',
                 'id'                               => 'ID',
@@ -3289,6 +3302,7 @@ return [
         ],
 
         'view' => [
+            'all-channels'  => 'Alle kanalen',
             'day'           => 'Dag',
             'end-date'      => 'Einddatum',
             'export-csv'    => 'Exporteer CSV',
@@ -3982,7 +3996,24 @@ return [
                 ],
 
                 'filter' => [
-                    'title' => 'Filter',
+                    'apply-filters-btn' => 'Filters toepassen',
+                    'back-btn'          => 'Terug',
+                    'create-new-filter' => 'Nieuwe filter maken',
+                    'custom-filters'    => 'Aangepaste filters',
+                    'delete-error'      => 'Er is iets misgegaan bij het verwijderen van het filter, probeer het opnieuw.',
+                    'delete-success'    => 'Filter is succesvol verwijderd.',
+                    'empty-description' => 'Er zijn geen geselecteerde filters beschikbaar om op te slaan. Selecteer filters om op te slaan.',
+                    'empty-title'       => 'Filters toevoegen om op te slaan',
+                    'name'              => 'Naam',
+                    'quick-filters'     => 'Snelle filters',
+                    'save-btn'          => 'Opslaan',
+                    'save-filter'       => 'Filter opslaan',
+                    'saved-success'     => 'Filter is succesvol opgeslagen.',
+                    'selected-filters'  => 'Geselecteerde filters',
+                    'title'             => 'Filter',
+                    'update'            => 'Bijwerken',
+                    'update-filter'     => 'Filter bijwerken',
+                    'updated-success'   => 'Het filter is succesvol bijgewerkt.',
                 ],
 
                 'search' => [
@@ -3992,7 +4023,7 @@ return [
 
             'filters' => [
                 'select' => 'Selecteren.',
-                'title'  => 'Filters Toepassen',
+                'title'  => 'Filters',
 
                 'dropdown' => [
                     'searchable' => [

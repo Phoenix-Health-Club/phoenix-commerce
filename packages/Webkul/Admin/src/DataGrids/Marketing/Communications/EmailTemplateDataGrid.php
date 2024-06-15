@@ -14,7 +14,12 @@ class EmailTemplateDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $queryBuilder = DB::table('marketing_templates')->addSelect('id', 'name', 'status');
+        $queryBuilder = DB::table('marketing_templates')
+            ->select(
+                'id',
+                'name',
+                'status'
+            );
 
         $this->addFilter('status', 'status');
 
@@ -32,7 +37,6 @@ class EmailTemplateDataGrid extends DataGrid
             'index'      => 'id',
             'label'      => trans('admin::app.marketing.communications.templates.index.datagrid.id'),
             'type'       => 'integer',
-            'searchable' => false,
             'filterable' => true,
             'sortable'   => true,
         ]);
