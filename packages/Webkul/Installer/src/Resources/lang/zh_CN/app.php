@@ -619,11 +619,9 @@ return [
                 'admin'            => '管理员',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => '确认密码',
-                'download-sample'  => '下载示例',
                 'email'            => '电子邮件',
                 'email-address'    => 'admin@example.com',
                 'password'         => '密码',
-                'sample-products'  => '示例产品',
                 'title'            => '创建管理员',
             ],
 
@@ -712,14 +710,22 @@ return [
                 'uzbekistani-som'             => '乌兹别克斯坦苏姆 (UZS)',
                 'venezuelan-bolívar'          => '委内瑞拉玻利瓦尔 (VEF)',
                 'vietnamese-dong'             => '越南盾 (VND)',
-                'warning-message'             => '警告！默认系统语言和默认货币设置是永久性的，无法再次更改。',
+                'warning-message'             => '注意！您的默认系统语言和默认货币设置是永久性的，设置后无法更改。',
                 'zambian-kwacha'              => '赞比亚克瓦查 (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => '下载样品',
+                'no'              => '否',
+                'sample-products' => '样品产品',
+                'title'           => '样品产品',
+                'yes'             => '是',
+            ],
+
             'installation-processing' => [
-                'bagisto-info'     => '正在创建数据库表，这可能需要一些时间',
-                'bagisto'          => 'Bagisto 安装',
-                'title'            => '安装',
+                'bagisto-info' => '正在创建数据库表，这可能需要一些时间',
+                'bagisto'      => 'Bagisto 安装',
+                'title'        => '安装',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => '开始',
                 'select-locale' => '选择区域设置',
                 'title'         => '您的 Bagisto 安装',
-                'welcome-title' => '欢迎来到 Bagisto 2.0。',
+                'welcome-title' => '欢迎来到 Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => '德语',
             'hebrew'                   => '希伯来语',
             'hindi'                    => '印地语',
-            'installation-description' => 'Bagisto 安装通常涉及多个步骤。以下是 Bagisto 安装过程的一般概述：',
+            'installation-description' => 'Bagisto 的安装通常涉及几个步骤。以下是 Bagisto 安装过程的一般概述',
             'installation-info'        => '我们很高兴在这里见到你！',
             'installation-title'       => '欢迎安装 Bagisto',
             'italian'                  => '意大利语',

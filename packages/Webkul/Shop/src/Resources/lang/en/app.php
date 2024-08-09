@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Add attachments',
+            'index' => [
+                'add-attachments' => 'Add attachments',
+                'add-image'       => 'Add image',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Default locale',
-                        'offer'          => 'Get UPTO 40% OFF on your 1st order',
-                        'shop-now'       => 'SHOP NOW',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Currencies',
                     'locales'    => 'Locales',
+                    'login'      => 'Sign up or Login',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'Load More',
                 'name'             => 'Name',
                 'rating'           => 'Rating',
+                'ratings'          => 'Ratings',
                 'submit-review'    => 'Submit Review',
                 'success'          => 'Review submitted successfully.',
                 'title'            => 'Title',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'The item has been deactivated and subsequently removed from the cart.',
             'inventory-warning'         => 'The requested quantity is not available, please try again later.',
             'item-add-to-cart'          => 'Item Added Successfully',
-            'minimum-order-message'     => 'Minimum order amount is :amount',
+            'minimum-order-message'     => 'Minimum order amount is',
             'missing-fields'            => 'Some required fields missing for this product.',
             'missing-options'           => 'Options are missing for this product.',
             'paypal-payment-cancelled'  => 'Paypal payment has been cancelled.',
@@ -870,7 +873,10 @@ return [
         ],
 
         'index' => [
+            'categories-carousel' => 'Categories Carousel',
+            'image-carousel'      => 'Image Carousel',
             'offer'               => 'Get UPTO 40% OFF on your 1st order SHOP NOW',
+            'product-carousel'    => 'Product Carousel',
             'resend-verify-email' => 'Resend Verification Email',
             'verify-email'        => 'Verify your email account',
         ],
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Next Page',
             'pagination-showing' => 'Showing :firstItem to :lastItem of :total entries',
+            'prev-page'          => 'Previous Page',
         ],
     ],
 

@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Adicionar Anexos',
+            'index' => [
+                'add-attachments' => 'Adicionar Anexos',
+                'add-image'       => 'Adicionar imagem',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Idioma padrão',
-                        'offer'          => 'Obtenha ATÉ 40% DE DESCONTO no seu 1º pedido',
-                        'shop-now'       => 'COMPRAR AGORA',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Moedas',
                     'locales'    => 'Localizações',
+                    'login'      => 'Inscrever-se ou Entrar',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'Carregar Mais',
                 'name'             => 'Nome',
                 'rating'           => 'Avaliação',
+                'ratings'          => 'Avaliações',
                 'submit-review'    => 'Enviar Avaliação',
                 'success'          => 'Avaliação enviada com sucesso.',
                 'title'            => 'Título',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'O item foi desativado e, portanto, removido do carrinho.',
             'inventory-warning'         => 'A quantidade solicitada não está disponível, por favor, tente novamente mais tarde.',
             'item-add-to-cart'          => 'Item Adicionado com Sucesso',
-            'minimum-order-message'     => 'O valor mínimo do pedido é de :amount',
+            'minimum-order-message'     => 'O valor mínimo do pedido é de',
             'missing-fields'            => 'Alguns campos obrigatórios estão faltando para este produto.',
             'missing-options'           => 'Opções estão faltando para este produto.',
             'paypal-payment-cancelled'  => 'O pagamento Paypal foi cancelado.',
@@ -870,8 +873,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'GANHE ATÉ 40% DE DESCONTO no seu 1º pedido. COMPRE AGORA',
-            'resend-verify-email' => 'Reenviar E-mail de Verificação',
+            'categories-carousel' => 'Carrossel de Categorias',
+            'image-carousel'      => 'Carrossel de Imagens',
+            'offer'               => 'Ganhe ATÉ 40% DE DESCONTO no seu 1º pedido, COMPRE AGORA',
+            'product-carousel'    => 'Carrossel de Produtos',
+            'resend-verify-email' => 'Reenviar e-mail de verificação',
             'verify-email'        => 'Verifique sua conta de e-mail',
         ],
 
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Próxima página',
             'pagination-showing' => 'Mostrando :firstItem a :lastItem de :total entradas',
+            'prev-page'          => 'Página anterior',
         ],
     ],
 

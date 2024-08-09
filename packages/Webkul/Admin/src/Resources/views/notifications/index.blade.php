@@ -122,14 +122,14 @@
                         <div class="flex items-center gap-1">
                             <a @click="getResults(pagination.prev_page_url)">
                                 <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
-                                    <span class="icon-sort-left text-2xl"></span>
+                                    <span class="icon-sort-left rtl:icon-sort-right text-2xl"></span>
                                 </div>
                             </a>
 
                             <a @click="getResults(pagination.next_page_url)">
                                 <div
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white p-1.5 text-center text-gray-600 transition-all marker:shadow hover:border hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:bg-gray-950 ltr:ml-2 rtl:mr-2">
-                                    <span class="icon-sort-right text-2xl"></span>
+                                    <span class="icon-sort-right rtl:icon-sort-left text-2xl"></span>
                                 </div>
                             </a>
                         </div>
@@ -153,36 +153,36 @@
                         orderType: {
                             all : {
                                 icon: 'icon',
-                                message: 'All',
+                                message: "@lang('admin::app.notifications.order-status-messages.all'),
                                 status: 'all'
                             },
 
                             pending : {
-                                icon: 'icon-information text-amber-600 bg-amber-100',
+                                icon: 'icon-information bg-amber-100 text-amber-600 dark:!text-amber-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.pending')",
                                 status: 'pending'
                             },
 
                             processing : {
-                                icon: 'icon-sort-right text-green-600 bg-green-100',
+                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:!text-green-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.processing')",
                                 status: 'processing'
                             },
 
                             canceled : {
-                                icon: 'icon-cancel-1 text-red-600 bg-red-100',
+                                icon: 'icon-cancel-1 bg-red-100 text-red-600 dark:!text-red-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.canceled')",
                                 status: 'canceled'
                             },
 
                             completed : {
-                                icon: 'icon-done text-blue-600 bg-blue-100',
+                                icon: 'icon-done bg-blue-100 text-blue-600 dark:!text-blue-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.completed')",
                                 status: 'completed'
                             },
 
                             closed : {
-                                icon: 'icon-repeat text-red-600 bg-red-100',
+                                icon: 'icon-repeat bg-red-100 text-red-600 dark:!text-red-600',
                                 message: "@lang('admin::app.notifications.order-status-messages.closed')",
                                 status: 'closed'
                             },

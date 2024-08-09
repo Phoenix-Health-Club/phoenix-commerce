@@ -108,8 +108,7 @@ class Import
         protected ImportRepository $importRepository,
         protected ImportBatchRepository $importBatchRepository,
         protected Error $errorHelper
-    ) {
-    }
+    ) {}
 
     /**
      * Set import instance.
@@ -464,7 +463,7 @@ class Import
 
         $source->rewind();
 
-        $spreadsheet = new Spreadsheet();
+        $spreadsheet = new Spreadsheet;
 
         $sheet = $spreadsheet->getActiveSheet();
 

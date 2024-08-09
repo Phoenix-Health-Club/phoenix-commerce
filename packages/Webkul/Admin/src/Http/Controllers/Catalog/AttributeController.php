@@ -21,8 +21,7 @@ class AttributeController extends Controller
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the resource.
@@ -58,7 +57,7 @@ class AttributeController extends Controller
     public function store()
     {
         $this->validate(request(), [
-            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code()],
+            'code'          => ['required', 'not_in:type,attribute_family_id', 'unique:attributes,code', new Code],
             'admin_name'    => 'required',
             'type'          => 'required',
             'default_value' => 'integer',

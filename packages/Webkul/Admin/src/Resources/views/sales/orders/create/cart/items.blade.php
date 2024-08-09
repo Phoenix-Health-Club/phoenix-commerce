@@ -122,7 +122,7 @@
                                 >
                                     <!-- Details Toggler -->
                                     <p
-                                        class="flex cursor-pointer items-center gap-1 text-sm"
+                                        class="flex cursor-pointer items-center gap-1 text-sm text-gray-800 dark:text-white"
                                         @click="item.option_show = ! item.option_show"
                                     >
                                         @lang('admin::app.sales.orders.create.cart.items.see-details')
@@ -138,11 +138,11 @@
                                         v-show="item.option_show"
                                     >
                                         <div v-for="option in item.options">
-                                            <p class="text-sm text-gray-600">
+                                            <p class="text-sm text-gray-600 dark:text-white">
                                                 @{{ option.attribute_name + ':' }}
                                             </p>
 
-                                            <p class="text-sm font-medium text-gray-800">
+                                            <p class="text-sm font-medium text-gray-800 dark:text-white">
                                                 @{{ option.option_label }}
                                             </p>
                                         </div>
@@ -325,7 +325,7 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="qty"
-                                                class="!w-[80px] !px-2 !py-1.5"
+                                                class="!w-20 !px-2 !py-1.5"
                                                 value="1"
                                                 rules="required|numeric|min_value:1"
                                                 :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"

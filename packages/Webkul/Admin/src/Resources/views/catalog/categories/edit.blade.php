@@ -47,7 +47,10 @@
             <div class="flex items-center gap-x-1">
                 <!-- Locale Switcher -->
 
-                <x-admin::dropdown :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''">
+                <x-admin::dropdown 
+                    position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}" 
+                    :class="core()->getAllLocales()->count() <= 1 ? 'hidden' : ''"
+                >
                     <!-- Dropdown Toggler -->
                     <x-slot:toggle>
                         <button
@@ -142,8 +145,7 @@
                                     :items="json_encode($categories)"
                                     :value="json_encode($category->parent_id)"
                                     :fallback-locale="config('app.fallback_locale')"
-                                >
-                                </x-admin::tree.view>
+                                />
                             </div>
                         </div>
                     @endif

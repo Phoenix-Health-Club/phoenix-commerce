@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => '添加附件',
+            'index' => [
+                'add-attachments' => '添加附件',
+                'add-image'       => '添加图片',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => '默认区域设置',
-                        'offer'          => '首次订单最高可享受40%折扣',
-                        'shop-now'       => '立即购买',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => '货币',
                     'locales'    => '语言',
+                    'login'      => '注册或登录',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => '加载更多',
                 'name'             => '名称',
                 'rating'           => '评分',
+                'ratings'          => '评级',
                 'submit-review'    => '提交评论',
                 'success'          => '评论成功提交。',
                 'title'            => '标题',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => '该项目已停用，随后从购物车中移除。',
             'inventory-warning'         => '请求的数量不可用，请稍后再试。',
             'item-add-to-cart'          => '已成功添加项目',
-            'minimum-order-message'     => '最低订单金额为 :amount',
+            'minimum-order-message'     => '最低订单金额为',
             'missing-fields'            => '此产品缺少一些必填字段。',
             'missing-options'           => '此产品缺少选项。',
             'paypal-payment-cancelled'  => 'Paypal付款已被取消。',
@@ -870,9 +873,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => '首次下单立减40%，现在开始购物',
-            'resend-verify-email' => '重新发送验证电子邮件',
-            'verify-email'        => '验证您的电子邮件帐户',
+            'categories-carousel' => '分类轮播',
+            'image-carousel'      => '图片轮播',
+            'offer'               => '首单最高可享40%折扣，立即购买',
+            'product-carousel'    => '产品轮播',
+            'resend-verify-email' => '重新发送验证邮件',
+            'verify-email'        => '验证您的邮箱账户',
         ],
 
         'thanks-for-contact' => '感谢您与我们联系，提供您的意见和问题。我们会尽快回复您。',
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => '下一页',
             'pagination-showing' => '显示 :total 个条目中的 :firstItem 到 :lastItem',
+            'prev-page'          => '上一页',
         ],
     ],
 

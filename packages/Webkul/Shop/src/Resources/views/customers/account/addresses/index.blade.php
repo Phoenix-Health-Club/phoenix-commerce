@@ -5,9 +5,11 @@
     </x-slot>
     
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="addresses" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="addresses" />
+        @endSection
+    @endif
 
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
@@ -31,7 +33,7 @@
 
             <a
                 href="{{ route('shop.customers.account.addresses.create') }}"
-                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2.5 max-sm:py-1.5 max-sm:text-sm"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
             >
                 @lang('shop::app.customers.account.addresses.index.add-address') 
             </a>

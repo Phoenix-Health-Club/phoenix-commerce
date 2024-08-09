@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Ek Dosyalar Ekle',
+            'index' => [
+                'add-attachments' => 'Ek Dosyalar Ekle',
+                'add-image'       => 'Resim ekle',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,14 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Varsayılan dil',
-                        'offer'          => 'İlk siparişinizde %40\'a varan İNDİRİM alın',
-                        'shop-now'       => 'ŞİMDİ ALIŞVERİŞ YAP',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Para Birimleri',
                     'locales'    => 'Yerel Ayarlar',
+                    'login'      => 'Kaydol veya Giriş yap
+',
                 ],
             ],
 
@@ -601,6 +604,7 @@ return [
                 'load-more'         => 'Daha Fazla Yükle',
                 'name'              => 'Adı',
                 'rating'            => 'Derecelendirme',
+                'ratings'           => 'Derecelendirmeler',
                 'submit-review'     => 'Yorumu Gönder',
                 'success'           => 'Yorum başarıyla gönderildi.',
                 'title'             => 'Başlık',
@@ -695,7 +699,7 @@ return [
             'inactive-add'              => 'Devre dışı ürün sepete eklenemez.',
             'inventory-warning'         => 'İstenen miktar şu anda stokta bulunmuyor, lütfen daha sonra tekrar deneyin',
             'item-add-to-cart'          => 'Ürün Başarıyla Eklendi',
-            'minimum-order-message'     => 'Minimum sipariş miktarı: :amount',
+            'minimum-order-message'     => 'Minimum sipariş miktarı',
             'missing-fields'            => 'Bu ürün için bazı gerekli alanlar eksik',
             'missing-options'           => 'Bu ürün için seçenekler eksik',
             'paypal-payment-cancelled'  => 'Paypal ödemesi iptal edildi.',
@@ -870,8 +874,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => '1. siparişinizde %40\'a varan İNDİRİM ALIŞVERİŞ YAPIN',
-            'resend-verify-email' => 'Doğrulama E-postası Tekrar Gönder',
+            'categories-carousel' => 'Kategoriler Karuseli',
+            'image-carousel'      => 'Görüntü Karuseli',
+            'offer'               => 'İlk siparişinizde %40’a kadar indirim kazanın, ŞİMDİ ALIŞVERİŞ YAPIN',
+            'product-carousel'    => 'Ürün Karuseli',
+            'resend-verify-email' => 'Doğrulama e-postasını yeniden gönder',
             'verify-email'        => 'E-posta hesabınızı doğrulayın',
         ],
 
@@ -880,7 +887,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Sonraki Sayfa',
             'pagination-showing' => 'Toplam :total girdinin :firstItem ile :lastItem arası gösteriliyor',
+            'prev-page'          => 'Önceki Sayfa',
         ],
     ],
 

@@ -12,15 +12,17 @@
     </x-slot>
 
     <!-- Breadcrumb -->
-    <div class="mt-5 flex justify-center max-lg:hidden">
-        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        <div class="mt-5 flex justify-center max-lg:hidden">
+            {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.before') !!}
 
-		<div class="flex items-center gap-x-2.5">
-            <x-shop::breadcrumbs name="compare" />
-		</div>
+            <div class="flex items-center gap-x-2.5">
+                <x-shop::breadcrumbs name="compare" />
+            </div>
 
-        {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
-	</div>
+            {!! view_render_event('bagisto.shop.customers.account.compare.breadcrumbs.after') !!}
+        </div>
+    @endif
 
     <!-- Compare Component -->
     <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-7 max-md:px-0">
@@ -76,7 +78,7 @@
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
 
-                                <div class="min-w-[304px] max-w-full max-md:grid max-md:min-w-[110px] max-md:items-center max-md:bg-gray-200 max-md:sm:h-full">
+                                <div class="min-w-[304px] max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-[110px]">
                                     <p class="text-sm font-medium max-md:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
@@ -86,7 +88,7 @@
 
                                 <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="relative w-[311px] max-w-[311px] px-5 max-md:w-[240px] max-md:px-2.5 max-sm:w-[190px]"
+                                        class="relative w-[311px] max-w-[311px] px-5 max-md:w-60 max-md:px-2.5 max-sm:w-[190px]"
                                         v-for="product in items"
                                     >
                                         <span
@@ -106,7 +108,7 @@
                                 class="flex max-w-full items-center border-b border-zinc-200"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full max-md:grid max-md:h-full max-md:min-w-[110px] max-md:items-center max-md:bg-gray-200">
+                                <div class="min-w-[304px] max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-[110px]">
                                     <p class="text-sm font-medium max-md:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
@@ -114,7 +116,7 @@
 
                                 <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
                                     <div
-                                        class="w-[311px] max-w-[311px] p-5 max-md:w-[240px] max-md:px-2.5 max-sm:w-[190px]"
+                                        class="w-[311px] max-w-[311px] p-5 max-md:w-60 max-md:px-2.5 max-sm:w-[190px]"
                                         v-for="(product, index) in items"
                                     >
                                         <p

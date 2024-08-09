@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Beheerder',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Bevestig wachtwoord',
-                'download-sample'  => 'download-voorbeeld',
                 'email'            => 'E-mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Wachtwoord',
-                'sample-products'  => 'Voorbeeldproducten',
                 'title'            => 'Beheerder aanmaken',
             ],
 
@@ -712,8 +710,16 @@ return [
                 'uzbekistani-som'             => 'Oezbeekse Som (UZS)',
                 'venezuelan-bolívar'          => 'Venezolaanse Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamese Dong (VND)',
-                'warning-message'             => 'Pas op! De instellingen voor uw standaard systeemtalen en de standaardvaluta zijn permanent en kunnen nooit meer worden gewijzigd.',
+                'warning-message'             => 'Pas op! De instellingen voor uw standaardtaal en standaardvaluta zijn permanent en kunnen niet worden gewijzigd zodra ze zijn ingesteld.',
                 'zambian-kwacha'              => 'Zambiaanse Kwacha (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'download voorbeeld',
+                'no'              => 'Nee',
+                'sample-products' => 'Voorbeeldproducten',
+                'title'           => 'Voorbeeldproducten',
+                'yes'             => 'Ja',
             ],
 
             'installation-processing' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Start',
                 'select-locale' => 'Selecteer Locatie',
                 'title'         => 'Uw Bagisto-installatie',
-                'welcome-title' => 'Welkom bij Bagisto 2.0.',
+                'welcome-title' => 'Welkom bij Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'Duits',
             'hebrew'                   => 'Hebreeuws',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'De installatie van Bagisto omvat meestal verschillende stappen. Hier is een algemene uiteenzetting van het insta llatieproces voor Bagisto:',
+            'installation-description' => 'De installatie van Bagisto omvat doorgaans verschillende stappen. Hier is een algemeen overzicht van het installatieproces voor Bagisto',
             'installation-info'        => 'We zijn blij je hier te zien!',
             'installation-title'       => 'Welkom bij de Bagisto-installatie',
             'italian'                  => 'Italiaans',

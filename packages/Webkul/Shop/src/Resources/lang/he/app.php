@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'הוסף קבצים מצורפים',
+            'index' => [
+                'add-attachments' => 'הוסף קבצים מצורפים',
+                'add-image'       => 'הוסף תמונה',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'שפת ברירת המחדל',
-                        'offer'          => 'קבל עד 40% הנחה על הזמנתך הראשונה',
-                        'shop-now'       => 'קנה עכשיו',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'מטבעות',
                     'locales'    => 'אזורים',
+                    'login'      => ' הרשם או התחבר',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'טען עוד',
                 'name'             => 'שם',
                 'rating'           => 'דירוג',
+                'ratings'          => 'דירוגים',
                 'submit-review'    => 'שלח ביקורת',
                 'success'          => 'ביקורת נשלחה בהצלחה.',
                 'title'            => 'כותרת',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'הפריט הושבת ונמחק מהעגלה.',
             'inventory-warning'         => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
             'item-add-to-cart'          => 'הפריט התווסף בהצלחה',
-            'minimum-order-message'     => 'סכום הזמנה מינימלי הוא :amount',
+            'minimum-order-message'     => 'סכום הזמנה מינימלי הוא ',
             'missing-fields'            => 'חלק מהשדות החובה חסרים עבור מוצר זה.',
             'missing-options'           => 'אפשרויות חסרות עבור מוצר זה.',
             'paypal-payment-cancelled'  => 'התשלום בפייפאל בוטל.',
@@ -870,8 +873,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'עד 40% הנחה על הזמנתך הראשונה! קנה עכשיו',
-            'resend-verify-email' => 'שלח מחדש אימייל לאימות',
+            'categories-carousel' => 'קרוסלת קטגוריות',
+            'image-carousel'      => 'קרוסלת תמונות',
+            'offer'               => 'קבל עד 40% הנחה על ההזמנה הראשונה שלך, קנה עכשיו',
+            'product-carousel'    => 'קרוסלת מוצרים',
+            'resend-verify-email' => 'שלח מחדש את מייל האימות',
             'verify-email'        => 'אמת את חשבון האימייל שלך',
         ],
 
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'עמוד הבא',
             'pagination-showing' => 'מציג :firstItem עד :lastItem מתוך :total רשומות',
+            'prev-page'          => 'עמוד קודם',
         ],
     ],
 

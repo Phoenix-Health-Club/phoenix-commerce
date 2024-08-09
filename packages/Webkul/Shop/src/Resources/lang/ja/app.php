@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => '添付ファイルを追加',
+            'index' => [
+                'add-attachments' => '添付ファイルを追加',
+                'add-image'       => '画像を追加',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'デフォルトのロケール',
-                        'offer'          => '初回注文で最大40％オフ',
-                        'shop-now'       => '今すぐ購入',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => '通貨',
                     'locales'    => 'ロケール',
+                    'login'      => 'サインアップまたはログイン',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'さらに読み込む',
                 'name'             => '名前',
                 'rating'           => '評価',
+                'ratings'          => '評価',
                 'submit-review'    => 'レビューを送信',
                 'success'          => 'レビューが正常に送信されました。',
                 'title'            => 'タイトル',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'アイテムは無効になり、カートから削除されました。',
             'inventory-warning'         => '要求された数量は利用できません。後でやり直してください。',
             'item-add-to-cart'          => 'アイテムが正常に追加されました',
-            'minimum-order-message'     => '最小注文金額は :amount です',
+            'minimum-order-message'     => '最小注文金額は です',
             'missing-fields'            => 'この製品にはいくつかの必須フィールドがありません。',
             'missing-options'           => 'この製品にはオプションがありません。',
             'paypal-payment-cancelled'  => 'PayPalの支払いがキャンセルされました。',
@@ -870,9 +873,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => '初めての注文で最大40%OFF 今すぐショッピング',
+            'categories-carousel' => 'カテゴリカルーセル',
+            'image-carousel'      => '画像カルーセル',
+            'offer'               => '初回注文で最大40%オフ、今すぐ購入',
+            'product-carousel'    => '商品カルーセル',
             'resend-verify-email' => '確認メールを再送信',
-            'verify-email'        => 'メールアカウントを確認',
+            'verify-email'        => 'メールアカウントを確認してください',
         ],
 
         'thanks-for-contact' => 'ご意見やご質問をお寄せいただきありがとうございます。返信いたしますので、しばらくお待ちください。',
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => '次のページ',
             'pagination-showing' => '合計 :total エントリのうち :firstItem から :lastItem を表示',
+            'prev-page'          => '前のページ',
         ],
     ],
 

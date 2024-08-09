@@ -18,8 +18,7 @@ class ElasticSearchRepository
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
         protected SearchSynonymRepository $searchSynonymRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Return elastic search index name
@@ -51,7 +50,7 @@ class ElasticSearchRepository
                 'size'          => $options['limit'],
                 'stored_fields' => [],
                 'query'         => [
-                    'bool' => $filters ?: new \stdClass(),
+                    'bool' => $filters ?: new \stdClass,
                 ],
                 'sort'          => $this->getSortOptions($options),
             ],

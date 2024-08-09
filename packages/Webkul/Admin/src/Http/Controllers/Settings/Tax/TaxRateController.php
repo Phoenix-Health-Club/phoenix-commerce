@@ -15,9 +15,7 @@ class TaxRateController extends Controller
      *
      * @return void
      */
-    public function __construct(protected TaxRateRepository $taxRateRepository)
-    {
-    }
+    public function __construct(protected TaxRateRepository $taxRateRepository) {}
 
     /**
      * Display a listing resource for the available tax rates.
@@ -38,7 +36,7 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function show()
+    public function create()
     {
         if (request()->ajax()) {
             return datagrid(TaxRateDataGrid::class)->process();
@@ -52,7 +50,7 @@ class TaxRateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function store()
     {
         $this->validate(request(), [
             'identifier' => 'required|string|unique:tax_rates,identifier',

@@ -3,9 +3,9 @@
     template as much as possible.
 -->
 @php
-    $showCompare = (bool) core()->getConfigData('general.content.shop.compare_option');
+    $showCompare = (bool) core()->getConfigData('catalog.products.settings.compare_option');
 
-    $showWishlist = (bool) core()->getConfigData('general.content.shop.wishlist_option');
+    $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
 <div class="flex flex-wrap gap-4 px-4 pb-4 pt-6 shadow-sm lg:hidden">
@@ -50,7 +50,7 @@
                                 href="{{ route('shop.customer.session.create') }}"
                                 class="flex text-base font-medium"
                             >
-                                @lang('Sign up or Login')
+                                @lang('shop::app.components.layouts.header.mobile.login')
 
                                 <i class="icon-double-arrow text-2xl ltr:ml-2.5 rtl:mr-2.5"></i>
                             </a>
@@ -117,7 +117,9 @@
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.before') !!}
 
-                @include('shop::checkout.cart.mini-cart')
+                @if(core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
+                    @include('shop::checkout.cart.mini-cart')
+                @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.mini_cart.after') !!}
 
@@ -143,6 +145,8 @@
 
                                 <p class="py-2px mt-3 w-full border border-zinc-200"></p>
 
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.before') !!}
+
                                 <div class="mt-6 flex gap-4">
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
 
@@ -162,6 +166,8 @@
 
                                     {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.after') !!}
                                 </div>
+
+                                {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.customers_action.after') !!}
                             </x-slot>
                         @endguest
 
@@ -268,7 +274,7 @@
         </label>
 
         <div class="relative w-full">
-            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2 ltr:left-3 rtl:right-3"></div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
             <input
                 type="text"
@@ -279,7 +285,7 @@
                 required
             >
 
-            @if (core()->getConfigData('general.content.shop.image_search'))
+            @if (core()->getConfigData('catalog.products.settings.image_search'))
                 @include('shop::search.images.index')
             @endif
         </div>
@@ -405,7 +411,12 @@
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!px-0">
-                            <v-currency-switcher></v-currency-switcher>
+                            <div
+                                class="overflow-auto"
+                                :style="{ height: getCurrentScreenHeight }"
+                            >
+                                <v-currency-switcher></v-currency-switcher>
+                            </div>
                         </x-slot>
                     </x-shop::drawer>
 
@@ -449,7 +460,12 @@
 
                         <!-- Drawer Content -->
                         <x-slot:content class="!px-0">
-                            <v-locale-switcher></v-locale-switcher>
+                            <div
+                                class="overflow-auto"
+                                :style="{ height: getCurrentScreenHeight }"
+                            >
+                                <v-locale-switcher></v-locale-switcher>
+                            </div>
                         </x-slot>
                     </x-shop::drawer>
                 </div>
@@ -469,6 +485,12 @@
 
             mounted() {
                 this.get();
+            },
+
+            computed: {
+                getCurrentScreenHeight() {
+                    return window.innerHeight - (window.innerWidth < 920 ? 61 : 0) + 'px';
+                },
             },
 
             methods: {

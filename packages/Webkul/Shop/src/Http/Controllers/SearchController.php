@@ -15,8 +15,7 @@ class SearchController extends Controller
     public function __construct(
         protected SearchTermRepository $searchTermRepository,
         protected SearchRepository $searchRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Index to handle the view loaded with the search results
@@ -25,6 +24,10 @@ class SearchController extends Controller
      */
     public function index()
     {
+        $this->validate(request(), [
+            'query' => ['required', 'string', 'regex:/^[^\\\\]+$/u'],
+        ]);
+
         $searchTerm = $this->searchTermRepository->findOneWhere([
             'term'       => request()->query('query'),
             'channel_id' => core()->getCurrentChannel()->id,

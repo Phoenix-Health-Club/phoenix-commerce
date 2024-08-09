@@ -619,11 +619,9 @@ return [
                 'admin'            => 'مدیر',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'تأیید رمز عبور',
-                'download-sample'  => 'دانلود نمونه',
                 'email'            => 'ایمیل',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'رمز عبور',
-                'sample-products'  => 'محصولات نمونه',
                 'title'            => 'ایجاد مدیر',
             ],
 
@@ -712,14 +710,22 @@ return [
                 'uzbekistani-som'             => 'سوم ازبکستان (UZS)',
                 'venezuelan-bolívar'          => 'بولیوار ونزوئلا (VEF)',
                 'vietnamese-dong'             => 'دانگ ویتنامی (VND)',
-                'warning-message'             => 'هشدار! تنظیمات زبان‌های پیشفرض سیستم و ارز پیشفرض برای همیشه ثابت و قابل تغییر نیستند.',
+                'warning-message'             => 'مراقب باشید! تنظیمات زبان سیستم پیش‌فرض و ارز پیش‌فرض شما دائمی هستند و پس از تنظیم نمی‌توان آنها را تغییر داد.',
                 'zambian-kwacha'              => 'کواچای زامبیا (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'دانلود نمونه',
+                'no'              => 'خیر',
+                'sample-products' => 'محصولات نمونه',
+                'title'           => 'محصولات نمونه',
+                'yes'             => 'بله',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'نصب Bagisto',
-                'bagisto-info'     => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
-                'title'            => 'نصب',
+                'bagisto'      => 'نصب Bagisto',
+                'bagisto-info' => 'ایجاد جداول پایگاه داده، این ممکن است چند لحظه طول بکشد',
+                'title'        => 'نصب',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'شروع',
                 'select-locale' => 'انتخاب محلی',
                 'title'         => 'نصب Bagisto شما',
-                'welcome-title' => 'خوش آمدید به Bagisto 2.0.',
+                'welcome-title' => 'خوش آمدید به Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'آلمانی',
             'hebrew'                   => 'عبری',
             'hindi'                    => 'هندی',
-            'installation-description' => 'نصب Bagisto به طور معمول شامل چندین مرحله است. در اینجا یک خلاصه عمومی از فرا یند نصب Bagisto آورده شده است:',
+            'installation-description' => 'نصب Bagisto معمولاً شامل چندین مرحله است. در اینجا یک نمای کلی از فرآیند نصب برای Bagisto آورده شده است',
             'installation-info'        => 'خوشحالیم که شما را اینجا می‌بینیم!',
             'installation-title'       => 'به نصب Bagisto خوش آمدید',
             'italian'                  => 'ایتالیایی',

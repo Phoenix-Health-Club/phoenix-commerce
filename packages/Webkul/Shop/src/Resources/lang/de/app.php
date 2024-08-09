@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Anhänge hinzufügen',
+            'index' => [
+                'add-attachments' => 'Anhänge hinzufügen',
+                'add-image'       => 'Bild hinzufügen',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standardsprache',
-                        'offer'          => 'Erhalten Sie bis zu 40% Rabatt auf Ihre erste Bestellung',
-                        'shop-now'       => 'JETZT KAUFEN',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Währungen',
                     'locales'    => 'Sprachen',
+                    'login'      => 'Registrieren oder Einloggen',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'Mehr laden',
                 'name'             => 'Name',
                 'rating'           => 'Bewertung',
+                'ratings'          => 'Bewertungen',
                 'submit-review'    => 'Bewertung absenden',
                 'success'          => 'Bewertung erfolgreich übermittelt.',
                 'title'            => 'Titel',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'Der Artikel wurde deaktiviert und wurde daher aus dem Warenkorb entfernt.',
             'inventory-warning'         => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
             'item-add-to-cart'          => 'Artikel erfolgreich hinzugefügt',
-            'minimum-order-message'     => 'Mindestbestellmenge beträgt :amount',
+            'minimum-order-message'     => 'Mindestbestellmenge beträgt',
             'missing-fields'            => 'Einige erforderliche Felder fehlen für dieses Produkt.',
             'missing-options'           => 'Optionen fehlen für dieses Produkt.',
             'paypal-payment-cancelled'  => 'Die Paypal-Zahlung wurde abgebrochen.',
@@ -870,9 +873,12 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre 1. Bestellung. JETZT EINKAUFEN',
+            'categories-carousel' => 'Kategorien-Karussell',
+            'image-carousel'      => 'Bilder-Karussell',
+            'offer'               => 'Erhalten Sie BIS ZU 40% RABATT auf Ihre erste Bestellung, JETZT einkaufen',
+            'product-carousel'    => 'Produkt-Karussell',
             'resend-verify-email' => 'Bestätigungs-E-Mail erneut senden',
-            'verify-email'        => 'Bestätigen Sie Ihre E-Mail-Adresse',
+            'verify-email'        => 'Bestätigen Sie Ihr E-Mail-Konto',
         ],
 
         'thanks-for-contact' => 'Vielen Dank für Ihre Kontaktaufnahme. Wir werden Ihnen sehr bald antworten.',
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Nächste Seite',
             'pagination-showing' => 'Zeige :firstItem bis :lastItem von insgesamt :total Einträgen',
+            'prev-page'          => 'Vorherige Seite',
         ],
     ],
 

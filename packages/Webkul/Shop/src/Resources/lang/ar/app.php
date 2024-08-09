@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'إضافة المرفقات',
+            'index' => [
+                'add-attachments' => 'إضافة المرفقات',
+                'add-image'       => 'أضف صورة',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'اللغة الافتراضية',
-                        'offer'          => 'احصل على خصم يصل إلى 40٪ على طلبك الأول',
-                        'shop-now'       => 'تسوق الآن',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'العملات',
                     'locales'    => 'اللغات',
+                    'login'      => 'التسجيل أو تسجيل الدخول',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'تحميل المزيد',
                 'name'             => 'الاسم',
                 'rating'           => 'التقييم',
+                'ratings'          => 'التقييمات',
                 'submit-review'    => 'إرسال المراجعة',
                 'success'          => 'تم إرسال المراجعة بنجاح.',
                 'title'            => 'العنوان',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'تم إلغاء تنشيط المنتج وبالتالي إزالته من السلة.',
             'inventory-warning'         => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
             'item-add-to-cart'          => 'تمت إضافة العنصر بنجاح',
-            'minimum-order-message'     => 'الحد الأدنى للطلب هو :amount',
+            'minimum-order-message'     => 'الحد الأدنى للطلب هو',
             'missing-fields'            => 'بعض الحقول المطلوبة مفقودة لهذا المنتج.',
             'missing-options'           => 'الخيارات مفقودة لهذا المنتج.',
             'paypal-payment-cancelled'  => 'تم إلغاء الدفع باي بال.',
@@ -870,8 +873,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'احصل على خصم يصل إلى 40٪ على طلبك الأول اشتر الآن',
-            'resend-verify-email' => 'إعادة إرسال رسالة التحقق من البريد الإلكتروني',
+            'categories-carousel' => 'سلاسل الفئات',
+            'image-carousel'      => 'سلاسل الصور',
+            'offer'               => 'احصل على خصم يصل إلى 40% على طلبك الأول، تسوق الآن',
+            'product-carousel'    => 'سلاسل المنتجات',
+            'resend-verify-email' => 'إعادة إرسال بريد التحقق',
             'verify-email'        => 'تحقق من حساب بريدك الإلكتروني',
         ],
 
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'الصفحة التالية',
             'pagination-showing' => 'عرض :firstItem إلى :lastItem من :total مقالات',
+            'prev-page'          => 'الصفحة السابقة',
         ],
     ],
 

@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Administrador',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Confirmar Contraseña',
-                'download-sample'  => 'Descargar Muestra',
                 'email'            => 'Correo Electrónico',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Contraseña',
-                'sample-products'  => 'Productos de Muestra',
                 'title'            => 'Crear Administrador',
             ],
 
@@ -712,14 +710,22 @@ return [
                 'uzbekistani-som'             => 'Som Uzbeko (UZS)',
                 'venezuelan-bolívar'          => 'Bolívar Venezolano (VEF)',
                 'vietnamese-dong'             => 'Dong Vietnamita (VND)',
-                'warning-message'             => '¡Cuidado! La configuración de los idiomas y la moneda predeterminada del sistema son permanentes y no se pueden cambiar.',
+                'warning-message'             => '¡Cuidado! Los ajustes de su idioma del sistema predeterminado y la moneda predeterminada son permanentes y no se pueden cambiar una vez establecidos.',
                 'zambian-kwacha'              => 'Kwacha de Zambia (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'descargar muestra',
+                'no'              => 'No',
+                'sample-products' => 'Productos de muestra',
+                'title'           => 'Productos de muestra',
+                'yes'             => 'Sí',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Instalación de Bagisto',
-                'bagisto-info'     => 'Creando las tablas de la base de datos, esto puede tomar algunos momentos',
-                'title'            => 'Instalación',
+                'bagisto'      => 'Instalación de Bagisto',
+                'bagisto-info' => 'Creando las tablas de la base de datos, esto puede tomar algunos momentos',
+                'title'        => 'Instalación',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Comienzo',
                 'select-locale' => 'Seleccionar Local',
                 'title'         => 'Tu instalación de Bagisto',
-                'welcome-title' => 'Bienvenido a Bagisto 2.0.',
+                'welcome-title' => 'Bienvenido a Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'Alemán',
             'hebrew'                   => 'Hebreo',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'La instalación de Bagisto generalmente implica varios pasos. Aquí hay un resumen  general del proceso de instalación para Bagisto:',
+            'installation-description' => 'La instalación de Bagisto generalmente implica varios pasos. Aquí hay un esquema general del proceso de instalación para Bagisto',
             'installation-info'        => '¡Nos alegra verte aquí!',
             'installation-title'       => 'Bienvenido a la Instalación',
             'italian'                  => 'Italiano',

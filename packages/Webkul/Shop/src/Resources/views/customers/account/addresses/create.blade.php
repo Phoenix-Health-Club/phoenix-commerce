@@ -5,9 +5,11 @@
     </x-slot>
 
     <!-- Breadcrumbs -->
-    @section('breadcrumbs')
-        <x-shop::breadcrumbs name="addresses.create" />
-    @endSection
+    @if ((core()->getConfigData('general.general.breadcrumbs.shop')))
+        @section('breadcrumbs')
+            <x-shop::breadcrumbs name="addresses.create" />
+        @endSection
+    @endif
 
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
@@ -338,7 +340,7 @@
 
                     <button
                         type="submit"
-                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-1.5"
+                        class="primary-button m-0 block rounded-2xl px-11 py-3 text-center text-base max-md:w-full max-md:max-w-full max-md:rounded-lg max-md:py-2 max-sm:py-1.5"
                     >
                         @lang('shop::app.customers.account.addresses.create.save')
                     </button>

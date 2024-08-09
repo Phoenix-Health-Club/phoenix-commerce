@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Aggiungi allegati',
+            'index' => [
+                'add-attachments' => 'Aggiungi allegati',
+                'add-image'       => 'Aggiungi immagine',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Lingua predefinita',
-                        'offer'          => 'Ottieni FINO AL 40% DI SCONTO sul tuo primo ordine',
-                        'shop-now'       => 'ACQUISTA ORA',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Valute',
                     'locales'    => 'Lingue',
+                    'login'      => 'Registrati o Accedi',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'Carica altro',
                 'name'             => 'Nome',
                 'rating'           => 'Valutazione',
+                'ratings'          => 'Giudizi',
                 'submit-review'    => 'Invia recensione',
                 'success'          => 'Recensione inviata con successo.',
                 'title'            => 'Titolo',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'L\'articolo è stato disattivato e rimosso dal carrello.',
             'inventory-warning'         => 'La quantità richiesta non è disponibile, riprova più tardi.',
             'item-add-to-cart'          => 'Articolo aggiunto con successo',
-            'minimum-order-message'     => 'L\'importo minimo dell\'ordine è :amount',
+            'minimum-order-message'     => 'L\'importo minimo dell\'ordine è',
             'missing-fields'            => 'Mancano alcuni campi obbligatori per questo prodotto.',
             'missing-options'           => 'Mancano opzioni per questo prodotto.',
             'paypal-payment-cancelled'  => 'Il pagamento Paypal è stato annullato.',
@@ -870,8 +873,11 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Ottieni FINO AL 40% DI SCONTO sul tuo primo ordine ACQUISTA ORA',
-            'resend-verify-email' => 'Rispedisci l\'email di verifica',
+            'categories-carousel' => 'Carosello delle categorie',
+            'image-carousel'      => 'Carosello delle immagini',
+            'offer'               => 'Ottieni fino al 40% di sconto sul tuo primo ordine, ACQUISTA ORA',
+            'product-carousel'    => 'Carosello dei prodotti',
+            'resend-verify-email' => 'Reinvia l\'email di verifica',
             'verify-email'        => 'Verifica il tuo account email',
         ],
 
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Pagina successiva',
             'pagination-showing' => 'Visualizzazione da :firstItem a :lastItem di :total voci',
+            'prev-page'          => 'Pagina precedente',
         ],
     ],
 

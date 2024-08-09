@@ -1,11 +1,11 @@
 {
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-7bd6b326.css",
+    "file": "assets/app-7339cde0.css",
     "isEntry": true,
     "src": "src/Resources/assets/css/app.css"
   },
   "src/Resources/assets/fonts/bagisto-admin.woff": {
-    "file": "assets/bagisto-admin-37c2feba.woff",
+    "file": "assets/bagisto-admin-c1c971d5.woff",
     "src": "src/Resources/assets/fonts/bagisto-admin.woff"
   },
   "src/Resources/assets/images/average-orders.svg": {
@@ -96,9 +96,17 @@
     "file": "assets/captcha-061d77ab.svg",
     "src": "src/Resources/assets/images/settings/captcha.svg"
   },
+  "src/Resources/assets/images/settings/checkout.svg": {
+    "file": "assets/checkout-e5efdb8e.svg",
+    "src": "src/Resources/assets/images/settings/checkout.svg"
+  },
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5653e8d5.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
+  },
+  "src/Resources/assets/images/settings/inventory.svg": {
+    "file": "assets/inventory-d69907d8.svg",
+    "src": "src/Resources/assets/images/settings/inventory.svg"
   },
   "src/Resources/assets/images/settings/invoice.svg": {
     "file": "assets/invoice-bbc6d6a8.svg",

@@ -19,9 +19,7 @@ class Installer
      *
      * @return void
      */
-    public function __construct(protected AdminRepository $adminRepository)
-    {
-    }
+    public function __construct(protected AdminRepository $adminRepository) {}
 
     /**
      * After Bagisto is successfully installed
@@ -32,7 +30,7 @@ class Installer
     {
         $admin = $this->adminRepository->first();
 
-        $httpClient = new Client();
+        $httpClient = new Client;
 
         try {
             $httpClient->request('POST', self::API_ENDPOINT, [

@@ -81,14 +81,14 @@ class Downloadable extends AbstractType
      * Update.
      *
      * @param  int  $id
-     * @param  string  $attribute
+     * @param  array  $attributes
      * @return \Webkul\Product\Contracts\Product
      */
-    public function update(array $data, $id, $attribute = 'id')
+    public function update(array $data, $id, $attributes = [])
     {
-        $product = parent::update($data, $id, $attribute);
+        $product = parent::update($data, $id, $attributes);
 
-        if (request()->route()?->getName() == 'admin.catalog.products.mass_update') {
+        if (! empty($attributes)) {
             return $product;
         }
 
@@ -224,7 +224,7 @@ class Downloadable extends AbstractType
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
-        $validation = new CartItemValidationResult();
+        $validation = new CartItemValidationResult;
 
         if (parent::isCartItemInactive($item)) {
             $validation->itemIsInactive();

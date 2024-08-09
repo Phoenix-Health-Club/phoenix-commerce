@@ -387,7 +387,10 @@ return [
         ],
 
         'media' => [
-            'add-attachments' => 'Bijlagen toevoegen',
+            'index' => [
+                'add-attachments' => 'Bijlagen toevoegen',
+                'add-image'       => 'Afbeelding toevoegen',
+            ],
         ],
 
         'layouts' => [
@@ -414,14 +417,13 @@ return [
                 'desktop' => [
                     'top' => [
                         'default-locale' => 'Standaardtaal',
-                        'offer'          => 'Krijg TOT 40% KORTING op je 1e bestelling',
-                        'shop-now'       => 'KOOP NU',
                     ],
                 ],
 
                 'mobile' => [
                     'currencies' => 'Valuta',
                     'locales'    => 'Taal',
+                    'login'      => 'Registreren of Inloggen',
                 ],
             ],
 
@@ -601,6 +603,7 @@ return [
                 'load-more'        => 'Meer laden',
                 'name'             => 'Naam',
                 'rating'           => 'Beoordeling',
+                'ratings'          => 'Waarderingen',
                 'submit-review'    => 'Beoordeling indienen',
                 'success'          => 'Beoordeling succesvol ingediend.',
                 'title'            => 'Titel',
@@ -695,7 +698,7 @@ return [
             'inactive'                  => 'Het item is gedeactiveerd en vervolgens uit de winkelwagen verwijderd.',
             'inventory-warning'         => 'De aangevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
             'item-add-to-cart'          => 'Item succesvol toegevoegd',
-            'minimum-order-message'     => 'Het minimum bestelbedrag is :amount',
+            'minimum-order-message'     => 'Het minimum bestelbedrag is',
             'missing-fields'            => 'Sommige vereiste velden ontbreken voor dit product.',
             'missing-options'           => 'Opties ontbreken voor dit product.',
             'paypal-payment-cancelled'  => 'PayPal-betaling is geannuleerd.',
@@ -870,7 +873,10 @@ return [
         ],
 
         'index' => [
-            'offer'               => 'Krijg TOT 40% KORTING op je 1e bestelling - WINKEL NU',
+            'categories-carousel' => 'Categorieën Carrousel',
+            'image-carousel'      => 'Afbeeldingen Carrousel',
+            'offer'               => 'Krijg TOT 40% KORTING op je eerste bestelling, WINKEL NU',
+            'product-carousel'    => 'Producten Carrousel',
             'resend-verify-email' => 'Verificatie-e-mail opnieuw verzenden',
             'verify-email'        => 'Verifieer je e-mailaccount',
         ],
@@ -880,7 +886,9 @@ return [
 
     'partials' => [
         'pagination' => [
+            'next-page'          => 'Volgende pagina',
             'pagination-showing' => 'Toont :firstItem tot :lastItem van de :total vermeldingen',
+            'prev-page'          => 'Vorige pagina',
         ],
     ],
 

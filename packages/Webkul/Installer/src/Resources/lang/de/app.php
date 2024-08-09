@@ -555,6 +555,7 @@ return [
                     'name'             => 'OmniHeat Herren Solid Hooded Puffer Jacke',
                     'sort-description' => 'Bleiben Sie warm und stilvoll mit unserer OmniHeat Herren Solid Hooded Puffer Jacke. Diese Jacke wurde entwickelt, um ultimative Wärme zu bieten und verfügt über Einstecktaschen für zusätzliche Bequemlichkeit. Das isolierte Material sorgt dafür, dass Sie in kaltem Wetter gemütlich bleiben. Erhältlich in 5 attraktiven Farben, ist sie eine vielseitige Wahl für verschiedene Anlässe.',
                 ],
+
                 '8' => [
                     'description'      => 'Introducing the OmniHeat Men\'s Solid Hooded Puffer Jacket, your go-to solution for staying warm and fashionable during colder seasons. This jacket is crafted with durability and warmth in mind, ensuring it becomes your trusted companion. The hooded design not only adds a touch of style but also provides additional warmth, shielding you from cold winds and weather. The full sleeves offer complete coverage, ensuring you stay cozy from shoulder to wrist. Equipped with insert pockets, this puffer jacket provides convenience for carrying your essentials or keeping your hands warm. The insulated synthetic filling offers enhanced warmth, making it ideal for battling chilly days and nights. Made from a durable polyester shell and lining, this jacket is built to last and endure the elements. Available in 5 attractive colors, you can choose the one that suits your style and preference. Versatile and functional, the OmniHeat Men\'s Solid Hooded Puffer Jacket is suitable for various occasions, whether you\'re heading to work, going for a casual outing, or attending an outdoor event. Experience the perfect blend of style, comfort, and functionality with OmniHeat Men\'s Solid Hooded Puffer Jacket. Elevate your winter wardrobe and stay snug while embracing the outdoors. Beat the cold in style and make a statement with this essential piece.',
                     'meta-description' => 'meta description',
@@ -618,11 +619,9 @@ return [
                 'admin'            => 'Administrator',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Passwort bestätigen',
-                'download-sample'  => 'Beispiel herunterladen',
                 'email'            => 'E-Mail',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Passwort',
-                'sample-products'  => 'Beispielprodukte',
                 'title'            => 'Administrator erstellen',
             ],
 
@@ -711,8 +710,22 @@ return [
                 'uzbekistani-som'             => 'Usbekischer Som (UZS)',
                 'venezuelan-bolívar'          => 'Venezolanischer Bolívar (VEF)',
                 'vietnamese-dong'             => 'Vietnamesischer Dong (VND)',
-                'warning-message'             => 'Achtung! Die Einstellungen für die Standardsprachen des Systems sowie die Standardwährung sind dauerhaft und können nicht mehr geändert werden.',
+                'warning-message'             => 'Achtung! Die Einstellungen für Ihre Standardsystemsprache und Standardwährung sind dauerhaft und können nach der Festlegung nicht mehr geändert werden.',
                 'zambian-kwacha'              => 'Sambischer Kwacha (ZMW)',
+            ],
+
+            'sample-products' => [
+                'download-sample' => 'Beispiel herunterladen',
+                'no'              => 'Nein',
+                'sample-products' => 'Beispielfprodukte',
+                'title'           => 'Beispielfprodukte',
+                'yes'             => 'Ja',
+            ],
+
+            'installation-processing' => [
+                'title'        => 'Installation',
+                'bagisto-info' => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
+                'bagisto'      => 'Installation Bagisto',
             ],
 
             'installation-completed' => [
@@ -722,12 +735,6 @@ return [
                 'explore-bagisto-extensions' => 'Erkunden Sie Bagisto-Erweiterungen',
                 'title'                      => 'Installation abgeschlossen',
                 'title-info'                 => 'Bagisto wurde erfolgreich auf Ihrem System installiert.',
-            ],
-
-            'installation-processing' => [
-                'title'            => 'Installation',
-                'bagisto-info'     => 'Erstellung der Datenbanktabellen, dies kann einige Momente dauern',
-                'bagisto'          => 'Installation Bagisto',
             ],
 
             'ready-for-installation' => [
@@ -745,7 +752,7 @@ return [
                 'main'          => 'Start',
                 'select-locale' => 'Wähle Lokale',
                 'title'         => 'Deine Bagisto-Installation',
-                'welcome-title' => 'Willkommen bei Bagisto 2.0.',
+                'welcome-title' => 'Willkommen bei Bagisto',
             ],
 
             'server-requirements' => [
@@ -785,7 +792,7 @@ return [
             'german'                   => 'Deutsch',
             'hebrew'                   => 'Hebräisch',
             'hindi'                    => 'Hindi',
-            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist ein grober Überblick über den Installationsprozess für Bagisto:',
+            'installation-description' => 'Die Installation von Bagisto umfasst in der Regel mehrere Schritte. Hier ist eine allgemeine Übersicht über den Installationsprozess für Bagisto',
             'installation-info'        => 'Wir freuen uns, Sie hier zu sehen!',
             'installation-title'       => 'Willkommen zur Installation',
             'italian'                  => 'Italienisch',

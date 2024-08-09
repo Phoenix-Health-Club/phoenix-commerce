@@ -619,11 +619,9 @@ return [
                 'admin'            => 'Администратор',
                 'bagisto'          => 'Bagisto',
                 'confirm-password' => 'Подтвердите пароль',
-                'download-sample'  => 'Скачать образец',
                 'email'            => 'Email',
                 'email-address'    => 'admin@example.com',
                 'password'         => 'Пароль',
-                'sample-products'  => 'Образцовые товары',
                 'title'            => 'Создать администратора',
             ],
 
@@ -712,14 +710,22 @@ return [
                 'uzbekistani-som'             => 'Узбекский сум (UZS)',
                 'venezuelan-bolívar'          => 'Венесуэльский боливар (VEF)',
                 'vietnamese-dong'             => 'Вьетнамский донг (VND)',
-                'warning-message'             => 'Внимание! Настройки вашего языка системы по умолчанию, а также валюты по умолчанию являются постоянными и больше никогда не могут быть изменены.',
+                'warning-message'             => 'Внимание! Настройки языка системы и валюты по умолчанию являются постоянными и не могут быть изменены после установки.',
                 'zambian-kwacha'              => 'Замбийская квача (ZMW)',
             ],
 
+            'sample-products' => [
+                'download-sample' => 'скачать образец',
+                'no'              => 'Нет',
+                'sample-products' => 'Образцы продукции',
+                'title'           => 'Образцы продукции',
+                'yes'             => 'Да',
+            ],
+
             'installation-processing' => [
-                'bagisto'          => 'Установка Bagisto',
-                'bagisto-info'     => 'Создание таблиц в базе данных может занять несколько моментов',
-                'title'            => 'Установка',
+                'bagisto'      => 'Установка Bagisto',
+                'bagisto-info' => 'Создание таблиц в базе данных может занять несколько моментов',
+                'title'        => 'Установка',
             ],
 
             'installation-completed' => [
@@ -746,7 +752,7 @@ return [
                 'main'          => 'Начало',
                 'select-locale' => 'Выбрать локаль',
                 'title'         => 'Ваша установка Bagisto',
-                'welcome-title' => 'Добро пожаловать в Bagisto 2.0.',
+                'welcome-title' => 'Добро пожаловать в Bagisto',
             ],
 
             'server-requirements' => [
@@ -786,7 +792,7 @@ return [
             'german'                   => 'Немецкий',
             'hebrew'                   => 'Иврит',
             'hindi'                    => 'Хинди',
-            'installation-description' => 'Установка Bagisto обычно включает несколько шагов. Вот общий контур процесса установки для Bagisto:',
+            'installation-description' => 'Установка Bagisto обычно включает несколько шагов. Вот общий обзор процесса установки Bagisto',
             'installation-info'        => 'Мы рады видеть вас здесь!',
             'installation-title'       => 'Добро пожаловать к установке',
             'italian'                  => 'Итальянский',

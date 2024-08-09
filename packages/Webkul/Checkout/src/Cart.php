@@ -23,14 +23,25 @@ use Webkul\Tax\Repositories\TaxCategoryRepository;
 class Cart
 {
     /**
+     * The cart instance.
+     *
      * @var \Webkul\Checkout\Contracts\Cart
      */
     private $cart;
 
+    /**
+     * Constant for tax calculation based on shipping origin.
+     */
     const TAX_CALCULATION_BASED_ON_SHIPPING_ORIGIN = 'shipping_origin';
 
+    /**
+     * Constant for tax calculation based on billing address.
+     */
     const TAX_CALCULATION_BASED_ON_BILLING_ADDRESS = 'billing_address';
 
+    /**
+     * Constant for tax calculation based on shipping address.
+     */
     const TAX_CALCULATION_BASED_ON_SHIPPING_ADDRESS = 'shipping_address';
 
     /**
@@ -92,7 +103,7 @@ class Cart
             return;
         }
 
-        $cartTemp = new \stdClass();
+        $cartTemp = new \stdClass;
         $cartTemp->id = $this->cart->id;
 
         session()->put('cart', $cartTemp);
@@ -694,14 +705,69 @@ class Cart
      */
     public function hasError(): bool
     {
-        if (
-            ! $this->cart
-            || ! $this->isItemsHaveSufficientQuantity()
-        ) {
+        return ! empty($this->getErrors());
+    }
+
+    /**
+     * Get Cart Errors.
+     */
+    public function getErrors()
+    {
+        if (! $this->cart) {
+            return [
+                'error_code' => 'CART_NOT_FOUND',
+                'message'    => trans('shop::app.checkout.cart.index.empty-product'),
+            ];
+        }
+
+        if (! $this->isItemsHaveSufficientQuantity()) {
+            return [
+                'error_code' => 'INSUFFICIENT_QUANTITY',
+                'message'    => trans('shop::app.checkout.cart.inventory-warning'),
+            ];
+        }
+
+        if (! $this->haveMinimumOrderAmount()) {
+            $minimumOrderDescription = core()->getConfigData('sales.order_settings.minimum_order.description');
+
+            return [
+                'error_code' => 'MINIMUM_ORDER_AMOUNT',
+                'message'    => $minimumOrderDescription ?: trans('shop::app.checkout.cart.minimum-order-message'),
+                'amount'     => core()->formatPrice((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: $this->getOrderAmount()),
+            ];
+        }
+
+        return [];
+    }
+
+    /**
+     * Check minimum Order Amount of cart.
+     */
+    public function getOrderAmount(): int
+    {
+        $minimumOrderAmount = $this->cart->sub_total;
+
+        if (core()->getConfigData('sales.order_settings.minimum_order.include_tax_to_amount')) {
+            $minimumOrderAmount += $this->cart->tax_total;
+        }
+
+        if (core()->getConfigData('sales.order_settings.minimum_order.include_discount_amount')) {
+            $minimumOrderAmount -= $this->cart->tax_total;
+        }
+
+        return $minimumOrderAmount;
+    }
+
+    /**
+     * Check minimum order.
+     */
+    public function haveMinimumOrderAmount(): bool
+    {
+        if (! core()->getConfigData('sales.order_settings.minimum_order.enable')) {
             return true;
         }
 
-        return false;
+        return $this->getOrderAmount() >= ((int) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0);
     }
 
     /**
